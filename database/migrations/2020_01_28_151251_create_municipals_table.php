@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateMunicipalsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('municipals', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('username')->unique();
+            $table->bigInteger('city_zip_code');
+            $table->string('password');
+            $table->string('profile')->default('default.jpg');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('municipals');
+    }
+}
