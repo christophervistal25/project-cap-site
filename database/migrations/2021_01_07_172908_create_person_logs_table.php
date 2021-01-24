@@ -18,6 +18,7 @@ class CreatePersonLogsTable extends Migration
             $table->bigInteger('person_id');
             $table->string('location');
             $table->bigInteger('checker_id')->nullable();
+            $table->string('purpose');
             $table->decimal('body_temperature', 8, 1);
             $table->string('time');
             $table->timestamps();
