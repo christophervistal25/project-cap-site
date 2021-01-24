@@ -33,7 +33,8 @@ class PersonnelRepository
     public static function generateQRbyData(Person $person)
     {
         $user_information =   $person->id . self::QR_SEPERATOR . $person->firstname . self::QR_SEPERATOR . $person->middlename . self::QR_SEPERATOR . $person->lastname 
-        . self::QR_SEPERATOR . $person->suffix . self::QR_SEPERATOR . $person->address . self::QR_SEPERATOR .   $person->date_of_birth . self::QR_SEPERATOR . $person->rapid_test_issued;
+        . self::QR_SEPERATOR . $person->suffix . self::QR_SEPERATOR . $person->address . self::QR_SEPERATOR .  $person->person_id;
+     
         return Encryptor::process($user_information);
     }
 
