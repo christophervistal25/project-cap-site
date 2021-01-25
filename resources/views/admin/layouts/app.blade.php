@@ -48,9 +48,9 @@
       <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
         <li class=" nav-item"><a href="{{ route('admin.dashboard') }}"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
         </li>
-        <li class=" nav-item"><a href="{{ route('personnel.create') }}"><i class="ft-plus"></i><span class="menu-title" data-i18n="">Add Personnel</span></a>
+        <li class=" nav-item"><a href="{{ route('personnel.create') }}"><i class="ft-plus"></i><span class="menu-title" data-i18n="">QR for <small class="font-weight-bold">Individual</small></span></a>
         </li>
-        <li class=" nav-item"><a href="{{ route('establishment.create') }}"><i class="ft-plus"></i><span class="menu-title" data-i18n="">Add Establishment</span></a>
+        <li class=" nav-item"><a href="{{ route('establishment.create') }}"><i class="ft-plus"></i><span class="menu-title" data-i18n="">QR for <small class="font-weight-bold">Establishment</small></span></a>
         </li>
         <li class=" nav-item"><a href="{{ route('personnel.index') }}"><i class="ft-list"></i><span class="menu-title" data-i18n="">View All Personnel</span></a>
         </li>
