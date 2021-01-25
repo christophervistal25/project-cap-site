@@ -36,6 +36,7 @@ class PersonLogController extends Controller
                 'person_id'        => $person_log['person_id'],
                 'location'         => $person_log['location'],
                 'checker_id'       => $person_log['checker_id'],
+                'purpose'          => $person_log['purpose'],
                 'time'             => $person_log['time'],
                 'body_temperature' => $person_log['body_temperature'],
             ]);

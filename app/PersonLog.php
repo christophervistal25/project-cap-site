@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PersonLog extends Model
 {
-    protected $fillable = ['person_id', 'location', 'checker_id', 'body_temperature', 'time'];
+    protected $fillable = ['person_id', 'location', 'checker_id','purpose', 'body_temperature', 'time'];
 
     public function person()
     {
