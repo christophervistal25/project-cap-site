@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Checker;
 use Illuminate\Support\Facades\Hash;
+use App\PersonLog;
 
 
 class CheckerController extends Controller
@@ -32,5 +33,12 @@ class CheckerController extends Controller
         } else {
             return response()->json(['code' => 422, 'message' => 'Invalid username / password.']);
         }
+    }
+    
+    public function countQRScanned(int $id)
+    {
+        $scanned = PersonLog::where('checker_id', $id)
+                        ->count();
+        return response()->json(['code' => 200, 'scanned_count' => $scanned]);
     }
 }
