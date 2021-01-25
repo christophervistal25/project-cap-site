@@ -63,6 +63,11 @@
     <!-- END Custom CSS-->
     <style>
           body { font-family: 'Poppins', sans-serif; }
+          @media (max-width: 767px) {                  
+              .app-name {
+                  display: none;
+              }
+            }
     </style>
     @stack('page-css')
   </head>

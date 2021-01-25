@@ -5,7 +5,8 @@
       <div class="navbar-container content">
         <div class="collapse navbar-collapse show" id="navbar-mobile">
           <ul class="nav navbar-nav mr-auto float-left">
-            <li class="nav-item d-block d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
+            <li class="nav-item d-block d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="{{  route('municipal.dashboard') }}"><i class="ft-menu"></i>{{  config('app.name') }}</a></li>
+            <li class="app-name"><a class="text-white" href="{{  route('municipal.dashboard') }}">{{ config('app.name') }}</a></li>
           </ul>
           <ul class="nav navbar-nav float-right">
             <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
