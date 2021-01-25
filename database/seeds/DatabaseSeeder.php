@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             PresidentSeeder::class,
             // PersonSeeder::class,
             CitySeeder::class,
+            OfficeSeeder::class,
             // LogsSeeder::class,
         ]);
     }
