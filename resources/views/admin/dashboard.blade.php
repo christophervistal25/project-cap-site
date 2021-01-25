@@ -69,7 +69,7 @@
           </div>
       </div>
        <!-- Simple Pie Chart -->
-       <div class="col-lg-6 col-sm-12">
+    <div class="col-lg-6 col-sm-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Personnel Temperature Chart</h4>
@@ -85,13 +85,132 @@
             </div>
             <div class="card-content collapse show">
                 <div class="card-body">
-                        <div class="height-400">
-                    <canvas id="simple-pie-chart"></canvas>
+                    <div class="height-400">
+                        <canvas id="simple-pie-chart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Covid-19 Updates Surigao del Sur-->
+    <div class="col-lg-12 col-sm-12">
+        <div class="card">
+            <div class="card-header">
+            <div class="row">
+                <div class="col-lg-6">
+                <h3 class="card-title">COVID-19 Updates</h3>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-sm-12 col-lg-12">
+                    <h3 class="card-sub-title display-4 text-center font-weight-bold mt-1">
+                    <img src="{{ url('/theme-assets/images/ico/covid.png')}}" width="10%">
+                    Surigao Del Sur
+                    <img src="{{ url('/theme-assets/images/ico/covid.png')}}" width="10%">
+                    </h3>
+                </div>
+            </div>
+                    <div class="row mt-2">
+                    <div class="col-lg-4 border bg-yellow">
+                        <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Confirmed Case</div>
+                        <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/positive.png')}}" width="40%"></div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">769</div>
+                    </div>
+                    <div class="col-lg-4 border bg-success">
+                        <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Recovered</div>
+                        <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/recovered.png')}}" width="40%"></div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">623</div>
+                    </div>
+                    <div class="col-lg-4 border bg-danger">
+                        <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Death</div>
+                        <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/deaths.png')}}" width="40%"></div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">50</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Covid-19 Updates Philippines-->
+    <div class="col-lg-12 col-sm-12">
+        <div class="card">
+            <div class="card-header">
+            <div class="row">
+                <div class="col-lg-6">
+                <h3 class="card-title">COVID-19 Updates</h3>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-lg-12">
+                    <h3 class="card-sub-title display-4 text-center font-weight-bold mt-1">
+                    <img src="{{ url('/theme-assets/images/ico/covid.png')}}" width="10%">
+                    Philippines
+                    <img src="{{ url('/theme-assets/images/ico/covid.png')}}" width="10%">
+                    </h3>
+                </div>
+            </div>
+                    <div class="row mt-2">
+                    <div class="col-lg-4 border bg-yellow">
+                        <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Confirmed Case</div>
+                        <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/positive.png')}}" width="40%"></div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">769</div>
+                    </div>
+                    <div class="col-lg-4 border bg-success">
+                        <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Recovered</div>
+                        <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/recovered.png')}}" width="40%"></div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">623</div>
+                    </div>
+                    <div class="col-lg-4 border bg-danger">
+                        <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Death</div>
+                        <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/deaths.png')}}" width="40%"></div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">50</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Covid-19 Updates Worldwide-->
+    <div class="col-lg-12 col-sm-12">
+        <div class="card">
+            <div class="card-header">
+            <div class="row">
+                <div class="col-lg-6">
+                <h3 class="card-title">COVID-19 Updates</h3>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-lg-12">
+                    <h3 class="card-sub-title display-4 text-center font-weight-bold mt-1">
+                    <img src="{{ url('/theme-assets/images/ico/covid.png')}}" width="10%">
+                    Worldwide
+                    <img src="{{ url('/theme-assets/images/ico/covid.png')}}" width="10%">
+                    </h3>
+                </div>
+            </div>
+                    <div class="row mt-2">
+                    <div class="col-lg-4 border bg-yellow">
+                        <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Confirmed Case</div>
+                        <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/positive.png')}}" width="40%"></div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">769</div>
+                    </div>
+                    <div class="col-lg-4 border bg-success">
+                        <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Recovered</div>
+                        <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/recovered.png')}}" width="40%"></div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">623</div>
+                    </div>
+                    <div class="col-lg-4 border bg-danger">
+                        <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Death</div>
+                        <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/deaths.png')}}" width="40%"></div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">50</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
   </div>
 
 </section>
