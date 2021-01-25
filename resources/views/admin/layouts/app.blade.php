@@ -8,7 +8,7 @@
             <li class="nav-item d-block d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
           </ul>
           <ul class="nav navbar-nav float-right">
-            <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">             
+            <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
               <span class="avatar avatar-online"><img src="/theme-assets/images/portrait/small/{{ Auth::user()->profile }}" alt="avatar"><i></i></span></a>
               <div class="dropdown-menu dropdown-menu-right">
                 <div class="arrow_box_right">
@@ -38,7 +38,7 @@
 
   <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
     <div class="navbar-header">
-      <ul class="nav navbar-nav flex-row">       
+      <ul class="nav navbar-nav flex-row">
         <li class="nav-item mr-auto"><a class="navbar-brand" href="">
             <h3><small>{{ config('app.name') }}</small></h3></a></li>
         <li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>
@@ -50,6 +50,8 @@
         </li>
         <li class=" nav-item"><a href="{{ route('personnel.create') }}"><i class="ft-plus"></i><span class="menu-title" data-i18n="">Add Personnel</span></a>
         </li>
+        <li class=" nav-item"><a href="{{ route('establishment.create') }}"><i class="ft-plus"></i><span class="menu-title" data-i18n="">Add Establishment</span></a>
+        </li>
         <li class=" nav-item"><a href="{{ route('personnel.index') }}"><i class="ft-list"></i><span class="menu-title" data-i18n="">View All Personnel</span></a>
         </li>
         <li class=" nav-item"><a href="{{ route('checker.index') }}"><i class="ft-list"></i><span class="menu-title" data-i18n="">View All Checkers</span></a>
@@ -60,7 +62,7 @@
     </div>
     <div class="navigation-background"></div>
   </div>
-     
+
   <div class="app-content content">
     <div class="content-wrapper">
       <div class="content-wrapper-before"></div>

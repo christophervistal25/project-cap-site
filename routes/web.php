@@ -54,7 +54,12 @@ Route::group(['prefix' => 'admin'] , function () {
 
 		Route::get('/export/options', 'Admin\ExportOptionController@index');
 		Route::get('/personnel/list/download', 'Admin\ExportOptionController@personnelList');
-		Route::get('/personnel/total/download', 'Admin\ExportOptionController@personnelTotal');
+        Route::get('/personnel/total/download', 'Admin\ExportOptionController@personnelTotal');
+
+
+
+
+        Route::view('/establishment/create','admin/establishment/create')->name('establishment.create');
 	});
 
   });
@@ -84,7 +89,12 @@ Route::group(['prefix' => 'municipal'] , function () {
 
 			Route::post('/setting/municipal/add/checker','Municipal\SettingController@addChecker')->name('setting.municipal.add.checker');
 
-			Route::post('/setting/municipal/update/checker','Municipal\SettingController@updateChecker')->name('setting.municipal.update.checker');
+            Route::post('/setting/municipal/update/checker','Municipal\SettingController@updateChecker')->name('setting.municipal.update.checker');
+
+
+
+
+            Route::view('/establishment/create','municipal/establishment/create')->name('municipal.establishment.create');
 		});
 
 	});
