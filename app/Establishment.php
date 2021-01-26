@@ -18,4 +18,15 @@ class Establishment extends Model
         return $this->belongsTo('App\Barangay');
     }
 
+    /**
+     * Returns the action column html for datatables.
+     *
+     * @param \App\Person
+     * @return string
+     */
+    public static function laratablesCustomAdminAction($establishment)
+    {
+        return view('admin.establishment.includes.index_action', compact('establishment'))->render();
+    }
+
 }

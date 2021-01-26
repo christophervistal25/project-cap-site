@@ -8,9 +8,18 @@ use App\Establishment;
 use App\City;
 use App\Http\Controllers\Repositories\EstablishmentRepository;
 use App\Barangay;
+use Freshbitsweb\Laratables\Laratables;
 
 class EstablishmentController extends Controller
 {
+    public function list()
+    {
+        // , function ($query) use($zip_code) {
+        //     return $query->where('city_zip_code', $zip_code);
+        // }
+        return Laratables::recordsOf(Establishment::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -87,7 +96,11 @@ class EstablishmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $establishment = Establishment::find($id);
+        $types = EstablishmentRepository::TYPES;
+        $cities = City::where('status', 'active')->get();
+        $barangay = Barangay::get();
+        return view('admin.establishment.edit', compact('establishment', 'types', 'cities', 'barangay'));
     }
 
     /**
@@ -99,7 +112,7 @@ class EstablishmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**

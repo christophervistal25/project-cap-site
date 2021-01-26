@@ -59,6 +59,7 @@ Route::group(['prefix' => 'admin'] , function () {
 		Route::get('/personnel/list/download', 'Admin\ExportOptionController@personnelList');
         Route::get('/personnel/total/download', 'Admin\ExportOptionController@personnelTotal');
 
+		Route::get('/establishment/list', 'Admin\EstablishmentController@list');
 		Route::resource('establishment', 'Admin\EstablishmentController');
 	});
 
