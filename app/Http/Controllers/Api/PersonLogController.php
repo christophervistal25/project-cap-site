@@ -14,6 +14,7 @@ class PersonLogController extends Controller
             'person_id'        => $request->user_id,
             'location'         => $request->location,
             'checker_id'       => $request->checker_id,
+            'purpose'          => $request->purpose,
             'body_temperature' => $request->temperature,
             'time'             => $request->time,
         ]);
