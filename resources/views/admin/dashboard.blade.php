@@ -115,17 +115,23 @@
                     <div class="col-lg-4 border bg-yellow">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Confirmed Case</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/positive.png')}}" width="40%"></div>
-                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="surigao-confirmed-case">0</div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="surigao-confirmed-case">
+                            <img width="15%" src="{{ url('/loader/loader.gif')}}" alt="">
+                        </div>
                     </div>
                     <div class="col-lg-4 border bg-success">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Recovered</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/recovered.png')}}" width="40%"></div>
-                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="surigao-recovered">0</div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="surigao-recovered">
+                            <img width="15%" src="{{ url('/loader/loader.gif')}}" alt="">
+                        </div>
                     </div>
                     <div class="col-lg-4 border bg-danger">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Death</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/deaths.png')}}" width="40%"></div>
-                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="surigao-deaths">0</div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="surigao-deaths">
+                            <img width="15%" src="{{ url('/loader/loader.gif')}}" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -154,17 +160,23 @@
                     <div class="col-lg-4 border bg-yellow">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Confirmed Case</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/positive.png')}}" width="40%"></div>
-                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="philippines-confirmed">0</div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="philippines-confirmed">
+                            <img width="15%" src="{{ url('/loader/loader.gif')}}" alt="">
+                        </div>
                     </div>
                     <div class="col-lg-4 border bg-success">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Recovered</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/recovered.png')}}" width="40%"></div>
-                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="philippines-recovered">0</div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="philippines-recovered">
+                            <img width="15%" src="{{ url('/loader/loader.gif')}}" alt="">
+                        </div>
                     </div>
                     <div class="col-lg-4 border bg-danger">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Death</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/deaths.png')}}" width="40%"></div>
-                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="philippines-deaths">0</div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="philippines-deaths">
+                            <img width="15%" src="{{ url('/loader/loader.gif')}}" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -193,17 +205,23 @@
                     <div class="col-lg-4 border bg-yellow">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Confirmed Case</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/positive.png')}}" width="40%"></div>
-                        <div id="world-wide-confirmed" class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold">0</div>
+                        <div id="world-wide-confirmed" class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold">
+                            <img width="15%" src="{{ url('/loader/loader.gif')}}" alt="">
+                        </div>
                     </div>
                     <div class="col-lg-4 border bg-success">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Recovered</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/recovered.png')}}" width="40%"></div>
-                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="world-wide-recovered">0</div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="world-wide-recovered">
+                            <img width="15%" src="{{ url('/loader/loader.gif')}}" alt="">
+                        </div>
                     </div>
                     <div class="col-lg-4 border bg-danger">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Death</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/deaths.png')}}" width="40%"></div>
-                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="world-wide-deaths">0</div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="world-wide-deaths">
+                            <img width="15%" src="{{ url('/loader/loader.gif')}}" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
