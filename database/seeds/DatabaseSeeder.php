@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             // PersonSeeder::class,
             CitySeeder::class,
             OfficeSeeder::class,
+            EstablishmentSeeder::class,
             // LogsSeeder::class,
         ]);
     }
