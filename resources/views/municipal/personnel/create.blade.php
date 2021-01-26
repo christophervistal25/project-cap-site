@@ -128,11 +128,10 @@
                                 @endif
                             </div>
 
-
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <label for="barangay">Barangays <span class="text-danger">*</span></label>
+                                        <label for="barangay">Barangay<span class="text-danger">*</span></label>
                                         <select name="barangay" id="barangays" class="form-control {{ $errors->has('barangay')  ? 'is-invalid' : ''}}">
                                             <option  selected disabled>Please Select Baragay</option>
                                             @foreach($barangays as $barangay)
@@ -152,7 +151,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="gender">Sex <span class="text-danger">*</span></label>
+                                    <label for="puroksub">Purok/Subdivision/Street<span class="text-danger">*</span></label>
+                                     <textarea name="puroksub" id="puroksub" class="form-control"></textarea>
+                            </div>
+
+                             
+                            <div class="form-group">
+                                <label for="gender">Sex<span class="text-danger">*</span></label>
                                 <select name="gender" id="gender" class="form-control {{ $errors->has('gender')  ? 'is-invalid' : ''}}">
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -162,7 +167,29 @@
                                     {{ $errors->first('gender') }} </small>
                                 @endif
                             </div>
-                        </div>
+
+                            <div class="form-group">
+                                    <label for="status">Status<span class="text-danger">*</span></label>
+                                        <select name="status" id="status" class="form-control {{ $errors->has('status')  ? 'is-invalid' : ''}}">
+                                             <option value="Single">Single</option>
+                                             <option value="Married">Married</option>
+                                             <option value="Married">Single Parent</option>
+                                             <option value="Married">Separated</option>
+                                             <option value="Married">Widowed</option>
+                                             <option value="Married">Annulled</option>
+                                        </select>
+                            </div>
+                            <div class="form-group">
+                                     <label for="email">Email</label>
+                                     <input type="email" class="form-control {{ $errors->has('email')  ? 'is-invalid' : ''}}" id="email" name="email" placeholder="Optional" value="{{ old('email') }}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cpnumber">Cellphone Number<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control {{ $errors->has('cpnumber')  ? 'is-invalid' : ''}}" id="cpnumber" name="cpnumber" placeholder="" value="{{ old('cpnumber') }}">
+                            </div>
+                            </div>
+
                             <div class="float-right">
                                 <button type="submit" class="btn btn-primary">Add New Personnel</button>
                                 @if(Session::has('success'))
