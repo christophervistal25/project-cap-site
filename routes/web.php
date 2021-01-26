@@ -5,6 +5,9 @@ Route::get('production-clear', 'ProductionArtisanController@clear');
 Route::get('production-cache', 'ProductionArtisanController@cache');
 
 
+Route::get('test', function () {
+	return view('admin.statistics.overview');
+});
 
 Route::get('/', 'WelcomeController@index');
 
