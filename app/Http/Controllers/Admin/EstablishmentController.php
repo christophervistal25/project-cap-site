@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Establishment;
+use App\City;
+use App\Http\Controllers\Repositories\EstablishmentRepository;
+use App\Barangay;
 
 class EstablishmentController extends Controller
 {
@@ -26,7 +29,10 @@ class EstablishmentController extends Controller
      */
     public function create()
     {
-        return view('admin.establishment.create');
+        $types = EstablishmentRepository::TYPES;
+        $cities = City::where('status', 'active')->get();
+        $barangay = Barangay::get();
+        return view('admin.establishment.create', compact('types', 'cities', 'barangay'));
     }
 
     /**
@@ -37,7 +43,29 @@ class EstablishmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $this->validate($request, [
+            'office_store_name' => 'required',
+            'type'              => 'required|in:' . implode(',', EstablishmentRepository::TYPES),
+            'address'           => 'required|max:100',
+            'contact_number'    => 'required',
+            'province'          => 'required',
+            'geo_tag_location'  => 'required',
+            'city'              => 'required',
+            'barangay'          => 'required',
+        ], [], ['office_store_name' => 'name']);
+
+        Establishment::create([
+            'name'          => $request->office_store_name,
+            'type'          => $request->type,
+            'address'       => $request->address,
+            'contact_no'    => $request->contact_number,
+            'province'      => $request->province,
+            'city_zip_code' => $request->city,
+            'barangay_id'   => $request->barangay
+        ]);
+
+        return redirect()->back()->with('success', 'Successfully create new establishment.');
     }
 
     /**
