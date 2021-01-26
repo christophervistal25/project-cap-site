@@ -115,17 +115,17 @@
                     <div class="col-lg-4 border bg-yellow">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Confirmed Case</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/positive.png')}}" width="40%"></div>
-                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">769</div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="surigao-confirmed-case">0</div>
                     </div>
                     <div class="col-lg-4 border bg-success">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Recovered</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/recovered.png')}}" width="40%"></div>
-                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">623</div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="surigao-recovered">0</div>
                     </div>
                     <div class="col-lg-4 border bg-danger">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Death</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/deaths.png')}}" width="40%"></div>
-                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">50</div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="surigao-deaths">0</div>
                     </div>
                 </div>
             </div>
@@ -154,17 +154,17 @@
                     <div class="col-lg-4 border bg-yellow">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Confirmed Case</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/positive.png')}}" width="40%"></div>
-                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">769</div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="philippines-confirmed">0</div>
                     </div>
                     <div class="col-lg-4 border bg-success">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Recovered</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/recovered.png')}}" width="40%"></div>
-                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">623</div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="philippines-recovered">0</div>
                     </div>
                     <div class="col-lg-4 border bg-danger">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Death</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/deaths.png')}}" width="40%"></div>
-                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">50</div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="philippines-deaths">0</div>
                     </div>
                 </div>
             </div>
@@ -193,17 +193,17 @@
                     <div class="col-lg-4 border bg-yellow">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Confirmed Case</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/positive.png')}}" width="40%"></div>
-                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">769</div>
+                        <div id="world-wide-confirmed" class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold">0</div>
                     </div>
                     <div class="col-lg-4 border bg-success">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Recovered</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/recovered.png')}}" width="40%"></div>
-                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">623</div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="world-wide-recovered">0</div>
                     </div>
                     <div class="col-lg-4 border bg-danger">
                         <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Death</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/deaths.png')}}" width="40%"></div>
-                        <div class="col-lg-12 pt-1 display-4 text-center text-black font-weight-bold">50</div>
+                        <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="world-wide-deaths">0</div>
                     </div>
                 </div>
             </div>
@@ -218,6 +218,43 @@
 
 @push('page-scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+{{-- FETCHING DATA FOR STATS --}}
+<script>
+    $(document).ready(function () {
+        $.get('https://covid19stats.ph/api/stats/quick', {}, function (data, textStatus, jqXHR) {
+            let cases = data.cases;
+            let world = data.world;
+          
+            $('#philippines-confirmed').html(cases.total);
+            $('#philippines-recovered').html(cases.recovered);
+            $('#philippines-deaths').html(cases.deaths);
+
+            
+            $('#world-wide-confirmed').html(world.total);
+            $('#world-wide-recovered').html(world.recovered);
+            $('#world-wide-deaths').html(world.deaths);
+        });
+
+        $.get('https://covid19stats.ph/api/stats/location', {}, function (data, textStatus, jqXHR) {
+            let surigaoDelSurCities = data.cities.filter((city) => city.slug.includes('surigao-del-sur'));
+            let confirmedTotal = 0;
+            let recoveredTotal = 0;
+            let deathTotal = 0;
+            surigaoDelSurCities.forEach((city, index) => {
+                confirmedTotal += city.total;
+                recoveredTotal += city.recovered;
+                deathTotal += city.total;
+            });
+
+            $('#surigao-confirmed-case').html(confirmedTotal);
+            $('#surigao-recovered').html(recoveredTotal);
+            $('#surigao-deaths').html(deathTotal);
+        });
+
+        
+    });
+</script>
 
 <script>
 let personnelChartLabels = $('meta[name="chart-labels"]').attr('content').split(',');
@@ -298,6 +335,8 @@ var config = {
 var lineChart = new Chart(ctx, config);
 });
 </script>
+
+
 <script>
     //Get the context of the Chart canvas element we want to select
     var pieCtx = $("#simple-pie-chart");
@@ -331,6 +370,9 @@ var lineChart = new Chart(ctx, config);
     // Create the chart
     var pieSimpleChart = new Chart(pieCtx, pieConfig);
 </script>
+
+
+
 
 @endpush
 @endsection
