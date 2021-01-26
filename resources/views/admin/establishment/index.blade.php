@@ -9,12 +9,12 @@
     <div class="card-body">
       <div class="row float-left col-lg-7">
         <div class="col-lg-7">
-          <select name="cities" id="city_filter" class="form-control">
+          {{-- <select name="cities" id="city_filter" class="form-control">
             <option value="all">Show All</option>
-            {{-- @foreach($cities as $city)
+            @foreach($cities as $city)
               <option value="{{ $city->zip_code }}"> {{ $city->name }}</option>
-            @endforeach --}}
-          </select>
+            @endforeach
+          </select> --}}
         </div>
 
 
@@ -37,9 +37,9 @@
           <tr>
             <td class="text-center"> {{  $establishment->id }}</td>
             <td> {{  $establishment->name }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td> {{  $establishment->address }}</td>
+            <td class="text-center"> {{  $establishment->contact_no }}</td>
+            <td> {{  $establishment->geo_tag_location }}</td>
             <td class="text-center"> {{  $establishment->created_at->diffForHumans() }}</td>
             <td class="text-center">
               <a href="{{  route('establishment.edit', $establishment->id) }}" class="btn btn-icon btn-sm btn-success">
