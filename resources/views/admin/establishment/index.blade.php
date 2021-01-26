@@ -19,9 +19,6 @@
 
 
       </div>
-      <div class="float-right">
-        <a href="/admin/export/options" class="btn btn-primary">EXPORT</a>
-      </div>
       <div class="clearfix mb-2"></div>
       <table class="table table-bordered " id="persons-table" style="width:100%;">
         <thead>
@@ -36,6 +33,22 @@
           </tr>
         </thead>
         <tbody>
+          @foreach($establishments as $establishment)
+          <tr>
+            <td class="text-center"> {{  $establishment->id }}</td>
+            <td> {{  $establishment->name }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-center"> {{  $establishment->created_at->diffForHumans() }}</td>
+            <td class="text-center">
+              <a href="{{  route('establishment.edit', $establishment->id) }}" class="btn btn-icon btn-sm btn-success">
+                  <i class="la la-edit"></i>
+              </div>
+              </a>
+            </td>
+          </tr>
+          @endforeach
         </tbody>
       </table>
   </div>
