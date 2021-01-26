@@ -55,6 +55,8 @@
         </li>
         <li class=" nav-item"><a href="{{ route('municipal-personnel.index') }}"><i class="ft-plus"></i><span class="menu-title" data-i18n="">View All Personnel</span></a>
         </li>
+        <li class=" nav-item"><a href="{{ route('municipal-establishment.index') }}"><i class="ft-plus"></i><span class="menu-title" data-i18n="">View Establishment</span></a>
+        </li>
         <li class=" nav-item"><a href="{{ route('municipal.setting.index') }}"><i class="ft-settings"></i><span class="menu-title" data-i18n="">Settings</span></a>
         </li>
       </ul>

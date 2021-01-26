@@ -22,6 +22,16 @@
                             <div class="form-group">
                                 <label for="establishment_office_store_name">Establishment/Office/Store Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="establishment_office_store_name" name="establishment_office_store_name" placeholder="Enter Establishment/Office/Store Name" value="">
+
+                                <div class="form-group mt-1">
+                                    <label for="city">Establishment Type <span class="text-danger">*</span></label>
+                                    <select name="city" id="cities" class="form-control {{ $errors->has('city')  ? 'is-invalid' : ''}}">
+                                        <option  selected disabled>Please Select Establishment Type</option>
+                                        {{-- @foreach($cities as $city)
+                                            <option value="{{ $city->zip_code }}"> {{ $city->name }}</option>
+                                        @endforeach --}}
+                                    </select>
+                                </div>
                             <div class="form-group mt-1">
                             <label for="address">Address<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" value="">

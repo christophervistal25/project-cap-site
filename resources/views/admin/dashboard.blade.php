@@ -10,7 +10,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Total Personnel Added:</h4>
-          <div class=""><i style="font-size:70px;" class="ft-user">{{ $peoples }}</i></div>
+          <div class=""><i style="font-size:50px;" class="ft-user">{{ $peoples }}</i></div>
       </div>
     </div>
   </div>
@@ -18,7 +18,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Checkers:</h4>
-          <div class=""><i style="font-size:70px;" class="ft-user">{{ $checkers }}</i></div>
+          <div class=""><i style="font-size:50px;" class="ft-user">{{ $checkers }}</i></div>
       </div>
     </div>
   </div>
@@ -27,7 +27,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Place:</h4>
-          <div class=""><i style="font-size:70px;" class="ft-location">{{ $noOfCities }}</i></div>
+          <div class=""><i style="font-size:50px;" class="ft-location">{{ $noOfCities }}</i></div>
       </div>
     </div>
   </div>
@@ -36,7 +36,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Municipal Accounts:</h4>
-          <div class=""><i style="font-size:70px;" class="ft-user">{{ $municipals_account }}</i></div>
+          <div class=""><i style="font-size:50px;" class="ft-user">{{ $municipals_account }}</i></div>
       </div>
     </div>
   </div>
@@ -225,12 +225,12 @@
         $.get('https://covid19stats.ph/api/stats/quick', {}, function (data, textStatus, jqXHR) {
             let cases = data.cases;
             let world = data.world;
-          
+
             $('#philippines-confirmed').html(cases.total);
             $('#philippines-recovered').html(cases.recovered);
             $('#philippines-deaths').html(cases.deaths);
 
-            
+
             $('#world-wide-confirmed').html(world.total);
             $('#world-wide-recovered').html(world.recovered);
             $('#world-wide-deaths').html(world.deaths);
@@ -252,7 +252,7 @@
             $('#surigao-deaths').html(deathTotal);
         });
 
-        
+
     });
 </script>
 
@@ -318,7 +318,7 @@ var chartData = {
         pointBorderWidth: 2,
         pointHoverBorderWidth: 2,
         pointRadius: 4,
-    }, 
+    },
 ]
 };
 
@@ -376,7 +376,7 @@ var lineChart = new Chart(ctx, config);
 
 @endpush
 @endsection
-   
 
-    
+
+
 

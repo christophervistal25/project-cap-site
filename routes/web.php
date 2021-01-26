@@ -60,6 +60,7 @@ Route::group(['prefix' => 'admin'] , function () {
 
 
         Route::view('/establishment/create','admin/establishment/create')->name('establishment.create');
+        Route::view('/establishment/','admin/establishment/index')->name('establishment.index');
 	});
 
   });
@@ -95,6 +96,7 @@ Route::group(['prefix' => 'municipal'] , function () {
 
 
             Route::view('/establishment/create','municipal/establishment/create')->name('municipal.establishment.create');
+            Route::view('/establishment/','municipal/establishment/index')->name('municipal-establishment.index');
 		});
 
 	});

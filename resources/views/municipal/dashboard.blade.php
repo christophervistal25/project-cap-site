@@ -6,30 +6,30 @@
 @endprepend
 @section('content')
 <div class="row">
-  <div class="col-lg-3 col-md-12">
+  <div class="col-lg-4 col-md-12">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Total Personnel Added:</h4>
-          <div class=""><i style="font-size:70px;" class="ft-user">{{ $peoples }}</i></div>
+          <div class=""><i style="font-size:50px;" class="ft-user">{{ $peoples }}</i></div>
       </div>
     </div>
   </div>
 
 
-  <div class="col-lg-3 col-md-12">
+  <div class="col-lg-4 col-md-12">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Barangays:</h4>
-          <div class=""><i style="font-size:70px;" class="ft-location">{{ $noOfBarangays }}</i></div>
+          <div class=""><i style="font-size:50px;" class="ft-location">{{ $noOfBarangays }}</i></div>
       </div>
     </div>
   </div>
 
-  <div class="col-lg-3 col-md-12">
+  <div class="col-lg-4 col-md-12">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Checkers:</h4>
-          <div class=""><i style="font-size:70px;" class="ft-location">{{ $checkers }}</i></div>
+          <div class=""><i style="font-size:50px;" class="ft-location">{{ $checkers }}</i></div>
       </div>
     </div>
   </div>
@@ -280,7 +280,7 @@ var chartData = {
         pointBorderWidth: 2,
         pointHoverBorderWidth: 2,
         pointRadius: 4,
-    }, 
+    },
 ]
 };
 
@@ -333,7 +333,7 @@ var lineChart = new Chart(ctx, config);
 
 @endpush
 @endsection
-   
 
-    
+
+
 

@@ -55,6 +55,8 @@
         </li>
         <li class=" nav-item"><a href="{{ route('personnel.index') }}"><i class="ft-list"></i><span class="menu-title" data-i18n="">View All Personnel</span></a>
         </li>
+        <li class=" nav-item"><a href="{{ route('establishment.index') }}"><i class="ft-list"></i><span class="menu-title" data-i18n="">View Establishment</span></a>
+        </li>
         <li class=" nav-item"><a href="{{ route('checker.index') }}"><i class="ft-list"></i><span class="menu-title" data-i18n="">View All Checkers</span></a>
         </li>
         <li class=" nav-item"><a href="{{ route('setting.index') }}"><i class="ft-settings"></i><span class="menu-title" data-i18n="">Settings</span></a>
