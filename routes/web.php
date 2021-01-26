@@ -94,8 +94,8 @@ Route::group(['prefix' => 'municipal'] , function () {
 
 
 
-            Route::view('/establishment/create','municipal/establishment/create')->name('municipal.establishment.create');
-            Route::view('/establishment/','municipal/establishment/index')->name('municipal-establishment.index');
+			Route::resource('m-establishment', 'Municipal\EstablishmentController');
+            
 		});
 
 	});

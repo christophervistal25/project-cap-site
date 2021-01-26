@@ -51,11 +51,11 @@
         </li>
         <li class=" nav-item"><a href="{{ route('municipal-personnel.create') }}"><i class="ft-plus"></i><span class="menu-title" data-i18n="">QR for <small class="font-weight-bold">Individual</small></span></a>
         </li>
-        <li class=" nav-item"><a href="{{ route('municipal.establishment.create') }}"><i class="ft-plus"></i><span class="menu-title" data-i18n="">QR for <small class="font-weight-bold">Establishment</small></span></a>
+        <li class=" nav-item"><a href="{{ route('m-establishment.create') }}"><i class="ft-plus"></i><span class="menu-title" data-i18n="">QR for <small class="font-weight-bold">Establishment</small></span></a>
         </li>
         <li class=" nav-item"><a href="{{ route('municipal-personnel.index') }}"><i class="ft-plus"></i><span class="menu-title" data-i18n="">View All Personnel</span></a>
         </li>
-        <li class=" nav-item"><a href="{{ route('municipal-establishment.index') }}"><i class="ft-plus"></i><span class="menu-title" data-i18n="">View Establishment</span></a>
+        <li class=" nav-item"><a href="{{ route('m-establishment.index') }}"><i class="ft-plus"></i><span class="menu-title" data-i18n="">View Establishment</span></a>
         </li>
         <li class=" nav-item"><a href="{{ route('municipal.setting.index') }}"><i class="ft-settings"></i><span class="menu-title" data-i18n="">Settings</span></a>
         </li>
