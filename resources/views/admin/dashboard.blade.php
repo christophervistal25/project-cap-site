@@ -221,10 +221,15 @@
 
 {{-- FETCHING DATA FOR STATS --}}
 <script>
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    
     $(document).ready(function () {
         $.get('https://covid19stats.ph/api/stats/quick', {}, function (data, textStatus, jqXHR) {
             let cases = data.cases;
             let world = data.world;
+<<<<<<< HEAD
 
             $('#philippines-confirmed').html(cases.total);
             $('#philippines-recovered').html(cases.recovered);
@@ -234,6 +239,17 @@
             $('#world-wide-confirmed').html(world.total);
             $('#world-wide-recovered').html(world.recovered);
             $('#world-wide-deaths').html(world.deaths);
+=======
+          
+            $('#philippines-confirmed').html(numberWithCommas(cases.total));
+            $('#philippines-recovered').html(numberWithCommas(cases.recovered));
+            $('#philippines-deaths').html(numberWithCommas(cases.deaths));
+
+            
+            $('#world-wide-confirmed').html(numberWithCommas(world.total));
+            $('#world-wide-recovered').html(numberWithCommas(world.recovered));
+            $('#world-wide-deaths').html(numberWithCommas(world.deaths));
+>>>>>>> 87205efab030c53520f80628401d9e7577eb36cf
         });
 
         $.get('https://covid19stats.ph/api/stats/location', {}, function (data, textStatus, jqXHR) {
@@ -241,18 +257,31 @@
             let confirmedTotal = 0;
             let recoveredTotal = 0;
             let deathTotal = 0;
-            surigaoDelSurCities.forEach((city, index) => {
-                confirmedTotal += city.total;
-                recoveredTotal += city.recovered;
-                deathTotal += city.total;
-            });
 
-            $('#surigao-confirmed-case').html(confirmedTotal);
-            $('#surigao-recovered').html(recoveredTotal);
-            $('#surigao-deaths').html(deathTotal);
+<<<<<<< HEAD
+
+=======
+            if(!localStorage.getItem('confirmed_total')) {
+                surigaoDelSurCities.forEach((city, index) => {
+                    confirmedTotal += city.total;
+                    recoveredTotal += city.recovered;
+                    deathTotal += city.total;
+                });
+                localStorage.setItem('confirmed_total', confirmedTotal);
+                localStorage.setItem('recovered_total', recoveredTotal);
+                localStorage.setItem('deaths_total', deathTotal);
+            } else {
+                confirmedTotal = localStorage.getItem('confirmed_total');
+                recoveredTotal = localStorage.getItem('recovered_total');
+                deathTotal = localStorage.getItem('deaths_total');
+            }
+
+            
+            $('#surigao-confirmed-case').html(numberWithCommas(confirmedTotal));
+            $('#surigao-recovered').html(numberWithCommas(recoveredTotal));
+            $('#surigao-deaths').html(numberWithCommas(deathTotal));
         });
-
-
+>>>>>>> 87205efab030c53520f80628401d9e7577eb36cf
     });
 </script>
 
