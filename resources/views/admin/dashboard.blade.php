@@ -268,7 +268,7 @@
                 surigaoDelSurCities.forEach((city, index) => {
                     confirmedTotal += city.total;
                     recoveredTotal += city.recovered;
-                    deathTotal += city.total;
+                    deathTotal += city.deaths;
                 });
                 localStorage.setItem('confirmed_total', confirmedTotal);
                 localStorage.setItem('recovered_total', recoveredTotal);
