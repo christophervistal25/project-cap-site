@@ -105,9 +105,6 @@
                                         <label for="barangay">Barangay <span class="text-danger">*</span></label>
                                         <select name="barangay" id="barangay" class="form-control {{ $errors->has('barangay')  ? 'is-invalid' : ''}}">
                                             <option  selected disabled>Please Select Barangay</option>
-                                            @foreach($barangay as $b)
-                                                <option data-zip-code="{{ $b->city_zip_code }}" value="{{ $b->id }}"> {{ $b->name }}</option>
-                                            @endforeach
                                         </select>
                                         @if($errors->has('barangay'))
                                         <small class="form-text text-danger">
@@ -134,4 +131,32 @@
     </div>
     </form>
 </section>
+@push('page-scripts')
+<script>
+    $(document).ready(function () {
+        let barangayOptionAll = [@foreach($barangay as $barangay){city_zip_code:'{{ $barangay->city_zip_code }}', name:'{{ $barangay->name }}'}, @endforeach];
+        $('#cities').change(function (e) {
+            let cityZipCode = e.target.value;
+            //filter all barangay data//
+            let barangayfilter = barangayOptionAll.filter(function(barangay){
+                return barangay.city_zip_code == cityZipCode;
+            });
+            //Remove all option in #barangay//
+            function removeOptionsBarangay(selectBarangay) {
+                var ii, L = selectBarangay.options.length - 1;
+                for(ii = L; ii >= 0; ii--) {
+                    selectBarangay.remove(ii);
+                }
+            }
+            removeOptionsBarangay(document.getElementById('barangay'));
+            //add barangay data based in what you select in #cities//
+            var i, length_barangay = barangayfilter.length;
+            for (i = 0; i < length_barangay; i++) {
+                var barangayfilter_final = barangayfilter[i];
+                $('#barangay').append('<option data-zip-code="' + barangayfilter_final.city_zip_code + '">' + barangayfilter_final.name + '</option>');
+            }
+        });
+    });
+</script>
+@endpush
 @endsection
