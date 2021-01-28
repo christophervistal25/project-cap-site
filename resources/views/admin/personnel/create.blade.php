@@ -129,8 +129,8 @@
                                 @endif
                             </div>
 
-                            
-                            
+
+
                             <div class="form-group">
                                     <label for="province">Province<span class="text-danger">*</span></label>
                                     <select name="province" id="province" class="form-control"></select>
@@ -168,7 +168,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                     <label for="puroksub">Purok/Subdivision/Street<span class="text-danger">*</span></label>
                                      <textarea name="puroksub" id="puroksub" class="form-control"></textarea>
@@ -203,7 +203,7 @@
                                 <label for="cpnumber">Cellphone Number<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control {{ $errors->has('cpnumber')  ? 'is-invalid' : ''}}" id="cpnumber" name="cpnumber" placeholder="" value="{{ old('cpnumber') }}">
                             </div>
-                            
+
                             <div class="float-right">
                                 <button type="submit" class="btn btn-primary">Add New Personnel</button>
                                 @if(Session::has('success'))
@@ -220,29 +220,26 @@
     </form>
 </section>
 @push('page-scripts')
+
 <script>
     $(document).ready(function () {
         let barangayOptionAll = [];
         $('#cities').change(function (e) {
-            
             let cityZipCode = e.target.value;
-
-
-            
             if(barangayOptionAll.length === 0) {
                 barangayOptionAll = $('#barangay option');
             }
-            
+
 
             barangayOptionAll.filter((index, barangayOption) => {
-              
+
                 if(barangayOption.getAttribute('data-zip-code') == cityZipCode) {
                     $('#barangay').append(barangayOption);
                 } else {
                     $('#barangay').val($(barangayOption).remove());
                 }
             });
-            
+
         });
     });
 </script>

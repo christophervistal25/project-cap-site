@@ -8,6 +8,7 @@ use App\Establishment;
 use App\City;
 use App\Http\Controllers\Repositories\EstablishmentRepository;
 use App\Barangay;
+use Freshbitsweb\Laratables\Laratables;
 
 class EstablishmentController extends Controller
 {
@@ -20,6 +21,11 @@ class EstablishmentController extends Controller
     {
         $establishments = Establishment::get();
         return view('municipal.establishment.index', compact('establishments'));
+    }
+
+    public function list()
+    {
+        return Laratables::recordsOf(Establishment::class);
     }
 
     /**

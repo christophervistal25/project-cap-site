@@ -90,6 +90,7 @@
                                     <div class="col-lg-6">
                                         <label for="city">City <span class="text-danger">*</span></label>
                                         <select name="city" id="cities" class="form-control {{ $errors->has('city')  ? 'is-invalid' : ''}}">
+
                                             <option  selected disabled>Please Select City</option>
                                             @foreach($cities as $city)
                                                 <option value="{{ $city->zip_code }}"> {{ $city->name }}</option>

@@ -121,7 +121,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 border bg-danger">
-                        <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Death</div>
+                        <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Deaths</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/deaths.png')}}" width="40%"></div>
                         <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="surigao-deaths">
                             <img width="15%" src="{{ url('/loader/loader.gif')}}" alt="">
@@ -166,7 +166,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 border bg-danger">
-                        <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Death</div>
+                        <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Deaths</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/deaths.png')}}" width="40%"></div>
                         <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="philippines-deaths">
                             <img width="15%" src="{{ url('/loader/loader.gif')}}" alt="">
@@ -211,7 +211,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 border bg-danger">
-                        <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Death</div>
+                        <div class="col-lg-12 pt-1 h2 text-center font-weight-bold">Deaths</div>
                         <div class="col-lg-12 pt-1 text-center"><img src="{{ url('/theme-assets/images/ico/deaths.png')}}" width="40%"></div>
                         <div class="col-lg-12 pt-1 display-4 text-center text-white font-weight-bold" id="world-wide-deaths">
                             <img width="15%" src="{{ url('/loader/loader.gif')}}" alt="">
@@ -245,12 +245,12 @@
         $.get('https://covid19stats.ph/api/stats/quick', {}, function (data, textStatus, jqXHR) {
             let cases = data.cases;
             let world = data.world;
-          
+
             $('#philippines-confirmed').html(numberWithCommas(cases.total));
             $('#philippines-recovered').html(numberWithCommas(cases.recovered));
             $('#philippines-deaths').html(numberWithCommas(cases.deaths));
 
-            
+
             $('#world-wide-confirmed').html(numberWithCommas(world.total));
             $('#world-wide-recovered').html(numberWithCommas(world.recovered));
             $('#world-wide-deaths').html(numberWithCommas(world.deaths));
@@ -270,14 +270,14 @@
                 });
                 localStorage.setItem('confirmed_total', confirmedTotal);
                 localStorage.setItem('recovered_total', recoveredTotal);
-                localStorage.setItem('deaths_total', recoveredTotal);
+                localStorage.setItem('deaths_total', deathTotal);
             } else {
                 confirmedTotal = localStorage.getItem('confirmed_total');
                 recoveredTotal = localStorage.getItem('recovered_total');
                 deathTotal = localStorage.getItem('deaths_total');
             }
 
-            
+
             $('#surigao-confirmed-case').html(numberWithCommas(confirmedTotal));
             $('#surigao-recovered').html(numberWithCommas(recoveredTotal));
             $('#surigao-deaths').html(numberWithCommas(deathTotal));

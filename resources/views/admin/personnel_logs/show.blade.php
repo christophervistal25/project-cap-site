@@ -202,25 +202,25 @@
     $(document).ready(function () {
         let barangayOptionAll = [];
         $('#cities').change(function (e) {
-            
+
             let cityZipCode = e.target.value;
 
 
-            
+
             if(barangayOptionAll.length === 0) {
                 barangayOptionAll = $('#barangay option');
             }
-            
+
 
             barangayOptionAll.filter((index, barangayOption) => {
-              
+
                 if(barangayOption.getAttribute('data-zip-code') == cityZipCode) {
                     $('#barangay').append(barangayOption);
                 } else {
                     $('#barangay').val($(barangayOption).remove());
                 }
             });
-            
+
         });
     });
 </script>

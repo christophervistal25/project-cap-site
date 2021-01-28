@@ -20,20 +20,20 @@
 
       </div>
       <div class="clearfix mb-2"></div>
-      <table class="table table-bordered " id="persons-table" style="width:100%;">
+      <table class="table table-bordered " id="establishments-table" style="width:100%;">
         <thead>
-          <tr>
-            <td scope="col" class="text-center font-weight-bold">ID</td>
-            <td scope="col" class="text-center font-weight-bold">Establishment/Office/Store Name</td>
-            <td scope="col" class="text-center font-weight-bold">Address Located</td>
-            <td scope="col" class="text-center font-weight-bold">Contact Number</td>
-            <td scope="col" class="text-center font-weight-bold">Geo Tag Location</td>
-            <td scope="col" class="text-center font-weight-bold">Date/Time register</td>
-            <td scope="col" class="text-center font-weight-bold">Option</td>
-          </tr>
-        </thead>
+            <tr>
+              <td scope="col" class="text-center font-weight-bold">ID</td>
+              <td scope="col" class="text-center font-weight-bold">Establishment/Office/Store Name</td>
+              <td scope="col" class="text-center font-weight-bold">Address Located</td>
+              <td scope="col" class="text-center font-weight-bold">Contact Number</td>
+              <td scope="col" class="text-center font-weight-bold">Geo Tag Location</td>
+              <td scope="col" class="text-center font-weight-bold">Date/Time register</td>
+              <td scope="col" class="text-center font-weight-bold">Option</td>
+            </tr>
+          </thead>
         <tbody>
-          @foreach($establishments as $establishment)
+          {{-- @foreach($establishments as $establishment)
           <tr>
             <td class="text-center"> {{  $establishment->id }}</td>
             <td> {{  $establishment->name }}</td>
@@ -47,7 +47,7 @@
               </a>
             </td>
           </tr>
-          @endforeach
+          @endforeach --}}
         </tbody>
       </table>
   </div>
@@ -60,29 +60,30 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.1.3/vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.1.3/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-  {{-- <script>
-    let QUERY_STRING = 'all';
+   <script>
+    // {{-- let QUERY_STRING = 'all';
 
-    if(localStorage.getItem('FILTER_SELECT') == null) {
-      QUERY_STRING = 'all';
-    } else {
-      QUERY_STRING = localStorage.getItem('FILTER_SELECT');
-      $('#city_filter').val(QUERY_STRING);
-    }
+    // if(localStorage.getItem('FILTER_SELECT') == null) {
+    //   QUERY_STRING = 'all';
+    // } else {
+    //   QUERY_STRING = localStorage.getItem('FILTER_SELECT');
+    //   $('#city_filter').val(QUERY_STRING);
+    // } --}}
 
-    let person_table =  $('#persons-table').DataTable({
+    let person_table =  $('#establishments-table').DataTable({
             serverSide: true,
-            ajax: `/admin/persons/list/${QUERY_STRING}`,
+            ajax: `{{ route('municipal.establishment.list') }}`,
             columns: [
-                { name: 'person_id' },
-                { name: 'firstname' },
-                { name: 'middlename' },
-                { name: 'lastname' },
-                { name: 'city.name' },
+                { name: 'id' },
+                { name: 'name' },
+                { name: 'address' },
+                { name: 'contact_no' },
+                { name: 'geo_tag_location' },
+                { name: 'created_at' },
                 { name: 'admin_action' , searchable : false, orderable : false, },
             ],
         });
-  </script> --}}
+  </script>
 
    {{-- <script>
       $('#city_filter').change(function (e) {

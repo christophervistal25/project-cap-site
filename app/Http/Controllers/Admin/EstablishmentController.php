@@ -52,7 +52,7 @@ class EstablishmentController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $this->validate($request, [
             'office_store_name' => 'required',
             'type'              => 'required|in:' . implode(',', EstablishmentRepository::TYPES),
@@ -85,7 +85,7 @@ class EstablishmentController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -110,9 +110,34 @@ class EstablishmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
     public function update(Request $request, $id)
     {
-        
+        $this->validate($request, [
+            'name' => 'required',
+            'type'              => 'required',
+            'address'           => 'required',
+            'contact_no'        => 'required',
+            'province'          => 'required',
+            'geo_tag_location'  => 'required',
+            'city'              => 'required',
+            'barangay'          => 'required',
+            ]);
+            $establishment = Establishment::find($id);
+            $establishment->name = $request->name;
+            $establishment->type = $request->type;
+            $establishment->address = $request->address;
+            $establishment->contact_no = $request->contact_no;
+            $establishment->province = $request->province;
+            $establishment->geo_tag_location = $request->geo_tag_location;
+            $establishment->city_zip_code = $request->city;
+            $establishment->barangay_id = $request->barangay;
+            $establishment->save();
+
+            // return response()->json(['success' => true]);
+            // return view('admin.establishment.edit');
+            return redirect()->route('establishment.edit', $establishment->id)->with('success', 'Successfully update personnel information.');
     }
 
     /**

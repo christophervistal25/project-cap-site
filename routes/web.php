@@ -60,7 +60,9 @@ Route::group(['prefix' => 'admin'] , function () {
         Route::get('/personnel/total/download', 'Admin\ExportOptionController@personnelTotal');
 
 		Route::get('/establishment/list', 'Admin\EstablishmentController@list');
-		Route::resource('establishment', 'Admin\EstablishmentController');
+        Route::resource('establishment', 'Admin\EstablishmentController');
+        Route::put('/establishment/{id}/edit', 'Admin\EstablishmentController@update')->name('establishment.edit');
+
 	});
 
   });
@@ -94,9 +96,9 @@ Route::group(['prefix' => 'municipal'] , function () {
 
 
 
-
+            Route::get('/m-establishment/list', 'Municipal\EstablishmentController@list')->name('municipal.establishment.list');
 			Route::resource('m-establishment', 'Municipal\EstablishmentController');
-            
+
 		});
 
 	});

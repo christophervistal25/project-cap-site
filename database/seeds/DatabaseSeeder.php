@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
         	MunicipalSeeder::class,
             // PersonSeeder::class,
             CitySeeder::class,
-            OfficeSeeder::class,
-            EstablishmentSeeder::class,
+            // OfficeSeeder::class,
+            // EstablishmentSeeder::class,
             // LogsSeeder::class,
         ]);
     }

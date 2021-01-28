@@ -27,6 +27,7 @@ class Establishment extends Model
     public static function laratablesCustomAdminAction($establishment)
     {
         return view('admin.establishment.includes.index_action', compact('establishment'))->render();
+        return view('municipal.establishment.includes.index_action', compact('establishment'))->render();
     }
 
 }
