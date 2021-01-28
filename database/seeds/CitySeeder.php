@@ -46,8 +46,9 @@ class CitySeeder extends Seeder
                 'code'     => $code,
             ]);
         }
+       
+        $barangays = glob('C:\xampp\htdocs\project-cap-site\public\data-need\barangays\*.csv');
 
-       $barangays = glob('C:\xampp\htdocs\capitol_app\public\data-need\barangays\*.csv');
        foreach($barangays as $barangay) {
         $row = 1;
         if (($handle = fopen($barangay, "r")) !== FALSE) {
