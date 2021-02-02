@@ -21,8 +21,6 @@ class CreatePeopleTable extends Migration
             $table->string('lastname');
             $table->string('suffix')->nullable();
             $table->date('date_of_birth');
-            $table->date('rapid_test_issued')->nullable();
-            $table->string('rapid_pass_no')->nullable();
             $table->string('city_zip_code');
             $table->enum('gender', ['male', 'female']);
             $table->string('address');

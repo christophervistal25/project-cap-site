@@ -15,7 +15,10 @@ class DatabaseSeeder extends Seeder
         	AdminSeeder::class,
         	MunicipalSeeder::class,
             // PersonSeeder::class,
+            ProvinceSeeder::class,
             CitySeeder::class,
+            BarangaySeeder::class,
+
             // OfficeSeeder::class,
             // EstablishmentSeeder::class,
             // LogsSeeder::class,

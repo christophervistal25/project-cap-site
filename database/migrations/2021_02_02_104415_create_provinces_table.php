@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCitiesTable extends Migration
+class CreateProvincesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateCitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('cities', function (Blueprint $table) {
-            // $table->string('zip_code')->primary();
-            $table->string('code');
-            $table->string('province_code');
+        Schema::create('provinces', function (Blueprint $table) {
+            $table->string('code')->primary();
             $table->string('name');
             $table->string('income_classification');
             $table->string('population');
-            $table->enum('status', ['active', 'in-active'])->default('active');
-            $table->primary(['province_code', 'code']);
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ class CreateCitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cities');
+        Schema::dropIfExists('provinces');
     }
 }

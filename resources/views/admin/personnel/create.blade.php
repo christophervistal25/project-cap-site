@@ -9,7 +9,7 @@
         <div class="card-body">Successfully add new personnel.</div>
     </div>
     @endif
-    @include('templates.error')
+    {{-- @include('templates.error') --}}
 </div>
 <section id="basic-alerts">
     <form method="POST" enctype="multipart/form-data" action="{{ route('personnel.store') }}" >
@@ -46,7 +46,7 @@
                                     <div class="form-group col-lg-3">
                                         <label for="lastname">Lastname <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control {{ $errors->has('lastname')  ? 'is-invalid' : ''}}" id="lastname" name="lastname" placeholder="Enter Lastname" value="{{ old('lastname') }}">
-        
+
                                         @if($errors->has('lastname'))
                                             <small  class="form-text text-danger">
                                             {{ $errors->first('lastname') }} </small>
@@ -63,16 +63,9 @@
                                     </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="rapid_pass_no">Rapid Pass No.</label>
-                                <input type="text" class="form-control {{ $errors->has('rapid_pass_no')  ? 'is-invalid' : ''}}" id="rapid_pass_no" name="rapid_pass_no" placeholder="Rapid Pass No" value="{{ old('rapid_pass_no') }}">
-                                @if($errors->has('rapid_pass_no'))
-                                <small  class="form-text text-danger">
-                                    {{ $errors->first('rapid_pass_no') }} </small>
-                            @endif
-                            </div>
 
-                           
+
+
 
 
 
@@ -80,7 +73,7 @@
 
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                         <label for="date_of_birth">Date of birth <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control  {{ $errors->has('date_of_birth')  ? 'is-invalid' : ''}}" id="date_of_birth" name="date_of_birth" value="{{ old('date_of_birth') }}">
                                         @if($errors->has('date_of_birth'))
@@ -89,14 +82,7 @@
                                         @endif
                                     </div>
 
-                                    <div class="col-lg-6">
-                                        <label for="rapid_test_issued">Rapid test issued</label>
-                                        <input type="date" class="form-control {{ $errors->has('rapid_test_issued')  ? 'is-invalid' : ''}}" id="rapid_test_issued" name="rapid_test_issued"  value="{{ old('rapid_test_issued') }}">
-                                        @if($errors->has('rapid_test_issued'))
-                                            <small  class="form-text text-danger">
-                                            {{ $errors->first('rapid_test_issued') }} </small>
-                                        @endif
-                                    </div>
+
                                 </div>
                             </div>
 
@@ -127,9 +113,12 @@
                                     <div class="col-lg-6">
                                         <label for="city">City <span class="text-danger">*</span></label>
                                         <select name="city" id="cities" class="form-control {{ $errors->has('city')  ? 'is-invalid' : ''}}">
-                                            <option  selected disabled>Please Select City</option>
                                             @foreach($cities as $city)
-                                                <option value="{{ $city->zip_code }}"> {{ $city->name }}</option>
+                                                @if(old('city'))
+                                                    <option {{ old('city') == $city->city_zipcode ? 'selected' : '' }} value="{{ $city->zip_code }}"> {{ $city->name }}</option>
+                                                @else
+                                                    <option value="{{ $city->zip_code }}"> {{ $city->name }}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                         @if($errors->has('city'))
@@ -141,9 +130,13 @@
                                     <div class="col-lg-6">
                                         <label for="barangay">Barangay<span class="text-danger">*</span></label>
                                         <select name="barangay" id="barangay" class="form-control {{ $errors->has('barangay')  ? 'is-invalid' : ''}}">
-                                            <option  selected disabled>Please Select Barangay</option>
                                             @foreach($barangays as $barangay)
+                                            @if(old('barangay'))
+                                                <option {{ old('barangay') == $barangay->id ? 'selected' : '' }} data-zip-code="{{ $barangay->city_zip_code }}" value="{{ $barangay->id }}"> {{ $barangay->name }}</option>
+                                            @else
                                                 <option data-zip-code="{{ $barangay->city_zip_code }}" value="{{ $barangay->id }}"> {{ $barangay->name }}</option>
+                                            @endif
+
                                             @endforeach
                                         </select>
                                         @if($errors->has('barangay'))
@@ -170,13 +163,11 @@
                             <div class="form-group">
                                     <label for="status">Status <span class="text-danger">*</span></label>
                                         <select name="status" id="status" class="form-control {{ $errors->has('status')  ? 'is-invalid' : ''}}">
-                                             <option value="Single">Single</option>
-                                             <option value="Married">Married</option>
-                                             <option value="Married">Single Parent</option>
-                                             <option value="Married">Separated</option>
-                                             <option value="Married">Widowed</option>
-                                             <option value="Married">Annulled</option>
+                                            @foreach($civil_status as $status)
+                                                <option value={{ $status }}>{{ $status }}</option>
+                                            @endforeach
                                         </select>
+                                        <div class="invalid-feedback">{{ $errors->first('status') }}</div>
                             </div>
 
                             <div class="form-group">

@@ -14,11 +14,15 @@ class CreateBarangaysTable extends Migration
     public function up()
     {
         Schema::create('barangays', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('city_zip_code');
+            // $table->bigIncrements('id');
+            // $table->bigInteger('city_zip_code');
+            $table->string('province_code');
+            $table->string('city_code');
+            $table->string('code');
             $table->string('name');
-            $table->bigInteger('code');
+            $table->string('type');
             $table->enum('status', ['active', 'in-active']);
+            $table->primary(['province_code', 'city_code', 'code']);
             $table->timestamps();
         });
     }
