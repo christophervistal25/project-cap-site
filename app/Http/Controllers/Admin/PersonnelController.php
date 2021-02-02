@@ -109,12 +109,6 @@ class PersonnelController extends Controller
             'age'           => $this->personnelRepository->getAge($request->date_of_birth),
         ]);
 
-        // Province is required
-        // status is required
-        // Phone number is required
-        // method for calculating age.
-
-
         return back()->with('success', $person->id);
     }
 
