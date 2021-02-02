@@ -28,6 +28,10 @@ class CreatePeopleTable extends Migration
             $table->string('address');
             $table->bigInteger('barangay_id');
             $table->string('generated_qr')->nullable();
+            $table->integer('age');
+            $table->string('civil_status');
+            $table->string('phone_number');
+            $table->string('email');
             // $table->string('generated_qr')->default('default_qr.png');
             $table->string('image')->default('default.png');
             $table->timestamps();

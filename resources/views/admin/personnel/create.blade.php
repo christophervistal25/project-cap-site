@@ -15,7 +15,7 @@
     <form method="POST" enctype="multipart/form-data" action="{{ route('personnel.store') }}" >
     @csrf
   <div class="row match-height">
-      <div class="col-xl-6 col-lg-12">
+      <diva class="col-xl-6 col-lg-12 d-none">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Personnel Image</h4>
@@ -36,8 +36,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-6 col-lg-12">
+            </diva>
+            <div class="col-xl-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Personnel Information</h4>
@@ -47,52 +47,54 @@
                     </div>
                     <div class="card-content collapse show">
                         <div class="card-body">
+                            <div class="row">
+                                    <div class="form-group  col-lg-3">
+                                        <label for="firstname">Firstname <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control {{ $errors->has('firstname')  ? 'is-invalid' : ''}}" id="firstname" name="firstname" placeholder="Enter Firstname" value="{{ old('firstname') }}">
+                                        @if($errors->has('firstname'))
+                                            <small  class="form-text text-danger">
+                                                {{ $errors->first('firstname') }} </small>
+                                        @endif
+                                    </div>
+
+                                    <div class="form-group col-lg-3 ">
+                                            <label for="middlename">Middlename <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control {{ $errors->has('middlename')  ? 'is-invalid' : ''}} " id="middlename" name="middlename" placeholder="Enter Middlename" value="{{ old('middlename') }}">
+                                            @if($errors->has('middlename'))
+                                            <small  class="form-text text-danger">{{ $errors->first('middlename') }} </small>
+                                            @endif
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label for="lastname">Lastname <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control {{ $errors->has('lastname')  ? 'is-invalid' : ''}}" id="lastname" name="lastname" placeholder="Enter Lastname" value="{{ old('lastname') }}">
+        
+                                        @if($errors->has('lastname'))
+                                            <small  class="form-text text-danger">
+                                            {{ $errors->first('lastname') }} </small>
+                                        @endif
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label for="suffix">Suffix <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control {{ $errors->has('suffix')  ? 'is-invalid' : ''}}" id="suffix" name="suffix" placeholder="e.g Jr." value="{{ old('suffix') }}">
+                                        @if($errors->has('suffix'))
+                                            <small  class="form-text text-danger">
+                                            {{ $errors->first('suffix') }} </small>
+                                        @endif
+                                    </div>
+                            </div>
+
                             <div class="form-group">
-                                <label for="rapid_pass_no">Rapid Pass No. <span class="text-danger">*</span></label>
+                                <label for="rapid_pass_no">Rapid Pass No.</label>
                                 <input type="text" class="form-control {{ $errors->has('rapid_pass_no')  ? 'is-invalid' : ''}}" id="rapid_pass_no" name="rapid_pass_no" placeholder="Rapid Pass No" value="{{ old('rapid_pass_no') }}">
                                 @if($errors->has('rapid_pass_no'))
                                 <small  class="form-text text-danger">
                                     {{ $errors->first('rapid_pass_no') }} </small>
                             @endif
-
-
-                            <div class="form-group mt-1">
-                            <label for="firstname">Firstname <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('firstname')  ? 'is-invalid' : ''}}" id="firstname" name="firstname" placeholder="Enter Firstname" value="{{ old('firstname') }}">
-                            @if($errors->has('firstname'))
-                                <small  class="form-text text-danger">
-                                    {{ $errors->first('firstname') }} </small>
-                            @endif
-
                             </div>
 
-                            <div class="form-group">
-                                <label for="middlename">Middlename <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control {{ $errors->has('middlename')  ? 'is-invalid' : ''}} " id="middlename" name="middlename" placeholder="Enter Middlename" value="{{ old('middlename') }}">
-                                @if($errors->has('middlename'))
-                                <small  class="form-text text-danger">
-                                    {{ $errors->first('middlename') }} </small>
-                            @endif
-                            </div>
-
-                            <div class="form-group">
-                                <label for="lastname">Lastname <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control {{ $errors->has('lastname')  ? 'is-invalid' : ''}}" id="lastname" name="lastname" placeholder="Enter Lastname" value="{{ old('lastname') }}">
-
-                                @if($errors->has('lastname'))
-                                    <small  class="form-text text-danger">
-                                    {{ $errors->first('lastname') }} </small>
-                                @endif
-                            </div>
-
-                            <div class="form-group">
-                                <label for="suffix">Suffix <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control {{ $errors->has('suffix')  ? 'is-invalid' : ''}}" id="suffix" name="suffix" placeholder="e.g Jr." value="{{ old('suffix') }}">
-                                @if($errors->has('suffix'))
-                                    <small  class="form-text text-danger">
-                                    {{ $errors->first('suffix') }} </small>
-                                @endif
-                            </div>
+                           
 
 
 
@@ -110,7 +112,7 @@
                                     </div>
 
                                     <div class="col-lg-6">
-                                        <label for="rapid_test_issued">Rapid test issued <span class="text-danger">*</span></label>
+                                        <label for="rapid_test_issued">Rapid test issued</label>
                                         <input type="date" class="form-control {{ $errors->has('rapid_test_issued')  ? 'is-invalid' : ''}}" id="rapid_test_issued" name="rapid_test_issued"  value="{{ old('rapid_test_issued') }}">
                                         @if($errors->has('rapid_test_issued'))
                                             <small  class="form-text text-danger">
@@ -167,7 +169,6 @@
                                     </div>
                                     </div>
                                 </div>
-                            </div>
 
                             <div class="form-group">
                                     <label for="puroksub">Purok/Subdivision/Street<span class="text-danger">*</span></label>
