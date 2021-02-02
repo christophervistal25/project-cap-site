@@ -25,6 +25,11 @@ class Person extends Model
         'generated_qr',
         'image',
         'barangay_id',
+        'age',
+        'civil_status', 
+        'province',
+        'phone_number',
+        'email',
     ];
 
     public static function boot()

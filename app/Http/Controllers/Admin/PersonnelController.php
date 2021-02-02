@@ -10,6 +10,7 @@ use App\Http\Controllers\Repositories\PersonnelRepository;
 use Freshbitsweb\Laratables\Laratables;
 use App\City;
 use App\Barangay;
+use Carbon\Carbon;
 
 class PersonnelController extends Controller
 {
@@ -56,6 +57,8 @@ class PersonnelController extends Controller
         $barangays = Barangay::get();
         return view('admin.personnel.create', compact('cities', 'barangays'));
     }
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -64,19 +67,23 @@ class PersonnelController extends Controller
      */
     public function store(Request $request)
     {
+       
         $this->validate($request, [
-            'firstname'         => 'required|regex:/^[A-Za-z ]+$/u',
-            'middlename'        => 'required|regex:/^[A-Za-z ]+$/u',
-            'lastname'          => 'required|regex:/^[A-Za-z ]+$/u',
-            'suffix'            => 'required',
-            'date_of_birth'     => 'required|date',
+            'firstname'     => 'required|regex:/^[A-Za-z ]+$/u',
+            'middlename'    => 'required|regex:/^[A-Za-z ]+$/u',
+            'lastname'      => 'required|regex:/^[A-Za-z ]+$/u',
+            'suffix'        => 'required',
+            'date_of_birth' => 'required|date',
             // 'rapid_pass_no'     => 'required|unique:people',
-            'gender'            => 'required|in:' . implode(',', PersonnelRepository::GENDER),
+            'gender' => 'required|in:' . implode(',', PersonnelRepository::GENDER),
             // 'rapid_test_issued' => 'required|date',
-            'address'           => 'required',
-            'city'              => 'required|exists:cities,zip_code',
-            'barangay'          => 'required|exists:barangays,id',
-            'image'             => 'required'
+            'address'      => 'required',
+            'city'         => 'required|exists:cities,zip_code',
+            'barangay'     => 'required|exists:barangays,id',
+            'image'        => 'required',
+            'province'     => 'required',
+            'status'       => 'required',
+            'phone_number' => 'required|unique:people',
         ],['image.required' => 'Please attach some image.']);
 
         if($request->has('image')) {
@@ -85,6 +92,7 @@ class PersonnelController extends Controller
             $request->file('image')->storeAs('/public/images', $imageName);
         }
 
+        $age = $this->personnelRepository->calculateAge($request->date_of_birth);
         $person = Person::create([
             'firstname'         => $request->firstname,
             'middlename'        => $request->middlename,
@@ -99,7 +107,17 @@ class PersonnelController extends Controller
             'city_zip_code'     => $request->city,
             'barangay_id'       => $request->barangay,
             'generated_qr'      => '',
+            'province'          => $request->province,
+            'civil_status'      => $request->status,
+            'phone_number'      => $request->phone_number,
+            'age'               => $age,
         ]);
+
+        // Province is required
+        // status is required
+        // Phone number is required
+        // method for calculating age.
+        
         
         return back()->with('success', $person->id);
     }

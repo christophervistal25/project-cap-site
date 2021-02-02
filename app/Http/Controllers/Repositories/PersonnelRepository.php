@@ -6,6 +6,7 @@ use App\Barangay;
 use App\City;
 use App\Http\Controllers\Repositories\Encrytor;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class PersonnelRepository 
 {
@@ -75,4 +76,14 @@ class PersonnelRepository
 
         return self::makeID($person, $personCounter);
     }
+
+
+    public function calculateAge(string $birthdate) :int
+    {
+        $birthDateYear = Carbon::parse($birthdate)->year;
+        $currentYear   = Carbon::now()->year;
+        
+        return $currentYear - $birthDateYear;
+    }
 }
+

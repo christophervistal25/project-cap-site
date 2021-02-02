@@ -9,34 +9,12 @@
         <div class="card-body">Successfully add new personnel.</div>
     </div>
     @endif
-    {{-- @include('templates.error') --}}
+    @include('templates.error')
 </div>
 <section id="basic-alerts">
     <form method="POST" enctype="multipart/form-data" action="{{ route('personnel.store') }}" >
     @csrf
   <div class="row match-height">
-      <diva class="col-xl-6 col-lg-12 d-none">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Personnel Image</h4>
-                        <a class="heading-elements-toggle">
-                            <i class="la la-ellipsis-v font-medium-3"></i>
-                        </a>
-                    </div>
-                    <div class="card-content collapse show">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="">Image <span class="text-danger">*</span></label>
-                                <div class="custom-file">
-                                    <input type="file" name="image" class="custom-file-input {{ $errors->has('image')  ? 'is-invalid' : ''}}" id="imageFile" >
-                                    <label class="custom-file-label" for="imageFile">Choose file...</label>
-                                    <div class="invalid-feedback">{{ $errors->first('image') }}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </diva>
             <div class="col-xl-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">
@@ -135,7 +113,13 @@
 
                             <div class="form-group">
                                     <label for="province">Province<span class="text-danger">*</span></label>
-                                    <select name="province" id="province" class="form-control"></select>
+                                    <select name="province" id="province" class="form-control {{ $errors->has('province')  ? 'is-invalid' : ''}}">
+                                        <option value="Surigao del sur">Surigao del Sur</option>
+                                    </select>
+                                    @if($errors->has('province'))
+                                        <small  class="form-text text-danger">
+                                        {{ $errors->first('province') }} </small>
+                                    @endif
                              </div>
 
                             <div class="form-group">
@@ -171,7 +155,7 @@
                                 </div>
 
                             <div class="form-group">
-                                    <label for="puroksub">Purok/Subdivision/Street<span class="text-danger">*</span></label>
+                                    <label for="puroksub">Purok/Subdivision/Street <span class="text-danger">*</span></label>
                                      <textarea name="puroksub" id="puroksub" class="form-control"></textarea>
                             </div>
 
@@ -184,7 +168,7 @@
                             </div>
 
                             <div class="form-group">
-                                    <label for="status">Status<span class="text-danger">*</span></label>
+                                    <label for="status">Status <span class="text-danger">*</span></label>
                                         <select name="status" id="status" class="form-control {{ $errors->has('status')  ? 'is-invalid' : ''}}">
                                              <option value="Single">Single</option>
                                              <option value="Married">Married</option>
@@ -201,8 +185,17 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="cpnumber">Cellphone Number<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control {{ $errors->has('cpnumber')  ? 'is-invalid' : ''}}" id="cpnumber" name="cpnumber" placeholder="" value="{{ old('cpnumber') }}">
+                                <label for="phone_number">Cellphone Number <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control {{ $errors->has('phone_number')  ? 'is-invalid' : ''}}" id="phone_number" name="phone_number" placeholder="" value="{{ old('phone_number') }}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Image <span class="text-danger">*</span></label>
+                                <div class="custom-file">
+                                    <input type="file" name="image" class="custom-file-input {{ $errors->has('image')  ? 'is-invalid' : ''}}" id="imageFile" >
+                                    <label class="custom-file-label" for="imageFile">Choose file...</label>
+                                    <div class="invalid-feedback">{{ $errors->first('image') }}</div>
+                                </div>
                             </div>
 
                             <div class="float-right">

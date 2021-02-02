@@ -21,8 +21,8 @@ class CreatePeopleTable extends Migration
             $table->string('lastname');
             $table->string('suffix')->nullable();
             $table->date('date_of_birth');
-            $table->date('rapid_test_issued');
-            $table->string('rapid_pass_no');
+            $table->date('rapid_test_issued')->nullable();
+            $table->string('rapid_pass_no')->nullable();
             $table->string('city_zip_code');
             $table->enum('gender', ['male', 'female']);
             $table->string('address');
@@ -31,7 +31,8 @@ class CreatePeopleTable extends Migration
             $table->integer('age');
             $table->string('civil_status');
             $table->string('phone_number');
-            $table->string('email');
+            $table->string('email')->nullable();
+            $table->string('province');
             // $table->string('generated_qr')->default('default_qr.png');
             $table->string('image')->default('default.png');
             $table->timestamps();
