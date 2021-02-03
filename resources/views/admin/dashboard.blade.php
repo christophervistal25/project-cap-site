@@ -1,8 +1,8 @@
 @extends('admin.layouts.app')
 @section('page-title', 'Dashboard')
 @prepend('meta-data')
-{{-- <meta name="chart-labels" content="{{ $cities }}"> --}}
-{{-- <meta name="chart-labels-value" content="{{ $citiesValue }}"> --}}
+<meta name="chart-labels" content="{{ $cities }}">
+<meta name="chart-labels-value" content="{{ $citiesValue }}">
 @endprepend
 @section('content')
 <div class="row">
@@ -60,11 +60,11 @@
                   </div>
               </div>
               <div class="card-content collapse show">
-                  <div class="card-body chartjs">
+                  {{-- <div class="card-body chartjs">
                           <div class="height-500">
                       <canvas id="line-chart"></canvas>
                       </div>
-                  </div>
+                  </div> --}}
               </div>
           </div>
       </div>
@@ -264,20 +264,11 @@
             let recoveredTotal = 0;
             let deathTotal = 0;
 
-            if(!localStorage.getItem('confirmed_total')) {
-                surigaoDelSurCities.forEach((city, index) => {
-                    confirmedTotal += city.total;
-                    recoveredTotal += city.recovered;
-                    deathTotal += city.deaths;
-                });
-                localStorage.setItem('confirmed_total', confirmedTotal);
-                localStorage.setItem('recovered_total', recoveredTotal);
-                localStorage.setItem('deaths_total', deathTotal);
-            } else {
-                confirmedTotal = localStorage.getItem('confirmed_total');
-                recoveredTotal = localStorage.getItem('recovered_total');
-                deathTotal = localStorage.getItem('deaths_total');
-            }
+            surigaoDelSurCities.forEach((city, index) => {
+                confirmedTotal += city.total;
+                recoveredTotal += city.recovered;
+                deathTotal += city.deaths;
+            });
 
 
             $('#surigao-confirmed-case').html(numberWithCommas(confirmedTotal));
@@ -287,7 +278,7 @@
     });
 </script>
 
-{{-- <script>
+<script>
 let personnelChartLabels = $('meta[name="chart-labels"]').attr('content').split(',');
 let personnelChartValues = $('meta[name="chart-labels-value"]').attr('content').split(',')
 $(window).on("load", function(){
@@ -400,7 +391,7 @@ var lineChart = new Chart(ctx, config);
 
     // Create the chart
     var pieSimpleChart = new Chart(pieCtx, pieConfig);
-</script> --}}
+</script>
 
 
 

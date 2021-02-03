@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class City extends Model
 {
     public    $incrementing = false;
-    protected $primaryKey   = 'zip_code';
-    protected $fillable     = ['zip_code', 'name', 'status', 'code'];
+    protected $primaryKey   = 'code';
+    protected $fillable     = ['name', 'status', 'code'];
     public const PROVINCE_CODE = '166800000';
 
     public function barangays()

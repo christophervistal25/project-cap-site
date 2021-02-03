@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Barangay extends Model
 {
-    protected $fillable = ['city_zip_code', 'name', 'code', 'status'];
+    protected $fillable = ['name', 'code', 'status'];
 
     public function city()
     {
