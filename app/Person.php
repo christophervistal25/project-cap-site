@@ -18,8 +18,9 @@ class Person extends Model
         'address',
         'date_of_birth',
         'gender',
-        'city_zip_code',
-        'barangay_id',
+        'province_code',
+        'city_code',
+        'barangay_code',
         'generated_qr',
         'image',
         'barangay_id',
@@ -119,12 +120,17 @@ class Person extends Model
 
     public function barangay()
     {
-        return $this->belongsTo('App\Barangay');
+        return $this->belongsTo('App\Barangay', 'barangay_code', 'code');
     }
 
+    public function province()
+    {
+        return $this->belongsTo('App\Province', 'province_code', 'code');
+    }
+    
     public function city()
     {
-        return $this->belongsTo('App\City');
+        return $this->belongsTo('App\City', 'city_code', 'code');
     }
 
     public function setFirstNameAttribute($value)

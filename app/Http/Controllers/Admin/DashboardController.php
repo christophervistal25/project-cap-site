@@ -26,14 +26,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $cities      = City::where('status', 'active')->orderBy('zip_code')->get('name')->pluck('name')->toArray();
-        $citiesValue = City::where('status', 'active')->withCount('people')->get('people_count')->pluck('people_count')->toArray();
+        // $cities      = City::where('status', 'active')->orderBy('zip_code')->get('name')->pluck('name')->toArray();
+        // $citiesValue = City::where('status', 'active')->withCount('people')->get('people_count')->pluck('people_count')->toArray();
         
-        $cities      = implode(',', $cities);
-        $citiesValue = implode(',', $citiesValue);
+        // $cities      = implode(',', $cities);
+        // $citiesValue = implode(',', $citiesValue);
 
-        $normal = PersonLog::where('body_temperature', '<=', 37)->count();
-        $notNormal = PersonLog::where('body_temperature', '>=', 38)->count();
+        // $normal = PersonLog::where('body_temperature', '<=', 37)->count();
+        // $notNormal = PersonLog::where('body_temperature', '>=', 38)->count();
 
         // No of registered. Admins
         $admins = Admin::count();
@@ -49,7 +49,8 @@ class DashboardController extends Controller
         // No of People Registered
         $peoples = Person::count();
 
-        return view('admin.dashboard', compact('cities', 'citiesValue', 'normal', 'notNormal', 'admins', 'municipals_account', 'noOfCities', 'peoples', 'checkers'));
+        // return view('admin.dashboard', compact('cities', 'citiesValue', 'normal', 'notNormal', 'admins', 'municipals_account', 'noOfCities', 'peoples', 'checkers'));
+        return view('admin.dashboard', compact('peoples', 'checkers', 'admins', 'municipals_account', 'noOfCities'));
     }
   
 }

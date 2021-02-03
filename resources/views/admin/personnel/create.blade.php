@@ -120,13 +120,14 @@
                                     <div class="col-lg-6">
                                         <label for="city">City <span class="text-danger">*</span></label>
                                         <select name="city" id="cities" class="form-control {{ $errors->has('city')  ? 'is-invalid' : ''}}">
-                                            @foreach($cities as $city)
+                                            <option value="" disabled>Select province</option>
+                                            {{-- @foreach($cities as $city)
                                                 @if(old('city'))
                                                     <option {{ old('city') == $city->city_zipcode ? 'selected' : '' }} value="{{ $city->zip_code }}"> {{ $city->name }}</option>
                                                 @else
                                                     <option value="{{ $city->zip_code }}"> {{ $city->name }}</option>
                                                 @endif
-                                            @endforeach
+                                            @endforeach --}}
                                         </select>
                                         @if($errors->has('city'))
                                         <small  class="form-text text-danger">
@@ -137,14 +138,14 @@
                                     <div class="col-lg-6">
                                         <label for="barangay">Barangay<span class="text-danger">*</span></label>
                                         <select name="barangay" id="barangay" class="form-control {{ $errors->has('barangay')  ? 'is-invalid' : ''}}">
-                                            @foreach($barangays as $barangay)
+                                            <option value="" disabled>Select City</option>
+                                            {{-- @foreach($barangays as $barangay)
                                             @if(old('barangay'))
                                                 <option {{ old('barangay') == $barangay->id ? 'selected' : '' }} data-zip-code="{{ $barangay->city_zip_code }}" value="{{ $barangay->id }}"> {{ $barangay->name }}</option>
                                             @else
                                                 <option data-zip-code="{{ $barangay->city_zip_code }}" value="{{ $barangay->id }}"> {{ $barangay->name }}</option>
                                             @endif
-
-                                            @endforeach
+                                            @endforeach --}}
                                         </select>
                                         @if($errors->has('barangay'))
                                         <small  class="form-text text-danger">
@@ -215,24 +216,48 @@
 
 <script>
     $(document).ready(function () {
-        let barangayOptionAll = [];
-        $('#cities').change(function (e) {
-            let cityZipCode = e.target.value;
-            if(barangayOptionAll.length === 0) {
-                barangayOptionAll = $('#barangay option');
-            }
-
-
-            barangayOptionAll.filter((index, barangayOption) => {
-
-                if(barangayOption.getAttribute('data-zip-code') == cityZipCode) {
-                    $('#barangay').append(barangayOption);
-                } else {
-                    $('#barangay').val($(barangayOption).remove());
-                }
+        
+        $('#province').change(function (e) {
+            $.ajax({
+                url : `/api/province/municipal/${e.target.value}`,
+                success : function (response) {
+                    // Clear all option of cities select element
+                    $('#cities').find('option').remove();
+                    response.municipals.forEach((municipal) => $('#cities').append(`<option value="${municipal.code}">${municipal.name}</option>`));
+                },
             });
-
         });
+
+        $('#cities').change(function (e) {
+            console.log(e.target.value);
+            $.ajax({
+                url : `/api/province/barangay/${e.target.value}`,
+                success : function (response) {
+                    // Clear all option of barangay select element
+                    $('#barangay').find('option').remove();
+                    response.barangays.forEach((barangay) => $('#barangay').append(`<option value="${barangay.code}">${barangay.name}</option>`));
+                },
+            });
+        });
+
+
+        // let barangayOptionAll = [];
+        // $('#cities').change(function (e) {
+        //     let cityZipCode = e.target.value;
+        //     if(barangayOptionAll.length === 0) {
+        //         barangayOptionAll = $('#barangay option');
+        //     }
+
+
+        //     barangayOptionAll.filter((index, barangayOption) => {
+
+        //         if(barangayOption.getAttribute('data-zip-code') == cityZipCode) {
+        //             $('#barangay').append(barangayOption);
+        //         } else {
+        //             $('#barangay').val($(barangayOption).remove());
+        //         }
+        //     });
+        // });
     });
 </script>
 @endpush

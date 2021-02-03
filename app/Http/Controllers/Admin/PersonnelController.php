@@ -55,21 +55,14 @@ class PersonnelController extends Controller
      */
     public function create()
     {
-        $cities = Cache::rememberForever('cities', function () {
-            return City::where('status', 'active')->get();
-        });
-
-        $barangays = Cache::rememberForever('barangays', function () {
-            return Barangay::get();
-        });
-
-        $civil_status = PersonnelRepository::CIVIL_STATUS;
 
         $provinces = Cache::rememberForever('provinces', function () {
             return Province::orderBy('name')->get();
         });
-        
-        return view('admin.personnel.create', compact('cities', 'barangays', 'civil_status', 'provinces'));
+      
+        $civil_status = PersonnelRepository::CIVIL_STATUS;
+       
+        return view('admin.personnel.create', compact('civil_status', 'provinces'));
     }
 
 
@@ -90,8 +83,8 @@ class PersonnelController extends Controller
             'date_of_birth' => 'required|date',
             'gender'        => 'required|in:' . implode(',', PersonnelRepository::GENDER),
             'address'       => 'required',
-            'city'          => 'required|exists:cities,zip_code',
-            'barangay'      => 'required|exists:barangays,id',
+            'city'          => 'required|exists:cities,code',
+            'barangay'      => 'required|exists:barangays,code',
             'image'         => 'required',
             'province'      => 'required',
             'status'        => 'required|in:' . implode(',', PersonnelRepository::CIVIL_STATUS),
@@ -113,9 +106,9 @@ class PersonnelController extends Controller
             'date_of_birth' => $request->date_of_birth,
             'image'         => $imageName ?? 'default.png',
             'gender'        => $request->gender,
-            'city_zip_code' => $request->city,
-            'barangay_id'   => $request->barangay,
-            'generated_qr'  => '',
+            'province_code' => $request->province,
+            'city_code'     => $request->city,
+            'barangay_code' => $request->barangay,
             'province'      => $request->province,
             'civil_status'  => $request->status,
             'phone_number'  => $request->phone_number,

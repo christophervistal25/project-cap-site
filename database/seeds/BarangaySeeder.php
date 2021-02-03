@@ -16,7 +16,7 @@ class BarangaySeeder extends Seeder
         $data = file_get_contents($data[0]);
         $data = array_filter(explode("\n", $data));
         
-        foreach($data as $barangay) {
+        foreach($data as $index => $barangay) {
             list($province_code, $municipal_code, $code, $name, $type, $income_clssification, $ruralOrUrban, $population) = explode(",", $barangay);
             Barangay::create([
                 'province_code' => $province_code,

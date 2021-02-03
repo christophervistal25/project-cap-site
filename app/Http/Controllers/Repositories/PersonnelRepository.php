@@ -40,13 +40,20 @@ class PersonnelRepository
         return Encryptor::process($user_information);
     }
 
-    private static function countPersonInCityAndBarangay($cityZipCode, $barangayId)
+    private static function counterForPerson(array $data = [])
     {
-        return Person::where(['city_zip_code' => $cityZipCode, 'barangay_id' => $barangayId])->latest()->first();
+        $province = $data['province'];
+        $city     = $data['city'];
+        $barangay = $data['barangay'];
+
+        return Person::where(['province_code' => $province, 'city_code' => $city, 'barangay_code' => $barangay])
+                ->latest()
+                ->first();
     }
 
     private static function makeCounter($lastRegisteredPerson) :int
     {
+        // There is no registered person 
         if(is_null($lastRegisteredPerson)) {
             $counter = 1;
         } else {
@@ -60,18 +67,22 @@ class PersonnelRepository
     private static function makeID(Person $person, int $personCounter) :string
     {
 
-        return Str::replaceFirst('166', '', City::PROVINCE_CODE)
+        return $person->province_code
         . self::ID_SEPERATOR
-        . Str::replaceFirst('166', '', $person->city->code)
+        . $person->city_code
         . self::ID_SEPERATOR
-        . Str::replaceFirst('166', '', $person->barangay->code)
+        . $person->barangay_code
         . self::ID_SEPERATOR
         . ($personCounter);
     }
 
     public static function generateID(Person $person) :string
-    {
-        $lastRegisteredPerson = self::countPersonInCityAndBarangay($person->city->zip_code, $person->barangay->id);
+    {   
+        $lastRegisteredPerson = self::counterForPerson([
+            'province' => $person->province_code,
+            'city'     => $person->city_code,
+            'barangay' => $person->barangay_code,
+        ]);
 
         $personCounter = self::makeCounter($lastRegisteredPerson);
 

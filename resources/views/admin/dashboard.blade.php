@@ -1,8 +1,8 @@
 @extends('admin.layouts.app')
 @section('page-title', 'Dashboard')
 @prepend('meta-data')
-<meta name="chart-labels" content="{{ $cities }}">
-<meta name="chart-labels-value" content="{{ $citiesValue }}">
+{{-- <meta name="chart-labels" content="{{ $cities }}"> --}}
+{{-- <meta name="chart-labels-value" content="{{ $citiesValue }}"> --}}
 @endprepend
 @section('content')
 <div class="row">
@@ -287,7 +287,7 @@
     });
 </script>
 
-<script>
+{{-- <script>
 let personnelChartLabels = $('meta[name="chart-labels"]').attr('content').split(',');
 let personnelChartValues = $('meta[name="chart-labels-value"]').attr('content').split(',')
 $(window).on("load", function(){
@@ -400,7 +400,7 @@ var lineChart = new Chart(ctx, config);
 
     // Create the chart
     var pieSimpleChart = new Chart(pieCtx, pieConfig);
-</script>
+</script> --}}
 
 
 
