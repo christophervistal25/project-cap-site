@@ -114,7 +114,7 @@ class Person extends Model
      */
     public static function laratablesAdditionalColumns()
     {
-        return ['generated_qr', 'address', 'city_zip_code'];
+        return ['address', 'province_code', 'city_code', 'barangay_code'];
     }
 
 

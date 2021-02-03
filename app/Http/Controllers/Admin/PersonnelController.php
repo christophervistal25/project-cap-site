@@ -26,10 +26,9 @@ class PersonnelController extends Controller
 
     public function list(string $filter)
     {
-
         if($filter !== 'all') {
             return Laratables::recordsOf(Person::class, function($query) use ($filter) {
-                return $query->where('city_zip_code', $filter);
+                return $query->where('province_code', $filter);
             });
         } else {
             return Laratables::recordsOf(Person::class);
@@ -44,8 +43,9 @@ class PersonnelController extends Controller
      */
     public function index()
     {
-        $cities = City::where('status', 'active')->get();
-        return view('admin.personnel.index', compact('cities'));
+        $provinces = Province::orderBy('name')
+                            ->get(['code', 'name']);
+        return view('admin.personnel.index', compact('provinces'));
     }
 
     /**

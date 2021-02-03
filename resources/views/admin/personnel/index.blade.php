@@ -9,10 +9,11 @@
     <div class="card-body">
       <div class="row float-left col-lg-7">
         <div class="col-lg-7">
-          <select name="cities" id="city_filter" class="form-control">
+          <span>Filter by Province</span>
+          <select name="cities" id="province_filter" class="form-control">
             <option value="all">Show All</option>
-            @foreach($cities as $city)
-              <option value="{{ $city->zip_code }}"> {{ $city->name }}</option>
+            @foreach($provinces as $province)
+              <option value="{{ $province->code }}"> {{ $province->name }}</option>
             @endforeach
           </select>
         </div>
@@ -30,7 +31,9 @@
             <td scope="col" class="font-weight-bold">Firstname</td>
             <td scope="col" class="font-weight-bold">Middlename</td>
             <td scope="col" class="font-weight-bold">Lastname</td>
+            <td scope="col" class="font-weight-bold">Province</td>
             <td scope="col" class="font-weight-bold">City</td>
+            <td scope="col" class="font-weight-bold">Barangay</td>
             <td scope="col" class="font-weight-bold">Option</td>
           </tr>
         </thead>
@@ -54,7 +57,7 @@
       QUERY_STRING = 'all';
     } else {
       QUERY_STRING = localStorage.getItem('FILTER_SELECT');
-      $('#city_filter').val(QUERY_STRING);
+      $('#province_filter').val(QUERY_STRING);
     }
 
     let person_table =  $('#persons-table').DataTable({
@@ -65,18 +68,19 @@
                 { name: 'firstname' },
                 { name: 'middlename' },
                 { name: 'lastname' },
+                { name: 'province.name' },
                 { name: 'city.name' },
+                { name: 'barangay.name' },
                 { name: 'admin_action' , searchable : false, orderable : false, },
             ],
         });
   </script>
 
    <script>
-      $('#city_filter').change(function (e) {
+      $('#province_filter').change(function (e) {
           QUERY_STRING = $(this).val();
           localStorage.setItem('FILTER_SELECT', QUERY_STRING);
           person_table.ajax.url(`/admin/persons/list/${QUERY_STRING}`).load();
-          cellContentEditableUpdator();
       });
     </script>
   @endpush
