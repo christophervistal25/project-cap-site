@@ -86,15 +86,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="address">Address <span class="text-danger">*</span></label>
-                                <textarea name="address" id="address" class="form-control {{ $errors->has('address')  ? 'is-invalid' : ''}}" rows="3">{{ old('address') }}</textarea>
-                                @if($errors->has('address'))
-                                    <small  class="form-text text-danger">
-                                    {{ $errors->first('address') }} </small>
-                                @endif
-                            </div>
-
+                            
 
 
                             <div class="form-group">
@@ -156,9 +148,24 @@
                                 </div>
 
                             <div class="form-group">
-                                    <label for="puroksub">Purok/Subdivision/Street <span class="text-danger">*</span></label>
-                                     <textarea name="puroksub" id="puroksub" class="form-control"></textarea>
+                                    <label for="puroksub">Temporary Address<span class="text-danger">*</span></label>
+                                     <textarea name="temporary_address" id="temporary_address" class="form-control">{{  old('temporary_address') }}</textarea>
+                                    @if($errors->has('temporary_address'))
+                                        <small  class="form-text text-danger">
+                                            {{ $errors->first('temporary_address') }} 
+                                        </small>
+                                    @endif
                             </div>
+
+                            <div class="form-group">
+                                <label for="address">Permanent Address <span class="text-danger">*</span></label>
+                                <textarea name="address" id="address" class="form-control {{ $errors->has('address')  ? 'is-invalid' : ''}}" rows="3">{{ old('address') }}</textarea>
+                                @if($errors->has('address'))
+                                    <small  class="form-text text-danger">
+                                    {{ $errors->first('address') }} </small>
+                                @endif
+                            </div>
+
 
                             <div class="form-group">
                                 <label for="gender">Sex <span class="text-danger">*</span></label>
@@ -239,25 +246,6 @@
                 },
             });
         });
-
-
-        // let barangayOptionAll = [];
-        // $('#cities').change(function (e) {
-        //     let cityZipCode = e.target.value;
-        //     if(barangayOptionAll.length === 0) {
-        //         barangayOptionAll = $('#barangay option');
-        //     }
-
-
-        //     barangayOptionAll.filter((index, barangayOption) => {
-
-        //         if(barangayOption.getAttribute('data-zip-code') == cityZipCode) {
-        //             $('#barangay').append(barangayOption);
-        //         } else {
-        //             $('#barangay').val($(barangayOption).remove());
-        //         }
-        //     });
-        // });
     });
 </script>
 @endpush

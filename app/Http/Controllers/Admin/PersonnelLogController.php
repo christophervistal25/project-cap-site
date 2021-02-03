@@ -8,6 +8,9 @@ use App\Person;
 use Auth;
 use App\City;
 use App\Barangay;
+use App\Province;
+use Illuminate\Support\Facades\Cache;
+use App\Http\Controllers\Repositories\PersonnelRepository;
 
 class PersonnelLogController extends Controller
 {
@@ -17,9 +20,20 @@ class PersonnelLogController extends Controller
     public function show($id)
     {
         $person = Person::with('logs')->find($id);
-        $cities = City::get();
-        $barangays = Barangay::get();
-        return view('admin.personnel_logs.show', compact('person', 'cities', 'barangays'));
+
+        $provinces = Cache::rememberForever('provinces', function () {
+            return Province::orderBy('name')->get();
+        });
+
+        $cities = City::where('province_code', $person->province_code)
+                        ->get();
+
+        $barangays = Barangay::where('province_code', $person->province_code)
+                ->get();
+
+        $civil_status = PersonnelRepository::CIVIL_STATUS;
+
+        return view('admin.personnel_logs.show', compact('person', 'provinces', 'civil_status', 'cities', 'barangays'));
     }
 
     public function update(Request $request, Person $id)
@@ -27,32 +41,34 @@ class PersonnelLogController extends Controller
 
         // Validation first.
         $this->validate($request, [
-            "rapid_pass_no"     => 'required:unique:persons,rapid_pass_no,' . $id,
-            "firstname"         => 'required',
-            "middlename"        => 'required',
-            "lastname"          => 'required',
-            "date_of_birth"     => 'required|date',
-            "rapid_test_issued" => 'required|date',
-            "address"           => 'required',
-            "city"              => 'required|exists:cities,zip_code',
-            "barangay"          => 'required:exists:barangays,id',
-            "gender"            => 'required|in:male,female',
+            'firstname'         => 'required',
+            'middlename'        => 'required',
+            'lastname'          => 'required',
+            'date_of_birth'     => 'required|date',
+            'temporary_address' => 'required',
+            'address'           => 'required',
+            'province'          => 'required|exists:provinces,code',
+            'city'              => 'required|exists:cities,code',
+            'barangay'          => 'required:exists:barangays,code',
+            'gender'            => 'required|in:male,female',
+            'civil_status'      => 'required|in:' . implode(',', PersonnelRepository::CIVIL_STATUS),
         ]);
 
-        // Update the Person.
 
+        // Update the Person.
         $person                    = $id;
         $person->firstname         = $request->firstname;
         $person->middlename        = $request->middlename;
         $person->lastname          = $request->lastname;
         $person->suffix            = $request->suffix;
         $person->date_of_birth     = $request->date_of_birth;
-        $person->rapid_pass_no     = $request->rapid_pass_no;
-        $person->rapid_test_issued = $request->rapid_test_issued;
         $person->address           = $request->address;
-        $person->city_zip_code     = $request->city;
-        $person->barangay_id       = $request->barangay;
+        $person->temporary_address = $request->temporary_address;
+        $person->province_code     = $request->province;
+        $person->city_code         = $request->city;
+        $person->barangay_code     = $request->barangay;
         $person->gender            = $request->gender;
+        $person->civil_status      = $request->civil_status;
         $person->save();
 
 

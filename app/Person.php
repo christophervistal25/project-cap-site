@@ -15,6 +15,7 @@ class Person extends Model
         'middlename',
         'lastname',
         'suffix',
+        'temporary_address',
         'address',
         'date_of_birth',
         'gender',

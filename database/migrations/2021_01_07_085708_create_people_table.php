@@ -19,13 +19,14 @@ class CreatePeopleTable extends Migration
             $table->string('firstname');
             $table->string('middlename');
             $table->string('lastname');
-            $table->string('suffix')->nullable();
+            $table->string('suffix', 3)->nullable();
             $table->date('date_of_birth');
             $table->string('province_code');
             $table->string('city_code');
             $table->string('barangay_code');
             $table->enum('gender', ['male', 'female']);
-            $table->string('address');
+            $table->text('temporary_address');
+            $table->text('address');
             $table->integer('age');
             $table->string('civil_status');
             $table->string('phone_number');
