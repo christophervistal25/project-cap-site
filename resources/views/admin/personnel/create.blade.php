@@ -100,7 +100,14 @@
                             <div class="form-group">
                                     <label for="province">Province<span class="text-danger">*</span></label>
                                     <select name="province" id="province" class="form-control {{ $errors->has('province')  ? 'is-invalid' : ''}}">
-                                        <option value="Surigao del sur">Surigao del Sur</option>
+                                        @foreach($provinces as $province)
+                                                @if(old('province'))
+                                                    <option {{ old('province') == $province->code ? 'selected' : '' }} value="{{ $province->code }}"> {{ $province->name }}</option>
+                                                @else
+                                                    <option value="{{ $province->code }}"> {{ $province->name }}</option>
+                                                @endif
+                                        @endforeach
+                                            
                                     </select>
                                     @if($errors->has('province'))
                                         <small  class="form-text text-danger">

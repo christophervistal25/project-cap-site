@@ -10,7 +10,9 @@ use App\Http\Controllers\Repositories\PersonnelRepository;
 use Freshbitsweb\Laratables\Laratables;
 use App\City;
 use App\Barangay;
+use App\Province;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 
 class PersonnelController extends Controller
 {
@@ -53,10 +55,21 @@ class PersonnelController extends Controller
      */
     public function create()
     {
-        $cities = City::where('status', 'active')->get();
-        $barangays = Barangay::get();
+        $cities = Cache::rememberForever('cities', function () {
+            return City::where('status', 'active')->get();
+        });
+
+        $barangays = Cache::rememberForever('barangays', function () {
+            return Barangay::get();
+        });
+
         $civil_status = PersonnelRepository::CIVIL_STATUS;
-        return view('admin.personnel.create', compact('cities', 'barangays', 'civil_status'));
+
+        $provinces = Cache::rememberForever('provinces', function () {
+            return Province::orderBy('name')->get();
+        });
+        
+        return view('admin.personnel.create', compact('cities', 'barangays', 'civil_status', 'provinces'));
     }
 
 
