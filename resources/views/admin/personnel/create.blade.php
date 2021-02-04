@@ -128,7 +128,7 @@
                                     </div>
 
                                     <div class="col-lg-6">
-                                        <label for="barangay">Barangay<span class="text-danger">*</span></label>
+                                        <label for="barangay">Barangay<span class="text-danger"> *</span></label>
                                         <select name="barangay" id="barangay" class="form-control {{ $errors->has('barangay')  ? 'is-invalid' : ''}}">
                                             <option value="" disabled>Select City</option>
                                             {{-- @foreach($barangays as $barangay)
@@ -166,33 +166,55 @@
                                 @endif
                             </div>
 
-
-                            <div class="form-group">
-                                <label for="gender">Sex <span class="text-danger">*</span></label>
-                                <select name="gender" id="gender" class="form-control {{ $errors->has('gender')  ? 'is-invalid' : ''}}">
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                    <label for="status">Status <span class="text-danger">*</span></label>
-                                        <select name="status" id="status" class="form-control {{ $errors->has('status')  ? 'is-invalid' : ''}}">
-                                            @foreach($civil_status as $status)
-                                                <option value={{ $status }}>{{ $status }}</option>
-                                            @endforeach
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="gender">Sex <span class="text-danger">*</span></label>
+                                        <select name="gender" id="gender" class="form-control {{ $errors->has('gender')  ? 'is-invalid' : ''}}">
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
                                         </select>
-                                        <div class="invalid-feedback">{{ $errors->first('status') }}</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="status">Status <span class="text-danger">*</span></label>
+                                            <select name="status" id="status" class="form-control {{ $errors->has('status')  ? 'is-invalid' : ''}}">
+                                                @foreach($civil_status as $status)
+                                                    <option value={{ $status }}>{{ $status }}</option>
+                                                @endforeach
+                                            </select>
+                                            <div class="invalid-feedback">{{ $errors->first('status') }}</div>
+                                </div>
+                                </div>
                             </div>
+                            
+                            
 
-                            <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control {{ $errors->has('email')  ? 'is-invalid' : ''}}" id="email" name="email" placeholder="Optional" value="{{ old('email') }}">
-                            </div>
+                            
 
-                            <div class="form-group">
-                                <label for="phone_number">Cellphone Number <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control {{ $errors->has('phone_number')  ? 'is-invalid' : ''}}" id="phone_number" name="phone_number" placeholder="" value="{{ old('phone_number') }}">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control {{ $errors->has('email')  ? 'is-invalid' : ''}}" id="email" name="email" placeholder="Optional" value="{{ old('email') }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="phone_number">Cellphone Number <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control {{ $errors->has('phone_number')  ? 'is-invalid' : ''}}" id="phone_number" name="phone_number" placeholder="" value="{{ old('phone_number') }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="landline_number">Landline Number</label>
+                                        <input type="text" class="form-control {{ $errors->has('landline_number')  ? 'is-invalid' : ''}}" id="landline_number" name="landline_number" placeholder="" value="{{ old('landline_number') }}">
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-group">

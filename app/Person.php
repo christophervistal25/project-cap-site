@@ -29,6 +29,7 @@ class Person extends Model
         'civil_status',
         'province',
         'phone_number',
+        'landline_number',
         'email',
     ];
 

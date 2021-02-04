@@ -30,6 +30,7 @@ class CreatePeopleTable extends Migration
             $table->integer('age');
             $table->string('civil_status');
             $table->string('phone_number');
+            $table->string('landline_number')->nullable();
             $table->string('email')->nullable();
             $table->string('province');
             $table->string('image')->default('default.png');

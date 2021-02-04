@@ -61,7 +61,7 @@
                                         </div>
     
                                         <div class="form-group col-lg-3">
-                                            <label for="suffix">Suffix <span class="text-danger">*</span></label>
+                                            <label for="suffix">Suffix </label>
                                             <input type="text" class="form-control {{ $errors->has('suffix')  ? 'is-invalid' : ''}}" id="suffix" name="suffix" placeholder="e.g Jr." value="{{ old('suffix') ?? $person->suffix }}">
                                             @if($errors->has('suffix'))
                                                 <small  class="form-text text-danger">
@@ -170,45 +170,69 @@
                                         {{ $errors->first('address') }} </small>
                                     @endif
                                 </div>
-    
-                                <div class="form-group">
-                                    <label for="gender">Sex <span class="text-danger">*</span></label>
-                                    <select name="gender" id="gender" class="form-control {{ $errors->has('gender')  ? 'is-invalid' : ''}}">
-                                        @if(old('gender'))
-                                        <option {{ old('gender') == 'male' ? 'selected' : '' }} value="male">Male</option>
-                                        <option {{ old('gender') == 'female' ? 'selected' : '' }} value="female">Female</option>
-                                            @else
-                                            <option {{ $person->gender == 'male' ? 'selected' : '' }} value="male">Male</option>
-                                            <option {{ $person->gender == 'female' ? 'selected' : '' }} value="female">Female</option>
-                                        @endif
-                                        
-                                    </select>
-                                </div>
-    
-                                <div class="form-group">
-                                        <label for="status">Status <span class="text-danger">*</span></label>
-                                            <select name="civil_status" id="status" class="form-control {{ $errors->has('civil_status')  ? 'is-invalid' : ''}}">
-                                                @foreach($civil_status as $status)
-                                                    @if(old('civil_status'))
-                                                        <option {{ old('civil_status') == $status ? 'selected' : '' }} value="{{ $status }}">{{ $status }}</option>
+                                
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="gender">Sex <span class="text-danger">*</span></label>
+                                            <select name="gender" id="gender" class="form-control {{ $errors->has('gender')  ? 'is-invalid' : ''}}">
+                                                @if(old('gender'))
+                                                <option {{ old('gender') == 'male' ? 'selected' : '' }} value="male">Male</option>
+                                                <option {{ old('gender') == 'female' ? 'selected' : '' }} value="female">Female</option>
                                                     @else
-                                                    <option {{  $person->civil_status == $status ? 'selected' : '' }} value="{{ $status }}">{{ $status }}</option>
-                                                    @endif
-                                                    
-                                                @endforeach
+                                                    <option {{ $person->gender == 'male' ? 'selected' : '' }} value="male">Male</option>
+                                                    <option {{ $person->gender == 'female' ? 'selected' : '' }} value="female">Female</option>
+                                                @endif
+                                                
                                             </select>
-                                            <div class="invalid-feedback">{{ $errors->first('civil_status') }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="status">Status <span class="text-danger">*</span></label>
+                                                <select name="civil_status" id="status" class="form-control {{ $errors->has('civil_status')  ? 'is-invalid' : ''}}">
+                                                    @foreach($civil_status as $status)
+                                                        @if(old('civil_status'))
+                                                            <option {{ old('civil_status') == $status ? 'selected' : '' }} value="{{ $status }}">{{ $status }}</option>
+                                                        @else
+                                                        <option {{  $person->civil_status == $status ? 'selected' : '' }} value="{{ $status }}">{{ $status }}</option>
+                                                        @endif
+                                                        
+                                                    @endforeach
+                                                </select>
+                                                <div class="invalid-feedback">{{ $errors->first('civil_status') }}</div>
+                                    </div>
+                                    </div>
                                 </div>
+                                
     
-                                <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input type="email" class="form-control {{ $errors->has('email')  ? 'is-invalid' : ''}}" id="email" name="email" placeholder="Optional" value="{{ old('email')  ?? $person->email }}">
+                                
+                                
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control {{ $errors->has('email')  ? 'is-invalid' : ''}}" id="email" name="email" placeholder="Optional" value="{{ old('email')  ?? $person->email }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="phone_number">Cellphone Number <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control {{ $errors->has('phone_number')  ? 'is-invalid' : ''}}" id="phone_number" name="phone_number" placeholder="" value="{{ old('phone_number') ?? $person->phone_number }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="landline_number">Landline Number <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control {{ $errors->has('landline_number')  ? 'is-invalid' : ''}}" id="landline_number" name="landline_number" placeholder="" value="{{ old('landline_number') ?? $person->landline_number }}">
+                                        </div>
+                                    </div>
                                 </div>
+                                
     
-                                <div class="form-group">
-                                    <label for="phone_number">Cellphone Number <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control {{ $errors->has('phone_number')  ? 'is-invalid' : ''}}" id="phone_number" name="phone_number" placeholder="" value="{{ old('phone_number') ?? $person->phone_number }}">
-                                </div>
+                                
     
                                 {{-- <div class="form-group">
                                     <label for="">Image <span class="text-warning">(Optional attach only if want to modify)</span></label>

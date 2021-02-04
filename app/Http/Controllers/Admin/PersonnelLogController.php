@@ -47,6 +47,7 @@ class PersonnelLogController extends Controller
             'date_of_birth'     => 'required|date',
             'temporary_address' => 'required',
             'address'           => 'required',
+            'phone_number'      => 'required',
             'province'          => 'required|exists:provinces,code',
             'city'              => 'required|exists:cities,code',
             'barangay'          => 'required:exists:barangays,code',
@@ -69,6 +70,8 @@ class PersonnelLogController extends Controller
         $person->barangay_code     = $request->barangay;
         $person->gender            = $request->gender;
         $person->civil_status      = $request->civil_status;
+        $person->phone_number      = $request->phone_number;
+        $person->landline_number   = $request->landline_number;
         $person->save();
 
 

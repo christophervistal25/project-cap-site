@@ -74,22 +74,20 @@ class PersonnelController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate($request, [
-            'firstname'     => 'required|regex:/^[A-Za-z ]+$/u',
-            'middlename'    => 'required|regex:/^[A-Za-z ]+$/u',
-            'lastname'      => 'required|regex:/^[A-Za-z ]+$/u',
-            'suffix'        => 'required',
-            'date_of_birth' => 'required|date',
-            'gender'        => 'required|in:' . implode(',', PersonnelRepository::GENDER),
-            'temporary_address'       => 'required',
-            'address'       => 'required',
-            'city'          => 'required|exists:cities,code',
-            'barangay'      => 'required|exists:barangays,code',
-            'image'         => 'required',
-            'province'      => 'required',
-            'status'        => 'required|in:' . implode(',', PersonnelRepository::CIVIL_STATUS),
-            'phone_number'  => 'required|unique:people',
+            'firstname'         => 'required|regex:/^[A-Za-z ]+$/u',
+            'middlename'        => 'required|regex:/^[A-Za-z ]+$/u',
+            'lastname'          => 'required|regex:/^[A-Za-z ]+$/u',
+            'date_of_birth'     => 'required|date',
+            'gender'            => 'required|in:' . implode(',', PersonnelRepository::GENDER),
+            'temporary_address' => 'required',
+            'address'           => 'required',
+            'city'              => 'required|exists:cities,code',
+            'barangay'          => 'required|exists:barangays,code',
+            'image'             => 'required',
+            'province'          => 'required',
+            'status'            => 'required|in:' . implode(',', PersonnelRepository::CIVIL_STATUS),
+            'phone_number'      => 'required|unique:people',
         ],['image.required' => 'Please attach some image.']);
 
         if($request->has('image')) {
@@ -114,6 +112,7 @@ class PersonnelController extends Controller
             'province'          => $request->province,
             'civil_status'      => $request->status,
             'phone_number'      => $request->phone_number,
+            'landline_number'   => $request->landline_number,
             'age'               => $this->personnelRepository->getAge($request->date_of_birth),
         ]);
 
@@ -172,15 +171,13 @@ class PersonnelController extends Controller
         $person->middlename        = $request->middlename;
         $person->lastname          = $request->lastname;
         $person->suffix            = $request->suffix;
-        $person->gender               = $request->sex;
-        $person->date_of_birth         = $request->birthdate;
-        $person->rapid_test_issued   = $request->rapid_test_date;
-        $person->address = $request->permanent_address;
+        $person->gender            = $request->sex;
+        $person->date_of_birth     = $request->birthdate;
+        $person->rapid_test_issued = $request->rapid_test_date;
+        $person->address           = $request->permanent_address;
         $person->save();
 
-
         return response()->json(['success' => true]);
-
     }
 
     /**
