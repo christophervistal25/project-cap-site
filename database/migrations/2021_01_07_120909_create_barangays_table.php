@@ -22,7 +22,7 @@ class CreateBarangaysTable extends Migration
             $table->string('name');
             $table->string('type');
             $table->string('population');
-            $table->enum('status', ['active', 'in-active']);
+            $table->enum('status', ['active', 'in-active'])->default('active');
             $table->primary(['province_code', 'city_code', 'code']);
             $table->timestamps();
         });

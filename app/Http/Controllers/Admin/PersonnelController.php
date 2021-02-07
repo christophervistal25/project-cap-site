@@ -109,7 +109,6 @@ class PersonnelController extends Controller
             'province_code'     => $request->province,
             'city_code'         => $request->city,
             'barangay_code'     => $request->barangay,
-            'province'          => $request->province,
             'civil_status'      => $request->status,
             'phone_number'      => $request->phone_number,
             'landline_number'   => $request->landline_number,

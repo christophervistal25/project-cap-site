@@ -55,7 +55,7 @@
 
                                     <div class="form-group col-lg-3">
                                         <label for="suffix">Suffix <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control {{ $errors->has('suffix')  ? 'is-invalid' : ''}}" id="suffix" name="suffix" placeholder="e.g Jr." value="{{ old('suffix') }}">
+                                        <input type="text" maxlength="3" class="form-control {{ $errors->has('suffix')  ? 'is-invalid' : ''}}" id="suffix" name="suffix" placeholder="e.g Jr." value="{{ old('suffix') }}">
                                         @if($errors->has('suffix'))
                                             <small  class="form-text text-danger">
                                             {{ $errors->first('suffix') }} </small>

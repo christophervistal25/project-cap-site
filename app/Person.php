@@ -42,7 +42,13 @@ class Person extends Model
 
 
         self::updating(function($person) {
-            $person->person_id = PersonnelRepository::generateID($person);
+            $modifiedFields = array_keys($person->getDirty());
+            if(in_array('province_code', $modifiedFields) 
+                || in_array('city_code', $modifiedFields) 
+                || in_array('barangay_code', $modifiedFields)
+                ) {
+                $person->person_id = PersonnelRepository::generateID($person);
+            }
         });
 
     }

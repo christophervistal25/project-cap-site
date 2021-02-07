@@ -18,6 +18,7 @@ class ProvinceSeeder extends Seeder
         $provinces = array_filter(explode("\n", $provinces));
      
 
+        // generate for sqlite database.
         foreach($provinces as $province) {
             list($code, $name, $classification, $population) = explode(",", $province);
             Province::create([
