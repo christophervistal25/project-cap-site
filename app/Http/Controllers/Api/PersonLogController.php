@@ -54,6 +54,7 @@ class PersonLogController extends Controller
                     'phone_number'      => $request->phone_number,
                     'landline_number'   => $request->landline_number,
                     'age'               => $this->personnelRepository->getAge($request->date_of_birth),
+                    'registered_from' => $request->registered_from
                 ]);
                 
                 PersonLog::create([
@@ -88,6 +89,7 @@ class PersonLogController extends Controller
     {
         $records = json_decode($request->data, true);
         foreach($records as $log) {
+            if(strtoupper($log['registered_from']) === 'MOBILE') {
                 try {
                     $barangay = Barangay::where(['name' => $log['barangay']])->first();
                     $person = Person::firstOrCreate(
@@ -130,6 +132,18 @@ class PersonLogController extends Controller
                 } catch (\Exception $e) {
                     DB::rollback();
                 }
+            } else {
+                $person = Person::find($log['person_id']);
+                PersonLog::create([
+                    'person_id'        => $person->id,
+                    'location'         => $log['location'],
+                    'checker_id'       => $log['checker_id'],
+                    'purpose'          => $log['purpose'],
+                    'body_temperature' => $log['body_temperature'],
+                    'time'             => $log['time'],
+                ]);
+            }
+                
         }
 
         return response()->json(

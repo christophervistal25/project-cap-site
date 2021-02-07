@@ -35,7 +35,24 @@ class PersonnelRepository
 
     public static function generateQRbyData(Person $person)
     {
-        $user_information =   $person->id . self::QR_SEPERATOR . $person->firstname . self::QR_SEPERATOR . $person->middlename .  self::QR_SEPERATOR . $person->lastname . self::QR_SEPERATOR . $person->suffix . self::QR_SEPERATOR . $person->address . self::QR_SEPERATOR .  $person->person_id;
+        $user_information =   $person->id . self::QR_SEPERATOR 
+                    . $person->firstname . self::QR_SEPERATOR 
+                    . $person->middlename .  self::QR_SEPERATOR 
+                    . $person->lastname . self::QR_SEPERATOR 
+                    . $person->suffix . self::QR_SEPERATOR 
+                    . $person->age . self::QR_SEPERATOR 
+                    . $person->civil_status . self::QR_SEPERATOR 
+                    . $person->phone_number . self::QR_SEPERATOR 
+                    . $person->email . self::QR_SEPERATOR 
+                    . $person->province->name . self::QR_SEPERATOR 
+                    . $person->city->name . self::QR_SEPERATOR 
+                    . $person->barangay->name . self::QR_SEPERATOR 
+                    . $person->date_of_birth . self::QR_SEPERATOR 
+                    . $person->landline_number . self::QR_SEPERATOR 
+                    . $person->gender . self::QR_SEPERATOR 
+                    . $person->person_id . self::QR_SEPERATOR 
+                    . "WEBSITE";
+                    
 
         return Encryptor::process($user_information);
     }
