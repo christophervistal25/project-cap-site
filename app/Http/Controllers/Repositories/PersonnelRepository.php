@@ -46,14 +46,14 @@ class PersonnelRepository
         $city     = $data['city'];
         $barangay = $data['barangay'];
         return Person::where(['province_code' => $province, 'city_code' => $city, 'barangay_code' => $barangay])
-                ->get()
-                ->last();
+                ->orderBy('person_id', 'DESC')
+                ->first();
             
     }
 
     private static function makeCounter($lastRegisteredPerson) :int
     {
-        // TNo registered person
+        // No registered person
         if(is_null($lastRegisteredPerson)) {
             $counter = 1;
         } else {
