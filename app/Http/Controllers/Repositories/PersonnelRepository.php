@@ -62,22 +62,26 @@ class PersonnelRepository
         $barangay = Barangay::where('code', $data['barangay'])->first();
         $person = Person::firstOrCreate(
             [
-                'phone_number' => $data['phone_number']
+                'firstname'     => $data['firstname'],
+                'middlename'    => $data['middlename'],
+                'lastname'      => $data['lastname'],
+                'suffix'        => $data['suffix'],
+                'date_of_birth' => $data['date_of_birth'],
             ],
             [
-            'firstname'         => '*',
-            'middlename'        => '*',
-            'lastname'          => '*',
-            'suffix'            => '*',
+            'firstname'         => $data['firstname'],
+            'middlename'        => $data['middlename'],
+            'lastname'          => $data['lastname'],
+            'suffix'            => $data['suffix'],
             'temporary_address' => '*',
             'address'           => '*',
-            'date_of_birth'     => '97-01-01',
+            'date_of_birth'     => $data['date_of_birth'],
             'image'             => 'default.png',
             'province_code'     => $barangay->province_code,
             'city_code'         => $barangay->city_code,
             'barangay_code'     => $barangay->code,
             'civil_status'      => '*',
-            'phone_number'      => '09193693499',
+            'phone_number'      => '*',
             'landline_number'   => '*',
             'age'               => 0,
             'registered_from'   => 'MOBILE'
