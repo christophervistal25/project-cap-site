@@ -31,6 +31,7 @@ class Person extends Model
         'phone_number',
         'landline_number',
         'email',
+        'registered_from'
     ];
 
     public static function boot()

@@ -15,6 +15,13 @@ class PersonnelController extends Controller
 
     public function make(Request $request)
     {
-        return $this->personnelRepository->makeIDForMobile($request->all());
+        $personId = $this->personnelRepository->makeIDForMobile($request->all());
+        return response()->json(
+            [
+                'code' => 200,
+                'message' => 'Successfully generate id for person.',
+                'person_id' => $personId
+            ]
+        );
     }
 }
