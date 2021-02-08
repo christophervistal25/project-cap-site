@@ -15,7 +15,7 @@ class BarangaySeeder extends Seeder
         $data = glob('C:\xampp\htdocs\capitol_app\public\data-need\barangays\*.csv');
         $data = file_get_contents($data[0]);
         $data = array_filter(explode("\n", $data));
-        
+
         foreach($data as $index => $barangay) {
             list($province_code, $municipal_code, $code, $name, $type, $income_clssification, $ruralOrUrban, $population) = explode(",", $barangay);
             Barangay::create([
