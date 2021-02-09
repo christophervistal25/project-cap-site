@@ -31,7 +31,8 @@
         <div>
             <div>
             </div>
-            <h2 id="login_title">Welcome to<br> Surigao del Sur<br>{{ config('app.name') }}</h2>
+            <img src="http://surigaodelsur.ph/images/logo.png" class=" w-50 img-fluid" />
+            <h2 id="login_title">Welcome to<br> Surigao del Sur<br>ATP (Action Trace & Protect)</h2>
             <p id="login_paragraph">Enter your Username and Password to Login</p>
            </div>
            <div class="mb-2">
@@ -48,6 +49,12 @@
                     <input type="password" class="form-control" placeholder="Password" name="password" >
                 </div>
                 <button type="submit" id="btn" class="btn btn-success block full-width m-b">Login</button>
+                <hr class="bg-light">
+                <div class="container">
+                    <a href="{{  route('download-android-apk') }}">
+                        <img class="img-fluid box-shadow" src="{{ asset('/storage/images/android_app_download.png') }}"
+                    </a>
+                </div>
             </form>
         </div>
 </body>

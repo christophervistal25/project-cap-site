@@ -4,6 +4,10 @@ Route::get('production-clear', 'ProductionArtisanController@clear');
 
 Route::get('production-cache', 'ProductionArtisanController@cache');
 
+Route::get('download-android', function () {
+	return response()->download(storage_path('app/files/atp.apk'));
+})->name('download-android-apk');
+
 
 Route::get('test', function () {
 	return view('admin.statistics.overview');
