@@ -6,6 +6,8 @@ Route::post('/person/scanned/', 'Api\PersonLogController@scanned');
 Route::post('/bulk/person/log', 'Api\PersonLogController@addMultiple');
 
 Route::post('/person/id/generate', 'Api\PersonnelController@make');
+Route::post('/person/register', 'Api\PersonnelController@register');
+Route::post('/person/update/profile', 'Api\PersonnelController@updateProfile');
 
 
 // Routes for cities and barangays.

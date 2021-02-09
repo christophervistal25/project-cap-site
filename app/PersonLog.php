@@ -25,10 +25,8 @@ class PersonLog extends Model
 
     public function getTimeAttribute($value)
     {
-        list($date, $time, $greet) = explode(' ', $value);
-        $date = str_replace('-', '/', $date);
-        $time = str_replace('-', ':', $time);
-        $date = $date . ' ' . $time . ' ' . $greet;
-        return Carbon::parse($date)->format('l jS \\of F Y h:i:s A');
+        list($date, $month, $year, $hours, $minutes, $greet) = explode('-', str_replace(' ', '-', $value));
+        $date = $month .'/'. $date . '/' . $year . ' ' . $hours . ':' . $minutes . ' ' . $greet;
+        return Carbon::parse($date)->format('l jS \\of F Y h:i A');
     }
 }

@@ -12,24 +12,20 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <style>
             body { overflow-y:  hidden; }
-            .person_image {
+            #image-index {
+                z-index: -9999;
                 position:absolute;
-                top : 63.3%;
-                left : 45.27%;
             }
-            .person_qr {
-                position:absolute;
-                top : 33.6%;
-                left : 43.7%;
-            }
+
         </style>
     </head>
 </head>
 <body>
-    <div class="container text-center">
-        <img  src="{{ asset('/storage/id_template/base-template_blank.png') }}" class="img-fluid">                
+    <div class="">
+        <img  src="{{ asset('/storage/id_template/plain_blank_2.png') }}" class="img-fluid " id="image-index">
         <img class="person_image img-fluid" width="9.5%;" src="{{ asset('/storage/images/' . $person->image) }}">
-        <img class="person_qr" src="https://api.qrserver.com/v1/create-qr-code/?size=245x245&data={{ $personnel_repository->generateQRbyData($person) }}" >
+            <img  class="img-fluid" src="https://api.qrserver.com/v1/create-qr-code/?&data={{ $personnel_repository->generateQRbyData($person) }}" style="margin-top : 35%;">
+
     </div>
 </body>
 </html>

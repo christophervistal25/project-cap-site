@@ -31,10 +31,10 @@ class PersonLogController extends Controller
                 $barangay = Barangay::where(['name' => $request->barangay])->first();
                 $person = Person::firstOrCreate(
                     [
-                        'firstname'     => $request->firstname,
-                        'middlename'    => $request->middlename,
-                        'lastname'      => $request->lastname,
-                        'suffix'        => $request->suffix,
+                        'firstname'     => strtoupper($request->firstname),
+                        'middlename'    => strtoupper($request->middlename),
+                        'lastname'      => strtoupper($request->lastname),
+                        'suffix'        => strtoupper($request->suffix),
                         'date_of_birth' => Carbon::parse($request->date_of_birth)->format('Y-m-d'),
                     ]
                     ,[
@@ -92,13 +92,14 @@ class PersonLogController extends Controller
             if(strtoupper($log['registered_from']) === 'MOBILE') {
                 try {
                     $barangay = Barangay::where(['name' => $log['barangay']])->first();
+                    $birthdate = Carbon::parse($log['date_of_birth'])->format('Y-m-d');
                     $person = Person::firstOrCreate(
                         [
-                            'firstname'     => $log['firstname'],
-                            'middlename'    => $log['middlename'],
-                            'lastname'      => $log['lastname'],
-                            'suffix'        => $log['suffix'],
-                            'date_of_birth' => Carbon::parse($log['date_of_birth'])->format('Y-m-d'),
+                            'firstname'     => strtoupper($log['firstname']),
+                            'middlename'    => strtoupper($log['middlename']),
+                            'lastname'      => strtoupper($log['lastname']),
+                            'suffix'        => strtoupper($log['suffix']),
+                            'date_of_birth' => $birthdate,
                         ]
                         ,[
                         'firstname'         => $log['firstname'],
@@ -107,7 +108,7 @@ class PersonLogController extends Controller
                         'suffix'            => $log['suffix'],
                         'temporary_address' => '',
                         'address'           => $log['address'],
-                        'date_of_birth'     => Carbon::parse($log['date_of_birth'])->format('Y-m-d'),
+                        'date_of_birth'     => $birthdate,
                         'image'             => 'default.png',
                         'gender'            => $log['gender'],
                         'province_code'     => $barangay['province_code'],
