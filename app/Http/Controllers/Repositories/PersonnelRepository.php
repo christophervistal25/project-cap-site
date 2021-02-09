@@ -59,15 +59,23 @@ class PersonnelRepository
 
     public function temporaryStore(array $data = []) :Person
     {
-        $barangay = Barangay::where('name', $data['barangay'])->first();
-        $person = Person::create([
-            'firstname'         => '*',
-            'middlename'        => '*',
-            'lastname'          => '*',
-            'suffix'            => '*',
+        $barangay = Barangay::where('code', $data['barangay'])->first();
+        $person = Person::firstOrCreate(
+            [
+                'firstname'     => $data['firstname'],
+                'middlename'    => $data['middlename'],
+                'lastname'      => $data['lastname'],
+                'suffix'        => $data['suffix'],
+                'date_of_birth' => $data['date_of_birth'],
+            ],
+            [
+            'firstname'         => $data['firstname'],
+            'middlename'        => $data['middlename'],
+            'lastname'          => $data['lastname'],
+            'suffix'            => $data['suffix'],
             'temporary_address' => '*',
             'address'           => '*',
-            'date_of_birth'     => '97-01-01',
+            'date_of_birth'     => $data['date_of_birth'],
             'image'             => 'default.png',
             'province_code'     => $barangay->province_code,
             'city_code'         => $barangay->city_code,
