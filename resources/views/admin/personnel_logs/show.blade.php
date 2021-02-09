@@ -264,6 +264,7 @@
                                         <th>Location</th>
                                         <th>Temperature</th>
                                         <th>Checker</th>
+                                        <th>Purpose</th>
                                         <th>Time</th>
                                     </tr>
                                 </thead>
@@ -273,6 +274,7 @@
                                         <td class="text-center">{{ $log->location }}</td>
                                         <td class="text-center">{{ $log->body_temperature }}</td>
                                         <td class="text-center text-capitalize">{{ $log->checker->lastname }}, {{ $log->checker->firstname }} {{ $log->checker->middlename }}</td>
+                                        <td>{{  $log->purpose }}</td>
                                         <td class="text-center">{{ $log->time }}</td>
                                     </tr>
                                     @endforeach

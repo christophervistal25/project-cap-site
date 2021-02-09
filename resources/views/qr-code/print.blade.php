@@ -23,7 +23,7 @@
 <body>
     <div class="">
         <img  src="{{ asset('/storage/id_template/plain_blank_2.png') }}" class="img-fluid " id="image-index">
-        {{-- <img class="person_image img-fluid" width="9.5%;" src="{{ asset('/storage/images/' . $person->image) }}"> --}}
+        <img class="person_image img-fluid" width="9.5%;" src="{{ asset('/storage/images/' . $person->image) }}">
             <img  class="img-fluid" src="https://api.qrserver.com/v1/create-qr-code/?&data={{ $personnel_repository->generateQRbyData($person) }}" style="margin-top : 35%;">
 
     </div>

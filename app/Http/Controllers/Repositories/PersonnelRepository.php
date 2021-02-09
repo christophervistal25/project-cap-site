@@ -75,7 +75,7 @@ class PersonnelRepository
             'suffix'            => $data['suffix'],
             'temporary_address' => '*',
             'address'           => '*',
-            'date_of_birth'     => $data['date_of_birth'],
+            'date_of_birth'     => Carbon::parse($data['date_of_birth'])->format('Y-m-d'),
             'image'             => 'default.png',
             'province_code'     => $barangay->province_code,
             'city_code'         => $barangay->city_code,

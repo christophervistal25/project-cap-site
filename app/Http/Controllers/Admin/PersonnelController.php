@@ -103,7 +103,7 @@ class PersonnelController extends Controller
             'temporary_address' => $request->temporary_address,
             'address'           => $request->address,
             'suffix'            => $request->suffix,
-            'date_of_birth'     => $request->date_of_birth,
+            'date_of_birth'     => Carbon::parse($request->date_of_birth)->format('Y-m-d'),
             'image'             => $imageName ?? 'default.png',
             'gender'            => $request->gender,
             'province_code'     => $request->province,

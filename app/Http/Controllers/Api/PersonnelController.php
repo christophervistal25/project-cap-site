@@ -31,13 +31,14 @@ class PersonnelController extends Controller
     public function register(Request $request)
     {
         $barangay = Barangay::where('name', $request->barangay)->first();
+        $birthdate = Carbon::parse($request->date_of_birth)->format('Y-m-d');
         $person = Person::firstOrCreate(
             [
-                'firstname'         => $request->firstname,
-                'middlename'        => $request->middlename,
-                'lastname'          => $request->lastname,
-                'suffix'            => $request->suffix,
-                'date_of_birth'     => Carbon::parse($request->date_of_birth)->format('Y-m-d'),
+                'firstname'         => strtoupper($request->firstname),
+                'middlename'        => strtoupper($request->middlename),
+                'lastname'          => strtoupper($request->lastname),
+                'suffix'            => strtoupper($request->suffix),
+                'date_of_birth'     => $birthdate,
             ]
             ,[
             'firstname'         => $request->firstname,
@@ -46,7 +47,7 @@ class PersonnelController extends Controller
             'suffix'            => $request->suffix,
             'temporary_address' => $request->street . ' ' . $request->purok . ' ' . $request->barangay . ' ' . $request->city . ' ' . $request->province,
             'address'           => $request->street . ' ' . $request->purok . ' ' . $request->barangay . ' ' . $request->city . ' ' . $request->province,
-            'date_of_birth'     => Carbon::parse($request->date_of_birth)->format('Y-m-d'),
+            'date_of_birth'     => $birthdate,
             'gender'            => $request->gender,
             'province_code'     => $barangay->province_code,
             'city_code'         => $barangay->city_code,
@@ -65,5 +66,19 @@ class PersonnelController extends Controller
             'message' => 'Account successfully create.',
             'person_id' => $person->person_id,
         ]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $person = Person::where('person_id', $request->person_id)->first();
+
+        $imageName = $request->file('image')->getClientOriginalName();
+        // Process of storing image.
+        $request->file('image')->storeAs('/public/images', $imageName);
+        $person->image = $imageName;
+        $person->save();
+
+        return response()->json(['message' => 'Success!'], 201);
+
     }
 }

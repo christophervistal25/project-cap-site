@@ -144,17 +144,22 @@ class Person extends Model
 
     public function setFirstNameAttribute($value)
     {
-        $this->attributes['firstname'] = ucfirst($value);
+        $this->attributes['firstname'] = strtoupper($value);
     }
 
     public function setMiddleNameAttribute($value)
     {
-        $this->attributes['middlename'] = ucfirst($value);
+        $this->attributes['middlename'] = strtoupper($value);
     }
 
     public function setLastNameAttribute($value)
     {
-        $this->attributes['lastname'] = ucfirst($value);
+        $this->attributes['lastname'] = strtoupper($value);
+    }
+
+    public function setSuffixAttribute($value)
+    {
+        $this->attributes['suffix'] = strtoupper($value);
     }
 
     public function logs()
