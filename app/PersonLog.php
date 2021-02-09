@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class PersonLog extends Model
 {
     protected $fillable = ['person_id', 'location', 'checker_id','purpose', 'body_temperature', 'time'];
-    
+    public function testing()
+    {
+
+    }
+
     public function person()
     {
         return $this->belongsTo('App\Person');
@@ -18,7 +22,7 @@ class PersonLog extends Model
     {
         return $this->belongsTo('App\Checker');
     }
-    
+
     public function getTimeAttribute($value)
     {
         list($date, $time, $greet) = explode(' ', $value);
