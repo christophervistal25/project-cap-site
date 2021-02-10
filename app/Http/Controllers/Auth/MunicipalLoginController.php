@@ -20,24 +20,20 @@ class MunicipalLoginController extends Controller
 	public function login()
 	{
 		return view('municipal.auth.login');
-		
+
 	}
 
     public function loginMunicipal(Request $request)
     {
-      $this->validate($request, [
-        'username'   => 'required',
-        'password' => 'required'
-      ]);
 
         // Attempt to log the user in
           if (Auth::guard('municipal')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
             // if successful, then redirect to their intended location
             return redirect()->intended(route('municipal.dashboard'));
-          } 
+          }
           // if unsuccessful, then redirect back to the login with the form data
-          return redirect()->back()->withErrors(['message' => 'Please check your email / password.'])->withInput($request->only('username'));    
-      
+          return redirect()->back()->withErrors(['message' => 'Please check your email / password.'])->withInput($request->only('username'));
+
     }
 
     public function logout()

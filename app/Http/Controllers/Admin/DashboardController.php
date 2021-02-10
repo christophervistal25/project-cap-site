@@ -28,7 +28,7 @@ class DashboardController extends Controller
     {
         $cities      = City::where('status', 'active')->orderBy('code')->get('name')->pluck('name')->toArray();
         $citiesValue = City::where('status', 'active')->withCount('people')->get('people_count')->pluck('people_count')->toArray();
-        
+
         $cities      = implode(',', $cities);
         $citiesValue = implode(',', $citiesValue);
 
@@ -45,12 +45,12 @@ class DashboardController extends Controller
 
         // No of checkers
         $checkers = Checker::count();
-        
+
         // No of People Registered
         $peoples = Person::count();
 
         return view('admin.dashboard', compact('cities', 'citiesValue', 'normal', 'notNormal', 'admins', 'municipals_account', 'noOfCities', 'peoples', 'checkers'));
         // return view('admin.dashboard', compact('peoples', 'checkers', 'admins', 'municipals_account', 'noOfCities'));
     }
-  
+
 }

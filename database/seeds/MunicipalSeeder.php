@@ -12,12 +12,12 @@ class MunicipalSeeder extends Seeder
      */
     public function run()
     {
-        
+
         Municipal::create([
             // 'email'         => 'chris@yahoo.com',
             'username'      => 'user',
             // 'phone_number'  => '09663765072',
-            'city_zip_code' => 8300,
+            'city_code' => '166819000',
             'password'      => bcrypt('christopher'),
         ]);
     }
