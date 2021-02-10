@@ -26,8 +26,8 @@
                     font-family: 'American Captain', sans-serif;
                 }
                 #image-index {
-                    width :9cm;
-                    height : 13cm;
+                    width :5.7in;
+                    height : 8.2in;
                 }
 /*
                 #qr-image {
@@ -37,8 +37,8 @@
                 }
                 #container {
                     position: absolute;
-                    left :39.5%;
-                    top : 25%;
+                    left :16%;
+                    top : 18%;
                     background :white;
                     padding : 10px;
                     width : 200px;
@@ -50,8 +50,8 @@
                 .person-image-container {
                     position: absolute;
                     z-index : 999;
-                    left :41.6%;
-                    top : 39%;
+                    left :17.87%;
+                    top : 32%;
                     background :white;
                     padding : 10px;
                     width : 150px;
@@ -62,17 +62,18 @@
 
                 .person_name {
                     font-family: 'American Captain', sans-serif;
-                    font-size : 1.5em;
+                    font-size : 1.8em;
                     position: absolute;
                     z-index : 999;
-                    top : 52%;
-                    left : 41%;
+                    top : 42%;
+                    left : 15.6%;
                     color :white;
+
                 }
 
                 .person_image {
                     height : 100px;
-                } */
+                }
 
             }
         </style>
@@ -80,13 +81,13 @@
 </head>
 <body>
         <img class="img-fluid" src="{{ asset('/storage/id_template/plain_blank_2.png') }}" id="image-index">
-        {{-- <div class="person-image-container">
+         <div class="person-image-container">
             <img id="person_image"  class="img-fluid" src="{{ asset('/storage/images/' . $person->image) }}">
         </div>
         <div id="container">
             <img id="qr-image" class="img-fluid" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={{ $personnel_repository->generateQRbyData($person) }}">
         </div>
-        <p class="person_name">{{ $person->firstname }} {{ $person->middlename[0] }}. {{ $person->lastname }} {{ $person->suffix }}</p> --}}
+        <p class="person_name">{{ $person->firstname }} {{ $person->middlename[0] }}. {{ $person->lastname }} {{ $person->suffix }}</p>
 
 </body>
 </html>
