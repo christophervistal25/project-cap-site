@@ -27,6 +27,7 @@ class PersonLog extends Model
     {
         list($date, $month, $year, $hours, $minutes, $greet) = explode('-', str_replace(' ', '-', $value));
         $date = $month .'/'. $date . '/' . $year . ' ' . $hours . ':' . $minutes . ' ' . $greet;
-        return Carbon::parse($date)->format('l jS \\of F Y h:i A');
+        return Carbon::parse($date)->format(' F d, Y h:i A');
+        // return Carbon::parse($date)->format('m/d/Y');
     }
 }

@@ -44,8 +44,8 @@ class Person extends Model
 
         self::updating(function($person) {
             $modifiedFields = array_keys($person->getDirty());
-            if(in_array('province_code', $modifiedFields) 
-                || in_array('city_code', $modifiedFields) 
+            if(in_array('province_code', $modifiedFields)
+                || in_array('city_code', $modifiedFields)
                 || in_array('barangay_code', $modifiedFields)
                 ) {
                 $person->person_id = PersonnelRepository::generateID($person);
@@ -116,6 +116,11 @@ class Person extends Model
         return view('admin.personnel.includes.index_action', compact('person'))->render();
     }
 
+    public static function laratablesCustomTrackAction($person)
+    {
+        return view('admin.track.includes.index_action', compact('person'))->render();
+    }
+
     /**
      * Additional columns to be loaded for datatables.
      *
@@ -136,7 +141,7 @@ class Person extends Model
     {
         return $this->belongsTo('App\Province', 'province_code', 'code');
     }
-    
+
     public function city()
     {
         return $this->belongsTo('App\City', 'city_code', 'code');

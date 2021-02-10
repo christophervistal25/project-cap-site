@@ -59,6 +59,8 @@
         </li>
         <li class=" nav-item"><a href="{{ route('checker.index') }}"><i class="ft-list"></i><span class="menu-title" data-i18n="">View All Checkers</span></a>
         </li>
+        <li class=" nav-item"><a href="{{ route('track.index') }}"><i class="ft-map"></i><span class="menu-title" data-i18n="">Track</span></a>
+        </li>
         <li class=" nav-item"><a href="{{ route('setting.index') }}"><i class="ft-settings"></i><span class="menu-title" data-i18n="">Settings</span></a>
         </li>
       </ul>

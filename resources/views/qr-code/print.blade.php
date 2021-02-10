@@ -10,23 +10,84 @@
         <link rel="stylesheet" href="/css/print_style1.css" media="print">
         <link rel="stylesheet" href="/css/screen_styled.css" media="screen">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="http://fonts.cdnfonts.com/css/american-captain" rel="stylesheet">
         <style>
-            body { overflow-y:  hidden; }
+            body { overflow-y:  hidden;
+                -webkit-print-color-adjust: exact !important; }
             #image-index {
                 z-index: -9999;
                 position:absolute;
+                width :9cm;
+                height : 13cm;
             }
 
+            @media print {
+                body {
+                    font-family: 'American Captain', sans-serif;
+                }
+                #image-index {
+                    width :9cm;
+                    height : 13cm;
+                }
+/*
+                #qr-image {
+                    /* position :absolute;
+                    left : 39%;
+                    top : 22%; */
+                }
+                #container {
+                    position: absolute;
+                    left :39.5%;
+                    top : 25%;
+                    background :white;
+                    padding : 10px;
+                    width : 200px;
+                    height :auto;
+                    border-radius: 3px;
+                    border : 5px solid #4844E3;
+                }
+
+                .person-image-container {
+                    position: absolute;
+                    z-index : 999;
+                    left :41.6%;
+                    top : 39%;
+                    background :white;
+                    padding : 10px;
+                    width : 150px;
+                    height :auto;
+                    border-radius: 3px;
+                    border : 4px solid #4844E3;
+                }
+
+                .person_name {
+                    font-family: 'American Captain', sans-serif;
+                    font-size : 1.5em;
+                    position: absolute;
+                    z-index : 999;
+                    top : 52%;
+                    left : 41%;
+                    color :white;
+                }
+
+                .person_image {
+                    height : 100px;
+                } */
+
+            }
         </style>
     </head>
 </head>
 <body>
-    <div class="">
-        <img  src="{{ asset('/storage/id_template/plain_blank_2.png') }}" class="img-fluid " id="image-index">
-        <img class="person_image img-fluid" width="9.5%;" src="{{ asset('/storage/images/' . $person->image) }}">
-            <img  class="img-fluid" src="https://api.qrserver.com/v1/create-qr-code/?&data={{ $personnel_repository->generateQRbyData($person) }}" style="margin-top : 35%;">
+        <img class="img-fluid" src="{{ asset('/storage/id_template/plain_blank_2.png') }}" id="image-index">
+        {{-- <div class="person-image-container">
+            <img id="person_image"  class="img-fluid" src="{{ asset('/storage/images/' . $person->image) }}">
+        </div>
+        <div id="container">
+            <img id="qr-image" class="img-fluid" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={{ $personnel_repository->generateQRbyData($person) }}">
+        </div>
+        <p class="person_name">{{ $person->firstname }} {{ $person->middlename[0] }}. {{ $person->lastname }} {{ $person->suffix }}</p> --}}
 
-    </div>
 </body>
 </html>
 
@@ -37,7 +98,7 @@
 
 <div id="c">{{ $person->firstname }} {{ $person->middlename[0] }}. {{ $person->lastname }}</div><br><br><br><br>
 <div id="d">{{ $person->address }}</div>
-</center>  
+</center>
 <center>
 <div></div>
 <div id="bb">ID: {{ $person->id }}</div>

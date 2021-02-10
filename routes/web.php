@@ -9,6 +9,9 @@ Route::get('download-android', function () {
 })->name('download-android-apk');
 
 
+
+Route::get('/test/notify', 'Api\NotifyController@message');
+
 Route::get('test', function () {
 	return view('admin.statistics.overview');
 });
@@ -26,8 +29,14 @@ Route::group(['prefix' => 'admin'] , function () {
 
 	Route::group(['middleware' => 'auth:admin'], function () {
 
+
 		Route::get('/profile/update', 'Admin\ProfileController@edit')->name('admin.profile.edit');
 		Route::put('/profile/update', 'Admin\ProfileController@update')->name('admin.profile.update');
+
+        Route::post('/persons/track/send/sms', 'Admin\TrackController@notify')->name('other.person.notify');
+        Route::get('/persons/track/others/{log}', 'Admin\TrackController@track');
+        Route::get('/persons/track', 'Admin\TrackController@find');
+        Route::resource('track', 'Admin\TrackController');
 
 
 		Route::get('/', 'Admin\DashboardController@index')->name('admin.dashboard');
