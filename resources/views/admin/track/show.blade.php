@@ -20,12 +20,15 @@
                <li style="list-style: none;">{{ $log->checker->firstname }} {{ $log->checker->middlename }} {{ $log->checker->lastname }}</li>
                <button class="float-right btn btn-primary btn-icon btn-sm mt-1 font-weight-light btn-interact" id="log-{{ $log->id }}">People with same location and date</button>
                <div class="clearfix"></div>
-               <div class="card mt-2">
+               <div class="card mt-2 " id="container-interact-{{ $log->id }}">
                    <div class="card-body text-dark" id="interact-{{ $log->id }}">
                         <form action="{{ route('other.person.notify') }}" method="POST">
                             @csrf
-                            <input type="text" name="phone_numbers" class="phone-numbers-{{ $log->id }}">
-                            <button class="btn btn-warning btn-send-notification" type="submit">Send Notification</button>
+                            <input type="hidden" name="phone_numbers" class="phone-numbers-{{ $log->id }}">
+                            <div class="float-right">
+                                <button class="btn btn-warning btn-send-notification" type="submit">Send Notification</button>
+                            </div>
+                            <div class="clearfix"></div>
                         </form>
                    </div>
                </div>
@@ -42,6 +45,7 @@
             type : 'GET',
             success : function (response) {
                 if(response.length !== 0) {
+                    $(`#container-interact-${logId}`).removeClass('d-none');
                     response.forEach((log) => {
                         $(`.phone-numbers-${logId}`).val($(`.phone-numbers-${logId}`).val()   + '|' + log.person.phone_number);
 
