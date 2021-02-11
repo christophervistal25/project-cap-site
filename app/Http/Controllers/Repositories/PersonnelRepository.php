@@ -98,19 +98,23 @@ class PersonnelRepository
                 ->first();
     }
 
-    private static function makeCounter($lastRegisteredPerson) :int
+    private static function makeCounter($lastRegisteredPerson) :string
     {
         // No registered person
         if(is_null($lastRegisteredPerson)) {
             $counter = 1;
         } else {
+            // 12801001
             list($barangayCode, $personCounter) = explode(self::ID_SEPERATOR, $lastRegisteredPerson->person_id);
             $counter = ($personCounter + 1);
         }
+
+        $counter = str_pad($counter, 7, 0, STR_PAD_LEFT);
+
         return $counter;
     }
 
-    private static function makeID(Person $person, int $personCounter) :string
+    private static function makeID(Person $person,  $personCounter) :string
     {
 
         return $person->barangay_code

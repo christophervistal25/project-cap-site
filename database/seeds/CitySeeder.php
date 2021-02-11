@@ -13,7 +13,7 @@ class CitySeeder extends Seeder
      */
     public function run()
     {
-        $data = glob('C:\xampp\htdocs\capitol_app\public\data-need\cities\*.csv');
+        $data = glob('C:\xampp\htdocs\capitol_app\public\data-need\cities\municipal.csv');
         $data = file_get_contents($data[0]);
         $data = array_filter(explode("\n", $data));
 

@@ -12,7 +12,7 @@ class BarangaySeeder extends Seeder
      */
     public function run()
     {
-        $data = glob('C:\xampp\htdocs\capitol_app\public\data-need\barangays\*.csv');
+        $data = glob('C:\xampp\htdocs\capitol_app\public\data-need\barangays\barangay.csv');
         $data = file_get_contents($data[0]);
         $data = array_filter(explode("\n", $data));
 

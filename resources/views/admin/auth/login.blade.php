@@ -17,7 +17,7 @@
         body {
             height : auto;
             width : 100%;
-            background : url({{ asset('/storage/images/main_bg.png') }}) center center no-repeat;
+            background : url(http://surigaodelsur.ph/images/home/Surigao_del_Sur_Provincial_Capitol.jpg) center center no-repeat;
             background-size: cover;
         }
     </style>
