@@ -23,7 +23,7 @@ class PersonnelController extends Controller
             [
                 'code' => 200,
                 'message' => 'Successfully generate id for person.',
-                'person_id' => $personId
+                'person_id' => $personId,
             ]
         );
     }

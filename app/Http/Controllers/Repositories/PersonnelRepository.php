@@ -60,13 +60,14 @@ class PersonnelRepository
     public function temporaryStore(array $data = []) :Person
     {
         $barangay = Barangay::where('code', $data['barangay'])->first();
+        $birthdate = Carbon::parse($data['date_of_birth'])->format('Y-m-d');
         $person = Person::firstOrCreate(
             [
-                'firstname'     => $data['firstname'],
-                'middlename'    => $data['middlename'],
-                'lastname'      => $data['lastname'],
-                'suffix'        => $data['suffix'],
-                'date_of_birth' => $data['date_of_birth'],
+                'firstname'     => strtoupper($data['firstname']),
+                'middlename'    => strtoupper($data['middlename']),
+                'lastname'      => strtoupper($data['lastname']),
+                'suffix'        => strtoupper($data['suffix']),
+                'date_of_birth' => $birthdate,
             ],
             [
             'firstname'         => $data['firstname'],
@@ -75,7 +76,7 @@ class PersonnelRepository
             'suffix'            => $data['suffix'],
             'temporary_address' => '*',
             'address'           => '*',
-            'date_of_birth'     => Carbon::parse($data['date_of_birth'])->format('Y-m-d'),
+            'date_of_birth'     => $birthdate,
             'image'             => 'default.png',
             'province_code'     => $barangay->province_code,
             'city_code'         => $barangay->city_code,
@@ -110,7 +111,6 @@ class PersonnelRepository
         }
 
         $counter = str_pad($counter, 7, 0, STR_PAD_LEFT);
-
         return $counter;
     }
 
