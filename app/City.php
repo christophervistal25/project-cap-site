@@ -9,7 +9,7 @@ class City extends Model
 {
     public    $incrementing = false;
     protected $primaryKey   = 'code';
-    protected $fillable     = ['name', 'status', 'code'];
+    protected $fillable     = ['name', 'status', 'province_code', 'code'];
     public const PROVINCE_CODE = '166800000';
 
 
@@ -32,5 +32,16 @@ class City extends Model
     public function people()
     {
         return $this->hasMany('App\Person');
+    }
+
+    /**
+     * Returns the action column html for datatables.
+     *
+     * @param \App\City
+     * @return string
+     */
+    public static function laratablesCustomAction($city)
+    {
+        return view('admin.setting.includes.index', compact('city'))->render();
     }
 }

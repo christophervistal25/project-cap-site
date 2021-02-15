@@ -44,27 +44,18 @@
 @endif
 <div class="card shadow mb-4">
     <div class="card-header">
-        <h6 class="m-0 font-weight-bold card-title">Add Municipalities Name</h6>
+        <h6 class="m-0 font-weight-bold card-title">Add Municipality</h6>
     </div>
     <div class="card-body">
-        
+
         <form method="POST" action="{{ route('setting.store.city') }}">
             @csrf
             <div class="form-group">
                 <label>Name</label>
-                <input type="text"  name="place" placeholder="Name" class="form-control {{ $errors->has('place')  ? 'is-invalid' : ''}}" value="{{ old('place') }}">
-                @if($errors->has('place'))
+                <input type="text"  name="name" nameholder="Name" class="form-control {{ $errors->has('name')  ? 'is-invalid' : ''}}" value="{{ old('name') }}">
+                @if($errors->has('name'))
                     <small  class="form-text text-danger">
-                    {{ $errors->first('place') }} </small>
-                @endif
-            </div>
-
-            <div class="form-group">
-                <label>Zip Code</label>
-                <input type="number"  name="zip_code" placeholder="Zip Code" class="form-control {{ $errors->has('zip_code')  ? 'is-invalid' : ''}}" value="{{ old('zip_code') }}">
-                @if($errors->has('zip_code'))
-                    <small  class="form-text text-danger">
-                    {{ $errors->first('zip_code') }} </small>
+                    {{ $errors->first('name') }} </small>
                 @endif
             </div>
 
@@ -78,42 +69,33 @@
             </div>
 
             <div class="form-group">
+                <label>Province</label>
+                <select name="province" id="province" class="form-control">
+                    @foreach($provinces as $province)
+                        <option value="{{ $province->code }}">{{ $province->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
                 <div class="float-right">
-                    <input type="submit" value="Add" class="btn btn-primary ">
+                    <input type="submit" value="Add Municipality" class="btn btn-primary ">
                 </div>
                 <div class="clearfix"></div>
             </div>
         </form>
 
         <hr>
-        
-        <table class="table table-bordered" id="barangays-table">
+
+        <table class="table table-bordered" id="cities-table">
             <thead>
                 <tr>
-                    <th>Place</th>
-                    <th>Zip Code</th>
+                    <th>Name</th>
                     <th>Code</th>
                     <th>Option</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach($cities as $city)
-                <tr>
-                    <td contenteditable="true" id="table-name-{{ $city->zip_code }}">{{ $city->name }}</td>
-                    <td>{{ $city->zip_code }}</td>
-                    <td>{{ $city->code }}</td>
-                    <td class="text-center">
-                        <button class="btn btn-info btn-icon btn-sm municpal-edit"  data-source-id="{{ $city->zip_code }}">
-                            <i class="la la-edit"></i>
-                        </button>
-
-                        <button class="btn btn-danger btn-sm btn-icon municipal-remove" data-source-id="{{ $city->zip_code }}">
-                            <i class="la la-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
+            <tbody></tbody>
         </table>
     </div>
 </div>
@@ -130,7 +112,7 @@
         <h6 class="m-0 font-weight-bold card-title">Municipal Account</h6>
     </div>
     <div class="card-body">
-        <form method="POST" action="{{ route('setting.store.city.account') }}">
+        <form method="POST" action="{{ route('setting.store.city.account') }}"  id="addMunicipalAccount">
             @csrf
             <div class="form-group">
                 <label>Username</label>
@@ -155,31 +137,33 @@
                 <input type="password"  name="password_confirmation" placeholder="Re-type Password" class="form-control" value="{{ old('password_confirmation') }}">
             </div>
 
+            <div class="row">
+                <div class="col-lg-3 pr-0">
+                    <div class="form-group">
+                        <label class="text-info">&nbsp;</label>
+                       <input type="text" class="form-control border-right-0" placeholder="Search for Municipality" id="filterMunicipality">
+                    </div>
+                </div>
+
+                <div class="col-lg-9 pl-0">
+                    <label>Municipalities</label>
+                    <div class="form-group">
+                        <select name="city" id="cities" class="form-control"></select>
+                    </div>
+                </div>
+            </div>
 
             <div class="form-group">
-                <label>Select City : </label>
-                <select name="register_city" class="form-control {{ $errors->has('register_city')  ? 'is-invalid' : ''}}" id="cities">
-                    <option value=""  selected disabled ></option>
-                    @foreach($cities as $city)
-                        <option {{ old('register_city') == $city->zip_code ? 'selected' : '' }} value="{{ $city->zip_code }}">{{ $city->name }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('register_city'))
-                    <small  class="form-text text-danger">
-                    {{ $errors->first('register_city') }} </small>
-                @endif
-            </div>
-            <div class="form-group">
                 <div class="float-right">
-                    <input type="submit" value="Add" class="btn btn-primary">
+                    <input type="button" value="Add Municipality Account" class="btn btn-primary" id="btnAddMunicipalityAccount">
                 </div>
                 <div class="clearfix"></div>
             </div>
         </form>
 
         <hr>
-        
-        <table class="table table-bordered" id="municipals-table">
+
+        <table class="table table-bordered" id="municipals-account-table">
             <thead>
                 <tr>
                     <th>Place</th>
@@ -191,7 +175,7 @@
             <tbody>
                 @foreach($municipals_account as $municipal)
                 <tr>
-                    
+
                     <td class="table-municipal-field" id="table-municipal-place-{{ $municipal->id }}">{{ $municipal->city->name }}</td>
                     <td contenteditable="true" id="table-municipal-username-{{ $municipal->id }}">{{ $municipal->username }}</td>
                     <td contenteditable="true" id="table-municipal-password-{{ $municipal->id }}">{{ str_repeat('*', strlen($municipal->password)) }}</td>
@@ -206,7 +190,7 @@
         </table>
     </div>
 </div>
-  
+
 @push('page-scripts')
 <script>
     $.ajaxSetup({
@@ -216,12 +200,66 @@
 <script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.1.3/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.1.3/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    $(document).ready(function () {
+        let filterMunicipal = (keyword) => {
 
+        // If the user leave the field blank then request for all city.
+        if(!keyword) {
+            keyword = 'all';
+        }
+        // Clear all the child option of select city
+        $('#cities').find('option')
+        .remove()
+        .end()
+
+        $.ajax({
+            url : `/api/municipal/filter/${keyword}`,
+            success : function (response) {
+                if(response.length !== 0) {
+                    response.forEach((city) => {
+                        $('#cities').append(`<option value=${city.code}>${city.name}</option>`)
+                    });
+                } else {
+                    alert('No results.')
+                }
+            }
+        });
+        };
+
+        $('#filterMunicipality').keyup(function (e) {
+        if(e.key.toLowerCase() === 'enter') {
+            filterMunicipal(e.target.value);
+        }
+        });
+
+        $('#addMunicipalAccount').submit(function (e) {
+        });
+
+        $('#btnAddMunicipalityAccount').click(function (e) {
+            $('#addMunicipalAccount').submit();
+        })
+
+    });
+</script>
 <script>
     $('#accounts-table').DataTable();
-    $('#barangays-table').DataTable();
-    $('#municipals-table').DataTable();
+
+    $('#cities-table').DataTable({
+            serverSide: true,
+            ajax: `/api/municipal/list`,
+            columns: [
+                { name: 'name' },
+                { name: 'code' },
+                { name: 'action' , searchable : false, orderable : false, },
+
+            ],
+        });
+
+    $('#municipals-account-table').DataTable();
 </script>
+
+
 {{-- ACCOUNT JS SCRIPT --}}
 <script>
     $(document).on('click', '.btn-account-edit', function (e) {
@@ -245,15 +283,15 @@
             },
             error : function (response) {
                 if(response.status === 422) {
-                     // this is a Node object    
+                     // this is a Node object
                     let errorElement = document.createElement("span");
 
                     Object.keys(response.responseJSON.errors).forEach((key) => {
                         errorElement.innerHTML += `<p class='text-danger'>${response.responseJSON.errors[key][0]}</p>`;
                     })
-                        
+
                     swal({
-                        title: "Opps!", 
+                        title: "Opps!",
                         icon: "error",
                         content: errorElement,
                     });
@@ -283,15 +321,15 @@
             },
             error : function (response) {
                 if(response.status === 422) {
-                     // this is a Node object    
+                     // this is a Node object
                     let errorElement = document.createElement("span");
 
                     Object.keys(response.responseJSON.errors).forEach((key) => {
                         errorElement.innerHTML += `<p class='text-danger'>${response.responseJSON.errors[key][0]}</p>`;
                     })
-                        
+
                     swal({
-                        title: "Opps!", 
+                        title: "Opps!",
                         icon: "error",
                         content: errorElement,
                     });
@@ -300,48 +338,48 @@
         })
     });
 
-    $(document).on('click', '.municipal-remove', function (e) {
-        let zipCode = $(this)[0].getAttribute('data-source-id');
-        swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this data.",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            })
-            .then((willDelete) => {
-            if (willDelete) {
-                $.ajax({
-                    url : "{{ route('setting.remove.city') }}",
-                    method : 'POST',
-                    data : { zip_code : zipCode },
-                    success : function (response) {
-                        if(response.success) {
-                            swal("Good job!", "Municipal successfully remove.", "success");
-                            window.location.reload();
-                        }
-                    },
-                    error : function (response) {
-                        if(response.status === 422) {
-                            // this is a Node object    
-                            let errorElement = document.createElement("span");
+    // $(document).on('click', '.municipal-remove', function (e) {
+    //     let zipCode = $(this)[0].getAttribute('data-source-id');
+    //     swal({
+    //         title: "Are you sure?",
+    //         text: "Once deleted, you will not be able to recover this data.",
+    //         icon: "warning",
+    //         buttons: true,
+    //         dangerMode: true,
+    //         })
+    //         .then((willDelete) => {
+    //         if (willDelete) {
+    //             $.ajax({
+    //                 url : "{{ route('setting.remove.city') }}",
+    //                 method : 'POST',
+    //                 data : { zip_code : zipCode },
+    //                 success : function (response) {
+    //                     if(response.success) {
+    //                         swal("Good job!", "Municipal successfully remove.", "success");
+    //                         window.location.reload();
+    //                     }
+    //                 },
+    //                 error : function (response) {
+    //                     if(response.status === 422) {
+    //                         // this is a Node object
+    //                         let errorElement = document.createElement("span");
 
-                            Object.keys(response.responseJSON.errors).forEach((key) => {
-                                errorElement.innerHTML += `<p class='text-danger'>${response.responseJSON.errors[key][0]}</p>`;
-                            })
-                                
-                            swal({
-                                title: "Opps!", 
-                                icon: "error",
-                                content: errorElement,
-                            });
-                        }
-                    }
-                });
-            } 
-            });
-       
-    });
+    //                         Object.keys(response.responseJSON.errors).forEach((key) => {
+    //                             errorElement.innerHTML += `<p class='text-danger'>${response.responseJSON.errors[key][0]}</p>`;
+    //                         })
+
+    //                         swal({
+    //                             title: "Opps!",
+    //                             icon: "error",
+    //                             content: errorElement,
+    //                         });
+    //                     }
+    //                 }
+    //             });
+    //         }
+    //         });
+
+    // });
 
 </script>
 
@@ -357,11 +395,11 @@
 
     $(document).on('click', '.municipal-account-edit', function (e) {
         let municipalId = $(this)[0].getAttribute('data-source-id');
-        
+
         let place = $(`#table-municipal-place-${municipalId}`);
         let username = $(`#table-municipal-username-${municipalId}`);
         let password = $(`#table-municipal-password-${municipalId}`);
-        
+
         $.ajax({
             url : "{{ route('admin.setting.municipal.account.update') }}",
             method : 'POST',
@@ -378,18 +416,18 @@
                     // Hide the password of the user.
                     password.text('************************************************************');
                 }
-            }, 
+            },
             error : function (response) {
                 if(response.status === 422) {
-                     // this is a Node object    
+                     // this is a Node object
                     let errorElement = document.createElement("span");
 
                     Object.keys(response.responseJSON.errors).forEach((key) => {
                         errorElement.innerHTML += `<p class='text-danger'>${response.responseJSON.errors[key][0]}</p>`;
                     })
-                        
+
                     swal({
-                        title: "Opps!", 
+                        title: "Opps!",
                         icon: "error",
                         content: errorElement,
                     });

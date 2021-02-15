@@ -57,7 +57,7 @@ Route::group(['prefix' => 'admin'] , function () {
 		Route::resource('city', 'Admin\CityController');
 
 		Route::get('/setting', 'Admin\SettingController@index')->name('setting.index');
-		Route::post('/setting/add/barangay', 'Admin\SettingController@addMunicipal')->name('setting.store.city');
+		Route::post('/setting/add/city', 'Admin\SettingController@addMunicipal')->name('setting.store.city');
 		Route::post('/setting/create/city/account', 'Admin\SettingController@addCityAccount')->name('setting.store.city.account');
 		Route::post('/setting/city/update', 'Admin\SettingController@updateMunicipal')->name('setting.update.city');
 		Route::post('/setting/city/remove', 'Admin\SettingController@removeMunicipal')->name('setting.remove.city');

@@ -15,4 +15,5 @@ Route::get('/province/municipal/{province_code}', 'Api\ProvinceController@munici
 Route::get('/province/barangay/{province_code}', 'Api\ProvinceController@barangays');
 
 Route::get('/municipal/filter/{name}', 'Api\MunicipalController@filterByName');
+Route::get('/municipal/list', 'Api\MunicipalController@list');
 

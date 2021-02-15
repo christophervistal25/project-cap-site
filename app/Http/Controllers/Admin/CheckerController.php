@@ -45,7 +45,7 @@ class CheckerController extends Controller
             'middlename' => 'required',
             'lastname'   => 'required',
             'city'       => 'required|exists:cities,code',
-            'phone_number' => 'required',
+            'phone_number' => 'required|unique:checkers',
             'password'   => 'required|confirmed|min:6|max:20'
         ]);
 
@@ -98,11 +98,12 @@ class CheckerController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'username'   => 'required|unique:checkers,username,' . $id,
-            'firstname'  => 'required',
-            'middlename' => 'required',
-            'lastname'   => 'required',
-            'city'       => 'required|exists:cities,code',
+            'username'     => 'required|unique:checkers,username,' . $id,
+            'firstname'    => 'required',
+            'middlename'   => 'required',
+            'lastname'     => 'required',
+            'phone_number' => 'required|unique:checkers,phone_number,' . $id,
+            'city'         => 'required|exists:cities,code',
         ]);
 
         $checker                 = Checker::find($id);

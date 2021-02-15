@@ -8,7 +8,9 @@ use App\Admin;
 use App\Barangay;
 use App\Municipal;
 use App\City;
+use App\Province;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class SettingController extends Controller
 {
@@ -16,31 +18,43 @@ class SettingController extends Controller
     {
         $admins    = Admin::get();
 
-        $barangays = Barangay::with('city')
-                            ->get();
-
-        $cities    = City::where('status', 'active')->get();
 
         $municipals_account = Municipal::with('city')->get();
 
-
-        return view('admin.setting.index', compact('admins', 'barangays', 'cities', 'municipals_account'));
+        $provinces = Province::get();
+        // return view('admin.setting.index', compact('admins', 'barangays', 'cities', 'municipals_account'));
+        return view('admin.setting.index', compact('admins', 'provinces', 'municipals_account'));
     }
 
     public function addMunicipal(Request $request)
     {
-        $this->validate($request, [
-            'place' => 'required|unique:cities,name',
-            'zip_code' => 'required|unique:cities',
-            'code' => 'required|unique:cities',
+       $validator = Validator::make($request->all(), [
+            'name'     => 'required',
+            'code'     => 'required|unique:cities',
+            'province' => 'required|exists:provinces,code',
         ]);
 
+        if($validator->fails()) {
+            return back()->withErrors($validator);
+        } else {
+            // Common validation passed
+            $hasTheSameData = City::where(['name' => $request->name, 'code' => $request->code, 'province_code' => $request->province])
+                    ->count();
+
+            if($hasTheSameData) {
+                $validator->getMessageBag()->add('name', 'This municipality already exists.');
+                return back()->withErrors($validator);
+            }
+        }
+
+
         City::create([
-            'zip_code' => $request->zip_code,
-            'name'     => ucfirst(strtolower($request->place)),
-            'code'     => $request->code,
+            'name'          => $request->name,
+            'province_code' => $request->province,
+            'code'          => $request->code,
         ]);
-        
+
+
         return back()->with('success', 'Successfully add new municipal.');
     }
 
@@ -74,24 +88,23 @@ class SettingController extends Controller
 
     public function addCityAccount(Request $request)
     {
-        
+
         $validator = \Validator::make($request->all(), [
             'username' => 'required|unique:municipals',
             'password' => 'required|min:6|max:20|confirmed',
-            'register_city' => 'required|exists:cities,zip_code'
+            'city'     => 'required|exists:cities,code'
         ]);
 
-        $account = Municipal::where(['city_zip_code' => $request->register_city])->exists();
-
-        if($account) {
-            $validator->getMessageBag()->add('username', 'This municipal already have a account.');
-            return back()->withErrors($validator);
+        if($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
         }
 
+
+
         Municipal::create([
-            'username' => $request->username,
-            'password' => bcrypt($request->password),
-            'city_zip_code' => $request->register_city,
+            'username'  => $request->username,
+            'password'  => bcrypt($request->password),
+            'city_code' => $request->city,
         ]);
 
         return back()->with('success-municipal-account', 'Successfully create new account.');
@@ -107,10 +120,10 @@ class SettingController extends Controller
                 'password' => 'required',
             ]);
         }
-        
+
         $municipal = Municipal::find($request->id);
         $municipal->username = $request->username;
-        
+
 
         if(!$this->isUserDontChangePassword($request->password)) {
             $municipal->password = bcrypt($request->password);
@@ -148,15 +161,15 @@ class SettingController extends Controller
                 'password' => 'required',
             ]);
 
-            
-          
+
+
 
             // Update the account
             $admin           = Admin::find($request->account_id);
             $admin->username = $request->username;
             if(!$this->isUserDontChangePassword($request->password)) {
                 $admin->password = bcrypt($request->password);
-            } 
+            }
             $admin->save();
 
             return response()->json(['success' => true]);
