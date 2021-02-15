@@ -40,9 +40,9 @@
                 { name: 'firstname' },
                 { name: 'middlename' },
                 { name: 'lastname' },
-                { name: 'barangay.name' },
-                { name: 'created_at' },
-                { name: 'action' , searchable : false, orderable : false, },
+                { name: 'barangay.name', orderable : false },
+                { name: 'created_at' , orderable : false },
+                { name: 'action' , searchable : false, orderable : false },
             ],
         });
   </script>

@@ -57,16 +57,8 @@
   <script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.1.3/vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.1.3/vendor/datatables/dataTables.bootstrap4.min.js"></script>
   <script>
-    // let QUERY_STRING = 'all';
 
-    // if(localStorage.getItem('FILTER_SELECT') == null) {
-    //   QUERY_STRING = 'all';
-    // } else {
-    //   QUERY_STRING = localStorage.getItem('FILTER_SELECT');
-    //   $('#city_filter').val(QUERY_STRING);
-    // }
-
-    let person_table =  $('#establishments-table').DataTable({
+    $('#establishments-table').DataTable({
             serverSide: true,
             ajax: `/admin/establishment/list/`,
             columns: [

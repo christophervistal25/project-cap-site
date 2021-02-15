@@ -8,6 +8,7 @@ use App\Establishment;
 use App\City;
 use App\Http\Controllers\Repositories\EstablishmentRepository;
 use App\Barangay;
+use Auth;
 use Freshbitsweb\Laratables\Laratables;
 
 class EstablishmentController extends Controller
@@ -36,9 +37,8 @@ class EstablishmentController extends Controller
     public function create()
     {
         $types = EstablishmentRepository::TYPES;
-        $cities = City::where('status', 'active')->get();
-        $barangay = Barangay::get();
-        return view('municipal.establishment.create', compact('types', 'cities', 'barangay'));
+        $barangays = Auth::user()->barangays;
+        return view('municipal.establishment.create', compact('types', 'barangays'));
     }
 
     /**
@@ -54,20 +54,23 @@ class EstablishmentController extends Controller
             'type'              => 'required|in:' . implode(',', EstablishmentRepository::TYPES),
             'address'           => 'required|max:100',
             'contact_number'    => 'required',
-            'province'          => 'required',
             'geo_tag_location'  => 'required',
-            'city'              => 'required',
-            'barangay'          => 'required',
+            'barangay'          => 'required|exists:barangays,code',
         ], [], ['office_store_name' => 'name']);
+
+        $barangay = Barangay::where('code', $request->barangay)->first();
+        list($latitude, $longitude) = explode('&', $request->geo_tag_location);
 
         Establishment::create([
             'name'          => $request->office_store_name,
             'type'          => $request->type,
             'address'       => $request->address,
+            'latitude'      => $latitude,
+            'longitude'     => $longitude,
             'contact_no'    => $request->contact_number,
-            'province'      => $request->province,
-            'city_zip_code' => $request->city,
-            'barangay_id'   => $request->barangay
+            'province_code' => $barangay->province_code,
+            'city_code'     => $barangay->city_code,
+            'barangay_code' => $barangay->code,
         ]);
 
         return redirect()->back()->with('success', 'Successfully create new establishment.');
@@ -90,9 +93,13 @@ class EstablishmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Establishment $m_establishment)
     {
-        //
+        $establishment = $m_establishment;
+        $types         = EstablishmentRepository::TYPES;
+        $barangays     = Auth::user()->barangays;
+
+        return view('municipal.establishment.edit', compact('establishment', 'types', 'barangays'));
     }
 
     /**
@@ -102,9 +109,34 @@ class EstablishmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Establishment $m_establishment)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'type'              => 'required|in:' . implode(',', EstablishmentRepository::TYPES),
+            'address'           => 'required|max:100',
+            'contact_number'    => 'required|unique:establishments,contact_no,' . $m_establishment->id,
+            'geo_tag_location'  => 'required',
+            'barangay'          => 'required|exists:barangays,code',
+        ], [], ['office_store_name' => 'name']);
+
+        list($latitude, $longitude) = explode('&', $request->geo_tag_location);
+
+        $barangay = Barangay::where('code', $request->barangay)->first();
+
+        $m_establishment->name          = $request->name;
+        $m_establishment->type          = $request->type;
+        $m_establishment->address       = $request->address;
+        $m_establishment->latitude      = $latitude;
+        $m_establishment->longitude     = $longitude;
+        $m_establishment->contact_no    = $request->contact_number;
+        $m_establishment->province_code = $barangay->province_code;
+        $m_establishment->city_code     = $barangay->city_code;
+        $m_establishment->barangay_code = $barangay->code;
+        $m_establishment->save();
+
+        return redirect()->back()->with('success', 'Successfully update establishment.'); 
+
     }
 
     /**

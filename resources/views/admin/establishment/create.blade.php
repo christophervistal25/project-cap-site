@@ -50,7 +50,7 @@
                                 </div>
                             <div class="form-group mt-1">
                                 <label for="address">Address<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control {{  $errors->has('address') ? 'is-invalid' : '' }}" id="address" name="address" placeholder="Enter Address">
+                                <textarea name="address" id="address" cols="30" rows="10" class="form-control">{{ old('address') }}</textarea>
                                 @if($errors->has('address'))
                                 <small class="form-text text-danger">
                                     {{ $errors->first('address') }} </small>

@@ -8,15 +8,13 @@
 <form action="{{  route('m-establishment.store') }}" method="POST">
    @csrf
   <div class="row match-height">
-      <div class="col-xl-2 col-lg-12"></div>
-            <div class="col-xl-8 col-lg-12">
+            <div class="col-xl-12 col-lg-12">
                 <div class="mb-2">
                     @if(Session::has('success'))
                     <div class="card bg-success text-white shadow">
                         <div class="card-body">Successfully add new establishment.</div>
                     </div>
                     @endif
-                    {{-- @include('templates.error') --}}
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -29,7 +27,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="office_store_name">Establishment/Office/Store Name <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control {{  $errors->has('office_store_name') ? 'is-invalid' : '' }}" id="office_store_name" name="office_store_name" placeholder="Enter Establishment/Office/Store Name" >
+                                <input type="text" class="form-control {{  $errors->has('office_store_name') ? 'is-invalid' : '' }}" id="office_store_name" name="office_store_name" placeholder="Enter Establishment/Office/Store Name" value="{{  old('office_store_name') }}">
                                 @if($errors->has('office_store_name'))
                                     <small  class="form-text text-danger">
                                         {{ $errors->first('office_store_name') }} </small>
@@ -38,10 +36,10 @@
 
                                 <div class="form-group mt-1">
                                     <label for="establishment_type">Establishment Type <span class="text-danger">*</span></label>
+                                    {{  old('type') }}
                                     <select name="type" id="establishment_type" class="form-control {{ $errors->has('type')  ? 'is-invalid' : ''}}">
-                                        <option  selected disabled>Please Select Establishment Type</option>
                                         @foreach($types as $type)
-                                            <option value="{{ $type }}"> {{ $type }}</option>
+                                            <option {{ $type == old('type') ? 'selected' : ''  }} value="{{ $type }}"> {{ $type }}</option>
                                         @endforeach
                                     </select>
                                     @if($errors->has('type'))
@@ -51,7 +49,7 @@
                                 </div>
                             <div class="form-group mt-1">
                                 <label for="address">Address<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control {{  $errors->has('address') ? 'is-invalid' : '' }}" id="address" name="address" placeholder="Enter Address">
+                                <textarea name="address" class="form-control" id="address" cols="30" rows="10">{{ old('address') }}</textarea>
                                 @if($errors->has('address'))
                                 <small class="form-text text-danger">
                                     {{ $errors->first('address') }} </small>
@@ -60,7 +58,7 @@
 
                             <div class="form-group">
                                 <label for="contact_number">Contact Number <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control {{  $errors->has('contact_number') ? 'is-invalid' : '' }}" id="contact_number" name="contact_number" placeholder="Enter Contact Number">
+                                <input type="text" class="form-control {{  $errors->has('contact_number') ? 'is-invalid' : '' }}" id="contact_number" name="contact_number" placeholder="Enter Contact Number" value="{{  old('contact_number') }}">
                                 @if($errors->has('contact_number'))
                                 <small class="form-text text-danger">
                                     {{ $errors->first('contact_number') }} </small>
@@ -76,45 +74,17 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label for="province">Province <span class="text-danger">*</span></label>
-                                <select name="province" id="province" class="form-control">
-                                    <option>Surigao del Sur</option>
+                                <label for="barangay">Barangay <span class="text-danger">*</span></label>
+                                <select name="barangay" id="barangay" class="form-control {{ $errors->has('barangay')  ? 'is-invalid' : ''}}">
+                                    <option  selected disabled>Please Select Barangay</option>
+                                    @foreach($barangays as $b)
+                                        <option {{  $b->code == old('barangay') ? 'selected' : '' }} value="{{ $b->code }}"> {{ $b->name }}</option>
+                                    @endforeach
                                 </select>
-                                @if($errors->has('province'))
+                                @if($errors->has('barangay'))
                                 <small class="form-text text-danger">
-                                    {{ $errors->first('province') }} </small>
+                                    {{ $errors->first('barangay') }} </small>
                                 @endif
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <label for="city">City <span class="text-danger">*</span></label>
-                                        <select name="city" id="cities" class="form-control {{ $errors->has('city')  ? 'is-invalid' : ''}}">
-                                            <option  selected disabled>Please Select City</option>
-                                            @foreach($cities as $city)
-                                                <option value="{{ $city->zip_code }}"> {{ $city->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        @if($errors->has('city'))
-                                        <small class="form-text text-danger">
-                                            {{ $errors->first('city') }} </small>
-                                        @endif
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <label for="barangay">Barangay <span class="text-danger">*</span></label>
-                                        <select name="barangay" id="barangay" class="form-control {{ $errors->has('barangay')  ? 'is-invalid' : ''}}">
-                                            <option  selected disabled>Please Select Barangay</option>
-                                            @foreach($barangay as $b)
-                                                <option data-zip-code="{{ $b->city_zip_code }}" value="{{ $b->id }}"> {{ $b->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        @if($errors->has('barangay'))
-                                        <small class="form-text text-danger">
-                                            {{ $errors->first('barangay') }} </small>
-                                        @endif
-                                    </div>
-                                </div>
                             </div>
                             <div class="float-right">
                                 <button type="submit" class="btn btn-primary">Add New Establishment</button>
@@ -134,4 +104,21 @@
     </div>
     </form>
 </section>
+@push('page-scripts')
+<script>
+     function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(initPosition);
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
+
+        function initPosition(position) {
+            $('#geo_tag_location').val(`${position.coords.latitude}&${position.coords.longitude}`);
+        }
+
+        getLocation();
+</script>
+@endpush
 @endsection

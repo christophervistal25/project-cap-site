@@ -34,7 +34,19 @@ class Establishment extends Model
     public static function laratablesCustomAdminAction($establishment)
     {
         return view('admin.establishment.includes.index_action', compact('establishment'))->render();
+        
+    }
+
+    /**
+     * Returns the action column html for datatables.
+     *
+     * @param \App\Person
+     * @return string
+     */
+    public static function laratablesCustomMunicipalAction($establishment)
+    {
         return view('municipal.establishment.includes.index_action', compact('establishment'))->render();
     }
+
 
 }
