@@ -124,6 +124,17 @@
             </div>
 
             <div class="form-group">
+                <label>Phone number</label>
+                <input type="text"  name="phone_number" placeholder="Phone number" class="form-control {{ $errors->has('phone_number')  ? 'is-invalid' : ''}}" value="{{ old('phone_number') }}">
+                @if($errors->has('phone_number'))
+                    <small  class="form-text text-danger">
+                    {{ $errors->first('phone_number') }} </small>
+                @endif
+            </div>
+
+
+
+            <div class="form-group">
                 <label>Password</label>
                 <input type="password"  name="password" placeholder="Password" class="form-control {{ $errors->has('password')  ? 'is-invalid' : ''}}" value="{{ old('password') }}">
                 @if($errors->has('password'))

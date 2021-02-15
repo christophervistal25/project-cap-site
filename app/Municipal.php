@@ -11,7 +11,7 @@ class Municipal extends Authenticatable
 {
 	use Notifiable;
 
-    protected $fillable = ['username', 'password', 'city_code'];
+    protected $fillable = ['username', 'password', 'city_code', 'phone_number'];
 
     protected $hidden = [
     	'password'

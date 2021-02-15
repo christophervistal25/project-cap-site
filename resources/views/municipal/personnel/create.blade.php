@@ -12,7 +12,7 @@
     {{-- @include('templates.error') --}}
 </div>
 <section id="basic-alerts">
-    <form method="POST" enctype="multipart/form-data" action="{{ route('personnel.store') }}" >
+    <form method="POST" enctype="multipart/form-data" action="{{ route('municipal-personnel.store') }}" >
     @csrf
   <div class="row match-height">
             <div class="col-xl-12 col-lg-12">
@@ -54,7 +54,7 @@
                                     </div>
 
                                     <div class="form-group col-lg-3">
-                                        <label for="suffix">Suffix <span class="text-danger">*</span></label>
+                                        <label for="suffix">Suffix </label>
                                         <input type="text" maxlength="3" class="form-control {{ $errors->has('suffix')  ? 'is-invalid' : ''}}" id="suffix" name="suffix" placeholder="e.g Jr." value="{{ old('suffix') }}">
                                         @if($errors->has('suffix'))
                                             <small  class="form-text text-danger">
@@ -87,41 +87,19 @@
                             </div>
 
 
-
-
-
-
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-lg-6">
-                                        <label for="city">City <span class="text-danger">*</span></label>
-                                        <select name="city" id="cities" class="form-control {{ $errors->has('city')  ? 'is-invalid' : ''}}">
-                                            <option value="" disabled>Select province</option>
-                                            {{-- @foreach($cities as $city)
-                                                @if(old('city'))
-                                                    <option {{ old('city') == $city->city_zipcode ? 'selected' : '' }} value="{{ $city->zip_code }}"> {{ $city->name }}</option>
-                                                @else
-                                                    <option value="{{ $city->zip_code }}"> {{ $city->name }}</option>
-                                                @endif
-                                            @endforeach --}}
-                                        </select>
-                                        @if($errors->has('city'))
-                                        <small  class="form-text text-danger">
-                                        {{ $errors->first('city') }} </small>
-                                        @endif
-                                    </div>
-
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                         <label for="barangay">Barangay<span class="text-danger"> *</span></label>
                                         <select name="barangay" id="barangay" class="form-control {{ $errors->has('barangay')  ? 'is-invalid' : ''}}">
                                             <option value="" disabled>Select City</option>
-                                            {{-- @foreach($barangays as $barangay)
+                                            @foreach($barangays as $barangay)
                                             @if(old('barangay'))
-                                                <option {{ old('barangay') == $barangay->id ? 'selected' : '' }} data-zip-code="{{ $barangay->city_zip_code }}" value="{{ $barangay->id }}"> {{ $barangay->name }}</option>
+                                                <option {{ old('barangay') == $barangay->code ? 'selected' : '' }}  value="{{ $barangay->code }}"> {{ $barangay->name }}</option>
                                             @else
-                                                <option data-zip-code="{{ $barangay->city_zip_code }}" value="{{ $barangay->id }}"> {{ $barangay->name }}</option>
+                                                <option value="{{ $barangay->code }}"> {{ $barangay->name }}</option>
                                             @endif
-                                            @endforeach --}}
+                                            @endforeach
                                         </select>
                                         @if($errors->has('barangay'))
                                         <small  class="form-text text-danger">
@@ -133,7 +111,7 @@
 
                             <div class="form-group">
                                     <label for="puroksub">Temporary Address<span class="text-danger">*</span></label>
-                                     <textarea name="temporary_address" id="temporary_address" class="form-control">{{  old('temporary_address') }}</textarea>
+                                     <textarea name="temporary_address" id="temporary_address" class="form-control {{  $errors->has('temporary_address') ?'is-invalid' : '' }}">{{  old('temporary_address') }}</textarea>
                                     @if($errors->has('temporary_address'))
                                         <small  class="form-text text-danger">
                                             {{ $errors->first('temporary_address') }}
@@ -158,6 +136,10 @@
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </select>
+                                    @if($errors->has('gender'))
+                                        <small  class="form-text text-danger">
+                                        {{ $errors->first('gender') }} </small>
+                                    @endif
                                     </div>
                                 </div>
 
@@ -170,13 +152,13 @@
                                                 @endforeach
                                             </select>
                                             <div class="invalid-feedback">{{ $errors->first('status') }}</div>
-                                </div>
+                                        @if($errors->has('status'))
+                                            <small  class="form-text text-danger">
+                                            {{ $errors->first('status') }} </small>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-
-
-
-
 
                             <div class="row">
                                 <div class="col-lg-4">
@@ -188,8 +170,13 @@
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="phone_number">Cellphone Number <span class="text-danger">*</span></label>
+                                        <label for="phone_number">Mobile Number <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control {{ $errors->has('phone_number')  ? 'is-invalid' : ''}}" id="phone_number" name="phone_number" placeholder="" value="{{ old('phone_number') }}">
+
+                                        @if($errors->has('phone_number'))
+                                            <small  class="form-text text-danger">
+                                            {{ $errors->first('phone_number') }} </small>
+                                        @endif
                                     </div>
                                 </div>
 

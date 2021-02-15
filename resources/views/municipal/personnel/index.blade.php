@@ -19,7 +19,7 @@
             <td scope="col" class="font-weight-bold">Middlename</td>
             <td scope="col" class="font-weight-bold">Lastname</td>
             <td scope="col" class="font-weight-bold">Barangay</td>
-            {{-- <td scope="col" class="font-weight-bold">Registered Date</td> --}}
+            <td scope="col" class="font-weight-bold">Registered At</td>
             <td scope="col" class="font-weight-bold">Option</td>
           </tr>
         </thead>
@@ -41,7 +41,7 @@
                 { name: 'middlename' },
                 { name: 'lastname' },
                 { name: 'barangay.name' },
-                // { name: 'created_at' },
+                { name: 'created_at' },
                 { name: 'action' , searchable : false, orderable : false, },
             ],
         });

@@ -34,6 +34,7 @@
             <td scope="col" class="font-weight-bold">Province</td>
             <td scope="col" class="font-weight-bold">City</td>
             <td scope="col" class="font-weight-bold">Barangay</td>
+            <td scope="col" class="font-weight-bold">Registered Date</td>
             <td scope="col" class="font-weight-bold">Option</td>
           </tr>
         </thead>
@@ -71,6 +72,7 @@
                 { name: 'province.name' },
                 { name: 'city.name' },
                 { name: 'barangay.name' },
+                { name: 'created_at' },
                 { name: 'admin_action' , searchable : false, orderable : false, },
             ],
         });

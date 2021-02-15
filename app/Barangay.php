@@ -7,6 +7,7 @@ use App\Scopes\BarangayScope;
 
 class Barangay extends Model
 {
+    
     protected $fillable = ['name', 'code', 'status'];
 
     /**

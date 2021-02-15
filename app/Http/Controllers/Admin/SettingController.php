@@ -86,25 +86,25 @@ class SettingController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function addCityAccount(Request $request)
+    public function addMunicipalAccount(Request $request)
     {
-
+        
         $validator = \Validator::make($request->all(), [
-            'username' => 'required|unique:municipals',
-            'password' => 'required|min:6|max:20|confirmed',
-            'city'     => 'required|exists:cities,code'
+            'username'     => 'required|unique:municipals',
+            'password'     => 'required|min:6|max:20|confirmed',
+            'phone_number' => 'required|unique:municipals',
+            'city'         => 'required|exists:cities,code'
         ]);
 
         if($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
 
-
-
         Municipal::create([
-            'username'  => $request->username,
-            'password'  => bcrypt($request->password),
-            'city_code' => $request->city,
+            'username'     => $request->username,
+            'phone_number' => $request->phone_number,
+            'password'     => bcrypt($request->password),
+            'city_code'    => $request->city,
         ]);
 
         return back()->with('success-municipal-account', 'Successfully create new account.');

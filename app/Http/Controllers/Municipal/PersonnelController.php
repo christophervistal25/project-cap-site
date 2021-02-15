@@ -9,6 +9,7 @@ use App\Barangay;
 use Illuminate\Support\Str;
 use Freshbitsweb\Laratables\Laratables;
 use Auth;
+use Carbon\Carbon;
 use App\Http\Controllers\Repositories\PersonnelRepository;
 
 class PersonnelController extends Controller
@@ -16,17 +17,18 @@ class PersonnelController extends Controller
 
     public const QR_SEPERATOR = ',';
 
-    public function __construct()
+    public function __construct(PersonnelRepository $personnelRepository)
     {
+        $this->personnelRepository = $personnelRepository;
         $this->middleware('auth:municipal');
     }
 
     public function list()
     {
-        $zip_code = Auth::user()->city_zip_code;
+        $city_code = Auth::user()->city_code;
 
-        return Laratables::recordsOf(Person::class, function ($query) use($zip_code) {
-            return $query->where('city_zip_code', $zip_code);
+        return Laratables::recordsOf(Person::class, function ($query) use($city_code) {
+            return $query->where('city_code', $city_code);
         });
     }
     /**
@@ -48,7 +50,6 @@ class PersonnelController extends Controller
     public function create()
     {
         $barangays = Auth::user()->barangays;
-
         $civil_status = PersonnelRepository::CIVIL_STATUS;
 
         return view('municipal.personnel.create', compact('barangays', 'civil_status'));
@@ -63,18 +64,17 @@ class PersonnelController extends Controller
      */
     public function store(Request $request)
     {
-        // |regex:/^[A-Za-z ]+$/u
         $this->validate($request, [
             'firstname'         => 'required',
             'middlename'        => 'required',
             'lastname'          => 'required',
-            'suffix'            => 'required',
-            'gender'            => 'required|in:' . implode(',', PersonnelRepository::GENDER),
             'date_of_birth'     => 'required|date',
-            'rapid_pass_no'     => 'required',
-            'rapid_test_issued' => 'required|date',
+            'gender'            => 'required|in:' . implode(',', PersonnelRepository::GENDER),
+            'temporary_address' => 'required',
+            'phone_number'      => 'required|unique:people,phone_number',
             'address'           => 'required',
-            'barangay'          => 'required|exists:barangays,id',
+            'status'            => 'required',
+            'barangay'          => 'required|exists:barangays,code',
             'image'             => 'required',
         ]);
 
@@ -84,21 +84,26 @@ class PersonnelController extends Controller
             $request->file('image')->storeAs('/public/images', $imageName);
         }
 
+        // Province Code
+        $barangay = Barangay::where('code', $request->barangay)->first();
 
         $person = Person::create([
             'firstname'         => $request->firstname,
             'middlename'        => $request->middlename,
             'lastname'          => $request->lastname,
+            'temporary_address' => $request->temporary_address,
             'address'           => $request->address,
             'suffix'            => $request->suffix,
-            'date_of_birth'     => $request->date_of_birth,
-            'rapid_test_issued' => $request->rapid_test_issued,
+            'date_of_birth'     => Carbon::parse($request->date_of_birth)->format('Y-m-d'),
             'image'             => $imageName ?? 'default.png',
-            'rapid_pass_no'     => $request->rapid_pass_no,
             'gender'            => $request->gender,
-            'city_zip_code'     => Auth::user()->city_zip_code,
-            'barangay_id'       => $request->barangay,
-            'generated_qr'      => '',
+            'province_code'     => $barangay->province_code,
+            'city_code'         => $barangay->city_code,
+            'barangay_code'     => $barangay->code,
+            'civil_status'      => $request->status,
+            'phone_number'      => $request->phone_number,
+            'landline_number'   => $request->landline_number,
+            'age'               => $this->personnelRepository->getAge($request->date_of_birth),
         ]);
 
 
@@ -137,52 +142,7 @@ class PersonnelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        // |regex:/^[A-Za-z ]+$/u
-        $this->validate($request, [
-            'firstname'         => 'required',
-            'middlename'        => 'required',
-            'lastname'          => 'required',
-            'birthdate'     => 'required|date',
-            'sex'               => 'required|in:' . implode(',', PersonnelRepository::GENDER),
-            'rapid_pass_no' => 'required',
-            'rapid_test_date'   => 'required|date',
-            'permanent_address' => 'required',
-            // 'barangay'          => 'required|exists:barangays,id'
-        ]);
-
-
-        $this->validate($request, [
-            "person_id"         => 'required|exists:people,id',
-            "rapid_pass_no"     => 'required|unique:people,rapid_pass_no,' . $id,
-            "firstname"         => 'required',
-            "middlename"        => "required",
-            "lastname"          => "required",
-            "suffix"            => "sometimes|required",
-            "sex"               => 'required',
-            "birthdate"         => "required",
-            "rapid_test_date"   => "required",
-            "permanent_address" => "required",
-            "registered_date"   => "required",
-    ]);
-
-        $person = Person::find($id);
-
-        $person->rapid_pass_no     = $request->rapid_pass_no;
-        $person->firstname         = $request->firstname;
-        $person->middlename        = $request->middlename;
-        $person->lastname          = $request->lastname;
-        $person->suffix            = $request->suffix;
-        $person->gender            = $request->sex;
-        $person->date_of_birth     = $request->birthdate;
-        $person->rapid_test_issued = $request->rapid_test_date;
-        $person->address           = $request->permanent_address;
-        $person->save();
-
-
-        return response()->json(['success' => true]);
-
-    }
+    {}
 
     /**
      * Remove the specified resource from storage.

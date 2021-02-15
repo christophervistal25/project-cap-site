@@ -54,20 +54,10 @@
                                     </div>
 
                                     <div class="form-group col-lg-3">
-                                        <label for="suffix">Suffix <span class="text-danger">*</span></label>
+                                        <label for="suffix">Suffix </label>
                                         <input type="text" maxlength="3" class="form-control {{ $errors->has('suffix')  ? 'is-invalid' : ''}}" id="suffix" name="suffix" placeholder="e.g Jr." value="{{ old('suffix') }}">
-                                        @if($errors->has('suffix'))
-                                            <small  class="form-text text-danger">
-                                            {{ $errors->first('suffix') }} </small>
-                                        @endif
                                     </div>
                             </div>
-
-
-
-
-
-
 
                             {{-- <hr> --}}
 
@@ -149,7 +139,7 @@
 
                             <div class="form-group">
                                     <label for="puroksub">Temporary Address<span class="text-danger">*</span></label>
-                                     <textarea name="temporary_address" id="temporary_address" class="form-control">{{  old('temporary_address') }}</textarea>
+                                     <textarea name="temporary_address" id="temporary_address" class="form-control {{  $errors->has('temporary_address') ? 'is-invalid' : '' }}">{{  old('temporary_address') }}</textarea>
                                     @if($errors->has('temporary_address'))
                                         <small  class="form-text text-danger">
                                             {{ $errors->first('temporary_address') }} 
@@ -204,8 +194,11 @@
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="phone_number">Cellphone Number <span class="text-danger">*</span></label>
+                                        <label for="phone_number">Mobile Number <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control {{ $errors->has('phone_number')  ? 'is-invalid' : ''}}" id="phone_number" name="phone_number" placeholder="" value="{{ old('phone_number') }}">
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('phone_number') }}
+                                        </div>
                                     </div>
                                 </div>
 

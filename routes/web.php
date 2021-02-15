@@ -45,6 +45,7 @@ Route::group(['prefix' => 'admin'] , function () {
 		Route::get('persons/list/{filter}', 'Admin\PersonnelController@list')->name('persons.list');
 
 		Route::resource('personnel', 'Admin\PersonnelController');
+		
         Route::get('/personnel/{id}/logs', 'Admin\PersonnelLogController@show')->name('personnel.logs');
         Route::put('/personnel/{id}/logs', 'Admin\PersonnelLogController@update')->name('personnel.logs.update');
 
@@ -56,7 +57,7 @@ Route::group(['prefix' => 'admin'] , function () {
 
 		Route::get('/setting', 'Admin\SettingController@index')->name('setting.index');
 		Route::post('/setting/add/city', 'Admin\SettingController@addMunicipal')->name('setting.store.city');
-		Route::post('/setting/create/city/account', 'Admin\SettingController@addCityAccount')->name('setting.store.city.account');
+		Route::post('/setting/create/city/account', 'Admin\SettingController@addMunicipalAccount')->name('setting.store.city.account');
 		Route::post('/setting/city/update', 'Admin\SettingController@updateMunicipal')->name('setting.update.city');
 		Route::post('/setting/city/remove', 'Admin\SettingController@removeMunicipal')->name('setting.remove.city');
 		Route::post('/setting/admin/account/update', 'Admin\SettingController@adminAccountUpdate')->name('setting.admin.account.update');

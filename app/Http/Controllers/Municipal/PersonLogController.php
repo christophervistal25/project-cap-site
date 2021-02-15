@@ -8,9 +8,19 @@ use App\Person;
 use Auth;
 use App\City;
 use App\Barangay;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
+use App\Http\Controllers\Repositories\PersonnelRepository;
+
 
 class PersonLogController extends Controller
 {
+
+
+    public function __construct(PersonnelRepository $personnelRepository)
+    {
+        $this->personnelRepository = $personnelRepository;
+    }
 
     public function get($id)
     {
@@ -59,9 +69,23 @@ class PersonLogController extends Controller
      */
     public function show($id)
     {
-        $person = Person::with('logs', 'logs.checker')->find($id);
-        $barangays = Barangay::where('city_zip_code', Auth::user()->city_zip_code)->get();
-        return view('municipal.personnel_logs.show', compact('person', 'barangays'));
+        $person = Person::with('logs')->find($id);
+
+        $provinces = Cache::rememberForever('provinces', function () {
+            return Province::orderBy('name')->get();
+        });
+
+        $cities = City::where('province_code', $person->province_code)
+                        ->get();
+
+        $barangays = Barangay::where('province_code', $person->province_code)
+                ->get();
+
+        $civil_status = PersonnelRepository::CIVIL_STATUS;
+
+        return view('municipal.personnel_logs.show', compact('person', 'provinces', 'civil_status', 'cities', 'barangays'));
+
+        // return view('municipal.personnel_logs.show', compact('person', 'barangays'));
     }
 
     /**
@@ -84,27 +108,38 @@ class PersonLogController extends Controller
      */
     public function update(Request $request, Person $person)
     {
+
         $this->validate($request, [
-            'rapid_pass_no'     => 'required',
             'firstname'         => 'required',
             'middlename'        => 'required',
             'lastname'          => 'required',
             'date_of_birth'     => 'required|date',
-            'rapid_test_issued' => 'required|date',
+            'gender'            => 'required|in:' . implode(',', PersonnelRepository::GENDER),
+            'temporary_address' => 'required',
+            'phone_number'      => 'required|unique:people,phone_number,' . $person->id,
             'address'           => 'required',
-            'barangay'          => 'required|exists:barangays,id',
-            'gender'            => 'required|in:male,female',
+            'civil_status'      => 'required',
+            'barangay'          => 'required|exists:barangays,code',
         ]);
+
+        $barangay = Barangay::where('code', $request->barangay)->first();
 
         $person->firstname         = $request->firstname;
         $person->middlename        = $request->middlename;
         $person->lastname          = $request->lastname;
-        $person->date_of_birth     = $request->date_of_birth;
-        $person->rapid_test_issued = $request->rapid_test_issued;
+        $person->temporary_address = $request->temporary_address;
         $person->address           = $request->address;
-        $person->barangay_id       = $request->barangay;
+        $person->suffix            = $request->suffix;
+        $person->date_of_birth     = Carbon::parse($request->date_of_birth)->format('Y-m-d');
         $person->gender            = $request->gender;
-
+        $person->province_code     = $barangay->province_code;
+        $person->city_code         = $barangay->city_code;
+        $person->barangay_code     = $barangay->code;
+        $person->civil_status      = $request->civil_status;
+        $person->phone_number      = $request->phone_number;
+        $person->landline_number   = $request->landline_number;
+        $person->age               = $this->personnelRepository
+                                           ->getAge($request->date_of_birth);
         $person->save();
 
         return back()->with('success', 'Successfully update personnel information.');

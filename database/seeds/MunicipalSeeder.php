@@ -14,9 +14,8 @@ class MunicipalSeeder extends Seeder
     {
 
         Municipal::create([
-            // 'email'         => 'chris@yahoo.com',
             'username'      => 'user',
-            // 'phone_number'  => '09663765072',
+            'phone_number'  => '09663765072',
             'city_code' => '166819000',
             'password'      => bcrypt('christopher'),
         ]);

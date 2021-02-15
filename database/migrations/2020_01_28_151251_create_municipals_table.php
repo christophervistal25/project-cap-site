@@ -16,6 +16,7 @@ class CreateMunicipalsTable extends Migration
         Schema::create('municipals', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('username')->unique();
+            $table->string('phone_number')->unique();
             $table->string('city_code');
             $table->string('password');
             $table->string('profile')->default('default.jpg');
