@@ -17,3 +17,9 @@ Route::get('/province/barangay/{province_code}', 'Api\ProvinceController@baranga
 Route::get('/municipal/filter/{name}', 'Api\MunicipalController@filterByName');
 Route::get('/municipal/list', 'Api\MunicipalController@list');
 
+
+Route::get('/notify/people', 'Api\NotifyController@message');
+Route::post('/sms/message/done', 'Api\NotifyController@messageDone');
+
+
+

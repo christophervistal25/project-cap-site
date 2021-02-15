@@ -56,7 +56,7 @@ class TrackController extends Controller
      */
     public function show($id)
     {
-        $person = Person::with('logs')->find($id);
+        $person = Person::with(['logs'])->find($id);
         return view('admin.track.show', compact('person'));
     }
 
@@ -71,22 +71,27 @@ class TrackController extends Controller
         return back()->with('success', 'Success!');
     }
 
+
     /**
      * int @id log id
      */
     public function track($id)
     {
-        if(request()->ajax()) {
-            $personColumns = 'person:id,person_id,firstname,middlename,lastname,suffix,phone_number';
+        // if(request()->ajax()) {
 
-            $log = PersonLog::find($id);
+            $log  = PersonLog::find($id);
+
             $time = Carbon::parse($log->time)->format('d-m-y');
-            return PersonLog::with([$personColumns, 'checker'])
+
+            return PersonLog::with(['person:id,person_id,firstname,middlename,lastname,suffix,phone_number', 'checker'])
                             ->where('time', 'like', $time . '%')
                             ->where('location', $log->location)
-                            ->where('person_id', '!=', $log->person_id)->get();
+                            ->where('person_id', '!=', $log->person_id)
+                            ->get()
+                            ->unique('person_id');
+
             return $log;
-        }
+        // }
     }
 
     /**

@@ -10,8 +10,6 @@ Route::get('download-android', function () {
 
 
 
-Route::get('/test/notify', 'Api\NotifyController@message');
-
 Route::get('test', function () {
 	return view('admin.statistics.overview');
 });
