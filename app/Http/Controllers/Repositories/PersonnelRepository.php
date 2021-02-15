@@ -35,6 +35,10 @@ class PersonnelRepository
 
     public static function generateQRbyData(Person $person)
     {
+        $person->suffix = $person->suffix ?? '*';
+        $person->landline_number = $person->landline_number ?? '*';
+        $person->email = $person->email ?? '*';
+
         $user_information =   $person->id . self::QR_SEPERATOR
                     . $person->firstname . self::QR_SEPERATOR
                     . $person->middlename .  self::QR_SEPERATOR
@@ -49,8 +53,9 @@ class PersonnelRepository
                     . $person->barangay->name . self::QR_SEPERATOR
                     . $person->date_of_birth . self::QR_SEPERATOR
                     . $person->landline_number . self::QR_SEPERATOR
-                    . $person->gender . self::QR_SEPERATOR
+                    . ucfirst($person->gender) . self::QR_SEPERATOR
                     . $person->person_id . self::QR_SEPERATOR
+                    . $person->address . self::QR_SEPERATOR
                     . "WEBSITE";
 
 
