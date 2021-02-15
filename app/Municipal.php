@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 
-class Municipal extends Authenticatable 
+class Municipal extends Authenticatable
 {
 	use Notifiable;
 
@@ -19,11 +19,11 @@ class Municipal extends Authenticatable
 
     public function city()
     {
-        return $this->belongsTo('App\City');    
+        return $this->belongsTo('App\City');
     }
 
     public function barangays()
     {
-        return $this->hasMany('App\Barangay');
+        return $this->hasMany('App\Barangay', 'city_code', 'city_code');
     }
 }
