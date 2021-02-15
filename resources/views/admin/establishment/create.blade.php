@@ -8,15 +8,14 @@
 <form action="{{  route('establishment.store') }}" method="POST">
    @csrf
   <div class="row match-height">
-      <div class="col-xl-2 col-lg-12"></div>
-            <div class="col-xl-8 col-lg-12">
+            <div class="col-xl-12 col-lg-12">
                 <div class="mb-2">
                     @if(Session::has('success'))
                     <div class="card bg-success text-white shadow">
                         <div class="card-body">Successfully add new establishment.</div>
                     </div>
                     @endif
-                    {{-- @include('templates.error') --}}
+                    @include('templates.error')
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -78,7 +77,10 @@
                             <div class="form-group">
                                 <label for="province">Province <span class="text-danger">*</span></label>
                                 <select name="province" id="province" class="form-control">
-                                    <option>Surigao del Sur</option>
+                                    <option  selected disabled>Please Select City</option>
+                                    @foreach($provinces as $province)
+                                        <option value="{{ $province->code }}"> {{ $province->name }}</option>
+                                    @endforeach
                                 </select>
                                 @if($errors->has('province'))
                                 <small class="form-text text-danger">
@@ -90,11 +92,7 @@
                                     <div class="col-lg-6">
                                         <label for="city">City <span class="text-danger">*</span></label>
                                         <select name="city" id="cities" class="form-control {{ $errors->has('city')  ? 'is-invalid' : ''}}">
-
                                             <option  selected disabled>Please Select City</option>
-                                            @foreach($cities as $city)
-                                                <option value="{{ $city->zip_code }}"> {{ $city->name }}</option>
-                                            @endforeach
                                         </select>
                                         @if($errors->has('city'))
                                         <small class="form-text text-danger">
@@ -133,29 +131,44 @@
     </form>
 </section>
 @push('page-scripts')
+
 <script>
     $(document).ready(function () {
-        let barangayOptionAll = [@foreach($barangay as $barangay){city_zip_code:'{{ $barangay->city_zip_code }}', name:'{{ $barangay->name }}'}, @endforeach];
-        $('#cities').change(function (e) {
-            let cityZipCode = e.target.value;
-            //filter all barangay data//
-            let barangayfilter = barangayOptionAll.filter(function(barangay){
-                return barangay.city_zip_code == cityZipCode;
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(initPosition);
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
+
+        function initPosition(position) {
+            $('#geo_tag_location').val(`${position.coords.latitude}&${position.coords.longitude}`);
+        }
+
+        getLocation();
+
+        $('#province').change(function (e) {
+            $.ajax({
+                url : `/api/province/municipal/${e.target.value}`,
+                success : function (response) {
+                    // Clear all option of cities select element
+                    $('#cities').find('option').remove();
+                    response.municipals.forEach((municipal) => $('#cities').append(`<option value="${municipal.code}">${municipal.name}</option>`));
+                },
             });
-            //Remove all option in #barangay//
-            function removeOptionsBarangay(selectBarangay) {
-                var ii, L = selectBarangay.options.length - 1;
-                for(ii = L; ii >= 0; ii--) {
-                    selectBarangay.remove(ii);
-                }
-            }
-            removeOptionsBarangay(document.getElementById('barangay'));
-            //add barangay data based in what you select in #cities//
-            var i, length_barangay = barangayfilter.length;
-            for (i = 0; i < length_barangay; i++) {
-                var barangayfilter_final = barangayfilter[i];
-                $('#barangay').append('<option data-zip-code="' + barangayfilter_final.city_zip_code + '">' + barangayfilter_final.name + '</option>');
-            }
+        });
+
+        $('#cities').change(function (e) {
+            $.ajax({
+                url : `/api/province/barangay/${e.target.value}`,
+                success : function (response) {
+                    // Clear all option of barangay select element
+                    $('#barangay').find('option').remove();
+                    response.barangays.forEach((barangay) => $('#barangay').append(`<option value="${barangay.code}">${barangay.name}</option>`));
+                },
+            });
         });
     });
 </script>

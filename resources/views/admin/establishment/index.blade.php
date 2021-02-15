@@ -27,7 +27,8 @@
             <td scope="col" class="text-center font-weight-bold">Establishment/Office/Store Name</td>
             <td scope="col" class="text-center font-weight-bold">Address Located</td>
             <td scope="col" class="text-center font-weight-bold">Contact Number</td>
-            <td scope="col" class="text-center font-weight-bold">Geo Tag Location</td>
+            <td scope="col" class="text-center font-weight-bold">Latitude</td>
+            <td scope="col" class="text-center font-weight-bold">Longitude</td>
             <td scope="col" class="text-center font-weight-bold">Date/Time register</td>
             <td scope="col" class="text-center font-weight-bold">Option</td>
           </tr>
@@ -79,7 +80,8 @@
                 { name: 'name' },
                 { name: 'address' },
                 { name: 'contact_no' },
-                { name: 'geo_tag_location' },
+                { name: 'latitude' },
+                { name: 'longitude' },
                 { name: 'created_at' },
                 { name: 'admin_action' , searchable : false, orderable : false, },
             ],

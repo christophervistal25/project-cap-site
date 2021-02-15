@@ -9,6 +9,7 @@ use App\City;
 use App\Http\Controllers\Repositories\EstablishmentRepository;
 use App\Barangay;
 use Freshbitsweb\Laratables\Laratables;
+use App\Province;
 
 class EstablishmentController extends Controller
 {
@@ -39,9 +40,8 @@ class EstablishmentController extends Controller
     public function create()
     {
         $types = EstablishmentRepository::TYPES;
-        $cities = City::where('status', 'active')->get();
-        $barangay = Barangay::get();
-        return view('admin.establishment.create', compact('types', 'cities', 'barangay'));
+        $provinces = Province::get();
+        return view('admin.establishment.create', compact('types', 'provinces'));
     }
 
     /**
@@ -64,14 +64,19 @@ class EstablishmentController extends Controller
             'barangay'          => 'required',
         ], [], ['office_store_name' => 'name']);
 
+        list($latitude, $longitude) = explode('&', $request->geo_tag_location);
+
+
         Establishment::create([
             'name'          => $request->office_store_name,
             'type'          => $request->type,
             'address'       => $request->address,
             'contact_no'    => $request->contact_number,
-            'province'      => $request->province,
-            'city_zip_code' => $request->city,
-            'barangay_id'   => $request->barangay
+            'latitude'      => $latitude,
+            'longitude'     => $longitude,
+            'province_code' => $request->province,
+            'city_code'     => $request->city,
+            'barangay_code' => $request->barangay
         ]);
 
         return redirect()->back()->with('success', 'Successfully create new establishment.');

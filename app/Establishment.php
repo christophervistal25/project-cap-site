@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Establishment extends Model
 {
-    protected $fillable = ['name', 'type', 'address', 'contact_no', 'geo_tag_location', 'province', 'city_zip_code', 'barangay_id'];
+    protected $fillable = ['name', 'type', 'address', 'contact_no', 'latitude','longitude', 'province_code', 'city_code', 'barangay_code'];
+
+
 
     public function city()
     {
