@@ -97,16 +97,10 @@ Route::group(['prefix' => 'municipal'] , function () {
 
 
 			Route::get('/setting', 'Municipal\SettingController@index')->name('municipal.setting.index');
+
 			Route::post('/setting/municipal/account/update', 'Municipal\SettingController@municipalUpdateAccount')->name('setting.municipal.account.update');
-			Route::post('/setting/municipal/add/barangay', 'Municipal\SettingController@addBarangay')->name('setting.municipal.add.barangay');
-			Route::post('/setting/municipal/update/barangay','Municipal\SettingController@updateBarangay')->name('setting.municipal.update.barangay');
-			Route::post('/setting/municipal/remove/barangay','Municipal\SettingController@removeBarangay')->name('setting.municipal.remove.barangay');
 
-			Route::post('/setting/municipal/add/checker','Municipal\SettingController@addChecker')->name('setting.municipal.add.checker');
-
-            Route::post('/setting/municipal/update/checker','Municipal\SettingController@updateChecker')->name('setting.municipal.update.checker');
-
-
+			Route::resource('m-checker', 'Municipal\CheckerController');
 
             Route::get('/m-establishment/list', 'Municipal\EstablishmentController@list')->name('municipal.establishment.list');
 			Route::resource('m-establishment', 'Municipal\EstablishmentController');
@@ -123,6 +117,6 @@ Route::group(['prefix' => 'municipal'] , function () {
 
 
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');

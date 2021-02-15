@@ -18,11 +18,7 @@ class SettingController extends Controller
     {
         $municipals    = Municipal::get();
 
-        $barangays = Barangay::where('city_zip_code', Auth::user()->city_zip_code)
-                            ->where('status', 'active')
-                            ->with('city')
-                            ->get();
-
+        $barangays = Auth::user()->barangays;
 
         $municipals_account = Municipal::with('city')->get();
 
@@ -61,11 +57,11 @@ class SettingController extends Controller
             $this->validate($request, [
                 'name' => 'required|unique:barangays',
                 'code' => 'required|unique:barangays,code',
-
             ]);
 
+       
+            
             $barangay = Barangay::create([
-                'city_zip_code' => Auth::user()->city_zip_code,
                 'name'          => $request->name,
                 'code'          => $request->code,
             ]);

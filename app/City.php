@@ -24,6 +24,11 @@ class City extends Model
         static::addGlobalScope(new CityScope);
     }
 
+    public function province()
+    {
+        return $this->belongsTo('App\Province');
+    }
+
     public function barangays()
     {
         return $this->hasMany('App\Barangay');

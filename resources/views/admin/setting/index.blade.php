@@ -132,6 +132,25 @@
                 @endif
             </div>
 
+            <div class="form-group">
+                <label>Suffix</label>
+                <input type="text"  name="suffix" placeholder="Suffifx" class="form-control {{ $errors->has('suffix')  ? 'is-invalid' : ''}}" value="{{ old('suffix') }}">
+                @if($errors->has('suffix'))
+                    <small  class="form-text text-danger">
+                    {{ $errors->first('suffix') }} </small>
+                @endif
+            </div>
+
+            
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text"  name="phone_number" placeholder="" class="form-control {{ $errors->has('phone_number')  ? 'is-invalid' : ''}}" value="{{ old('phone_number') }}">
+                @if($errors->has('phone_number'))
+                    <small  class="form-text text-danger">
+                    {{ $errors->first('phone_number') }} </small>
+                @endif
+            </div>
+
 
 
             <div class="form-group">

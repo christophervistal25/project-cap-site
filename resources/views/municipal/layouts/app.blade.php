@@ -57,6 +57,10 @@
         </li>
         <li class=" nav-item"><a href="{{ route('m-establishment.index') }}"><i class="ft-plus"></i><span class="menu-title" data-i18n="">View Establishment</span></a>
         </li>
+        <li class=" nav-item"><a href="{{ route('m-checker.index') }}"><i class="ft-plus"></i><span class="menu-title" data-i18n="">View All Checkers</span></a>
+        </li>
+        <li class=" nav-item"><a href="{{ route('m-checker.index') }}"><i class="ft-map"></i><span class="menu-title" data-i18n="">Track</span></a>
+        </li>
         <li class=" nav-item"><a href="{{ route('municipal.setting.index') }}"><i class="ft-settings"></i><span class="menu-title" data-i18n="">Settings</span></a>
         </li>
       </ul>
