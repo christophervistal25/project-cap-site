@@ -72,7 +72,7 @@
                 }
 
                 .person_image {
-                    height : 100px;
+                   
                 }
 
             }
@@ -82,7 +82,7 @@
 <body>
         <img class="img-fluid" src="{{ asset('/storage/id_template/plain_blank_2.png') }}" id="image-index">
          <div class="person-image-container">
-            <img id="person_image"  class="img-fluid" src="{{ asset('/storage/images/' . $person->image) }}">
+            <img id="person_image" class="img-fluid" src="{{ asset('/storage/images/' . $person->image) }}">
         </div>
         <div id="container">
             <img id="qr-image" class="img-fluid" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={{ $personnel_repository->generateQRbyData($person) }}">
