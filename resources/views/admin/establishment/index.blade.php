@@ -9,12 +9,6 @@
     <div class="card-body">
       <div class="row float-left col-lg-7">
         <div class="col-lg-7">
-          {{-- <select name="cities" id="city_filter" class="form-control">
-            <option value="all">Show All</option>
-            @foreach($cities as $city)
-              <option value="{{ $city->zip_code }}"> {{ $city->name }}</option>
-            @endforeach
-          </select> --}}
         </div>
 
 
@@ -42,7 +36,7 @@
             <td class="text-center"> {{  $establishment->contact_no }}</td>
             <td> {{  $establishment->geo_tag_location }}</td>
             <td class="text-center"> {{  $establishment->created_at->diffForHumans() }}</td>
-            <td class="text-center">
+            <td class="text-ceter">
               <a href="{{  route('establishment.edit', $establishment->id) }}" class="btn btn-icon btn-sm btn-success">
                   <i class="la la-edit"></i>
               </div>
@@ -88,13 +82,6 @@
         });
   </script>
 
-   {{-- <script>
-      $('#city_filter').change(function (e) {
-          QUERY_STRING = $(this).val();
-          localStorage.setItem('FILTER_SELECT', QUERY_STRING);
-          person_table.ajax.url(`/admin/persons/list/${QUERY_STRING}`).load();
-          cellContentEditableUpdator();
-      });
-    </script> --}}
-  @endpush
+
+    @endpush
 @endsection

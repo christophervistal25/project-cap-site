@@ -20,4 +20,9 @@ class Province extends Model
         static::addGlobalScope(new ProvinceScope);
     }
 
+    public function cities()
+    {
+        return $this->hasMany('App\City');
+    }
+
 }
