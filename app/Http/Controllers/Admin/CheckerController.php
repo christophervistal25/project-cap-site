@@ -28,8 +28,7 @@ class CheckerController extends Controller
      */
     public function create()
     {
-        $cities = City::get();
-        return view('admin.checker.create', compact('cities'));
+        return view('admin.checker.create');
     }
 
     /**
@@ -41,22 +40,25 @@ class CheckerController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'username' => 'required|unique:checkers',
-            'firstname' => 'required',
+            'username'   => 'required|unique:checkers',
+            'firstname'  => 'required',
             'middlename' => 'required',
-            'lastname' => 'required',
-            'city' => 'required|exists:cities,zip_code',
-            'password' => 'required|confirmed|min:6|max:20'
+            'lastname'   => 'required',
+            'city'       => 'required|exists:cities,code',
+            'phone_number' => 'required|unique:checkers',
+            'password'   => 'required|confirmed|min:6|max:20'
         ]);
 
+
         Checker::create([
-            'username' => $request->username,
-            'firstname' => $request->firstname,
-            'middlename' => $request->middlename,
-            'lastname' => $request->lastname,
-            'suffix' => $request->suffix,
-            'city_zip_code' => $request->city,
-            'password' => bcrypt($request->password),
+            'username'       => $request->username,
+            'firstname'      => $request->firstname,
+            'middlename'     => $request->middlename,
+            'lastname'       => $request->lastname,
+            'suffix'         => $request->suffix,
+            'municipal_code' => $request->city,
+            'phone_number'   => $request->phone_number,
+            'password'       => bcrypt($request->password),
         ]);
 
         return back()->with('success', 'Successfully create new checker account.');
@@ -96,29 +98,31 @@ class CheckerController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'username'   => 'required|unique:checkers,username,' . $id,
-            'firstname'  => 'required',
-            'middlename' => 'required',
-            'lastname'   => 'required',
-            'city'       => 'required|exists:cities,zip_code',
+            'username'     => 'required|unique:checkers,username,' . $id,
+            'firstname'    => 'required',
+            'middlename'   => 'required',
+            'lastname'     => 'required',
+            'phone_number' => 'required|unique:checkers,phone_number,' . $id,
+            'city'         => 'required|exists:cities,code',
         ]);
 
-        $checker                = Checker::find($id);
-        $checker->username      = $request->username;
-        $checker->firstname     = $request->firstname;
-        $checker->middlename    = $request->middlename;
-        $checker->lastname      = $request->lastname;
-        $checker->suffix        = $request->suffix;
-        $checker->city_zip_code = $request->city;
-        
+        $checker                 = Checker::find($id);
+        $checker->username       = $request->username;
+        $checker->firstname      = $request->firstname;
+        $checker->middlename     = $request->middlename;
+        $checker->lastname       = $request->lastname;
+        $checker->suffix         = $request->suffix;
+        $checker->phone_number   = $request->phone_number;
+        $checker->municipal_code = $request->city;
+
         if(!is_null($request->password)) {
             $checker->password      = bcrypt($request->password);
         }
-        
+
         $checker->save();
 
         return back()->with('success', 'Successfully update checker information.');
-        
+
     }
 
     /**

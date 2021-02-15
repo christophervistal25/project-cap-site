@@ -10,12 +10,12 @@
    @csrf
    @method('PUT')
   <div class="row match-height">
-      <div class="col-xl-2 col-lg-12"></div>
-            <div class="col-xl-8 col-lg-12">
+      <div class="col-xl-12 col-lg-12"></div>
+            <div class="col-xl-12 col-lg-12">
                 <div class="mb-2">
                     @if(Session::has('success'))
                     <div class="card bg-success text-white shadow">
-                        <div class="card-body">Successfully Updated</div>
+                        <div class="card-body">Successfully update Establishment</div>
                     </div>
                     @endif
                     {{-- @include('templates.error') --}}
@@ -78,7 +78,7 @@
 
                             <div class="form-group">
                                 <label for="geo_tag_location">Geo Tag Location <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control {{  $errors->has('geo_tag_location') ? 'is-invalid' : '' }}" id="geo_tag_location" name="geo_tag_location" placeholder="Enter Geo Tag Location">
+                            <input type="text" class="form-control {{  $errors->has('geo_tag_location') ? 'is-invalid' : '' }}" id="geo_tag_location"  readonly value="{{ $establishment->latitude }},{{ $establishment->longitude }}"  name="geo_tag_location" placeholder="Enter Geo Tag Location">
                                 @if($errors->has('geo_tag_location'))
                                 <small class="form-text text-danger">
                                     {{ $errors->first('geo_tag_location') }} </small>
@@ -87,7 +87,11 @@
                             <div class="form-group">
                                 <label for="province">Province <span class="text-danger">*</span></label>
                                 <select name="province" id="province" class="form-control">
-                                    <option>Surigao del Sur</option>
+                                    {{-- <option>Surigao del Sur</option> --}}
+                                    @foreach($provinces as $province)
+
+                                        <option {{ $province->code == $establishment->province_code ? 'selected' : '' }} value="{{ $province->code }}"> {{ $province->name }}</option>
+                                    @endforeach
                                 </select>
                                 @if($errors->has('province'))
                                 <small class="form-text text-danger">
@@ -95,16 +99,13 @@
                                 @endif
                             </div>
                             <div class="form-group">
+
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label for="city">City <span class="text-danger">*</span></label>
-                                        <select id="city" name="city" class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}">
+                                        <select id="cities" name="city" class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}">
                                             @foreach($cities as $city)
-                                                @if(!is_null(old('city')))
-                                                    <option {{ old('city') === $city->zip_code ? 'selected' : '' }} value="{{ $city->zip_code }}">{{ $city->name }}</option>
-                                                @else
-                                                    <option {{ $establishment->city_zip_code == $city->zip_code ? 'selected' : '' }} value="{{ $city->zip_code }}">{{ $city->name }}</option>
-                                                @endif
+                                                <option {{ $city->code == $establishment->city_code ? 'selected' : '' }} value="{{ $city->code }}">{{ $city->name }}</option>
                                             @endforeach
                                         </select>
                                         @if($errors->has('city'))
@@ -116,12 +117,8 @@
                                     <div class="col-lg-6">
                                         <label for="barangay">Barangay <span class="text-danger">*</span></label>
                                         <select name="barangay"  id="barangay" class="form-control {{ $errors->has('barangay') ? 'is-invalid' : '' }}">
-                                            @foreach($barangay as $barangay)
-                                            @if(!is_null(old('barangay')))
-                                                <option data-zip-code="{{ $barangay->city_zip_code }}" {{ old('barangay') === $barangay->id ? 'selected' : '' }} value="{{ $barangay->id }}">{{ $barangay->name }}</option>
-                                            @else
-                                                <option data-zip-code="{{ $barangay->city_zip_code }}" {{ $establishment->barangay_id === $barangay->id ? 'selected' : '' }} value="{{ $barangay->id }}">{{ $barangay->name }}</option>
-                                            @endif
+                                            @foreach($barangays as $barangay)
+                                                <option {{ $barangay->code == $establishment->barangay_code ? 'selected' : '' }} value="{{ $barangay->code }}">{{ $barangay->name }}</option>
                                             @endforeach
                                         </select>
                                         @if($errors->has('barangay'))
@@ -131,6 +128,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="float-right">
                                 <button type="submit" class="btn btn-success">Update Establishment</button>
                             </div>
@@ -145,4 +143,46 @@
     </div>
     </form>
 </section>
+@push('page-scripts')
+    <script>
+        $(document).ready(function () {
+
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(initPosition);
+                } else {
+                    alert('Geolocation is not supported by this browser.');
+                }
+            }
+
+            function initPosition(position) {
+                $('#geo_tag_location').val(`${position.coords.latitude}&${position.coords.longitude}`);
+            }
+
+            getLocation();
+
+            $('#province').change(function (e) {
+                $.ajax({
+                    url : `/api/province/municipal/${e.target.value}`,
+                    success : function (response) {
+                        // Clear all option of cities select element
+                        $('#cities').find('option').remove();
+                        response.municipals.forEach((municipal) => $('#cities').append(`<option value="${municipal.code}">${municipal.name}</option>`));
+                    },
+                });
+            });
+
+            $('#cities').change(function (e) {
+                $.ajax({
+                    url : `/api/province/barangay/${e.target.value}`,
+                    success : function (response) {
+                        // Clear all option of barangay select element
+                        $('#barangay').find('option').remove();
+                        response.barangays.forEach((barangay) => $('#barangay').append(`<option value="${barangay.code}">${barangay.name}</option>`));
+                    },
+                });
+            });
+            });
+    </script>
+@endpush
 @endsection

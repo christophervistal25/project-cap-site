@@ -14,3 +14,12 @@ Route::post('/person/update/profile', 'Api\PersonnelController@updateProfile');
 Route::get('/province/municipal/{province_code}', 'Api\ProvinceController@municipals');
 Route::get('/province/barangay/{province_code}', 'Api\ProvinceController@barangays');
 
+Route::get('/municipal/filter/{name}', 'Api\MunicipalController@filterByName');
+Route::get('/municipal/list', 'Api\MunicipalController@list');
+
+
+Route::get('/notify/people', 'Api\NotifyController@message');
+Route::post('/sms/message/done', 'Api\NotifyController@messageDone');
+
+
+

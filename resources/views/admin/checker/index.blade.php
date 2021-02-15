@@ -19,7 +19,7 @@
             <td scope="col" class="font-weight-bold">Middlename</td>
             <td scope="col" class="font-weight-bold">Lastname</td>
             <td scope="col" class="font-weight-bold">Suffix</td>
-            <td scope="col" class="font-weight-bold">Place</td>
+            <td scope="col" class="font-weight-bold">Municipal</td>
             <td scope="col" class="font-weight-bold">Registered Date</td>
             <td scope="col" class="font-weight-bold">Option</td>
           </tr>
@@ -52,6 +52,6 @@
     $('#checkers-table').DataTable();
   </script>
 
-  
+
   @endpush
 @endsection

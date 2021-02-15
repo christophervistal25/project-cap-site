@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Checker extends Model
 {
-    protected $fillable = ['username','firstname','middlename','lastname', 'suffix', 'password', 'city_zip_code'];
+    protected $fillable = ['username','firstname','middlename','lastname', 'suffix', 'password', 'municipal_code', 'phone_number'];
 
     protected $hidden = [
     	'password'
@@ -14,7 +14,7 @@ class Checker extends Model
 
     public function city()
     {
-        return $this->belongsTo('App\City');
+        return $this->belongsTo('App\City', 'municipal_code', 'code');
     }
 
     public function logs()

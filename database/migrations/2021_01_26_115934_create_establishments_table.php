@@ -19,10 +19,11 @@ class CreateEstablishmentsTable extends Migration
             $table->string('type');
             $table->text('address');
             $table->string('contact_no');
-            $table->string('geo_tag_location')->nullable();
-            $table->string('province');
-            $table->bigInteger('city_zip_code');
-            $table->bigInteger('barangay_id');
+            $table->decimal('latitude', 10, 8);
+            $table->decimal('longitude', 11, 8);
+            $table->string('province_code');
+            $table->bigInteger('city_code');
+            $table->bigInteger('barangay_code');
             $table->timestamps();
         });
     }

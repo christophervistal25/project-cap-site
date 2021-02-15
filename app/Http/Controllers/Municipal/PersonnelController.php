@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Freshbitsweb\Laratables\Laratables;
 use Auth;
 use App\Http\Controllers\Repositories\PersonnelRepository;
+
 class PersonnelController extends Controller
 {
 
@@ -46,21 +47,11 @@ class PersonnelController extends Controller
      */
     public function create()
     {
-        $barangays = Barangay::where('city_zip_code', Auth::user()->city_zip_code)->get();
-        return view('municipal.personnel.create', compact('barangays'));
-    }
+        $barangays = Auth::user()->barangays;
 
-     /*
-        QR FORMAT
-        MIDDLENAME, LASTNAME, SUFFIX, ADDRESS, BARANGAY, DATE OF BIRTH, RAPID_ISSUED
-    */
-    private function generateQRData(array $data)
-    {
-        $barangay = Barangay::find($data['barangay']);
+        $civil_status = PersonnelRepository::CIVIL_STATUS;
 
-        return $data['firstname'] . self::QR_SEPERATOR . $data['middlename'] . self::QR_SEPERATOR . $data['lastname']
-        . self::QR_SEPERATOR . $data['suffix'] . self::QR_SEPERATOR . $barangay->name . self::QR_SEPERATOR . $data['date_of_birth'] . self::QR_SEPERATOR . $data['rapid_test_issued'];
-
+        return view('municipal.personnel.create', compact('barangays', 'civil_status'));
     }
 
 

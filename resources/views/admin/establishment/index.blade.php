@@ -9,12 +9,6 @@
     <div class="card-body">
       <div class="row float-left col-lg-7">
         <div class="col-lg-7">
-          {{-- <select name="cities" id="city_filter" class="form-control">
-            <option value="all">Show All</option>
-            @foreach($cities as $city)
-              <option value="{{ $city->zip_code }}"> {{ $city->name }}</option>
-            @endforeach
-          </select> --}}
         </div>
 
 
@@ -27,7 +21,8 @@
             <td scope="col" class="text-center font-weight-bold">Establishment/Office/Store Name</td>
             <td scope="col" class="text-center font-weight-bold">Address Located</td>
             <td scope="col" class="text-center font-weight-bold">Contact Number</td>
-            <td scope="col" class="text-center font-weight-bold">Geo Tag Location</td>
+            <td scope="col" class="text-center font-weight-bold">Latitude</td>
+            <td scope="col" class="text-center font-weight-bold">Longitude</td>
             <td scope="col" class="text-center font-weight-bold">Date/Time register</td>
             <td scope="col" class="text-center font-weight-bold">Option</td>
           </tr>
@@ -41,7 +36,7 @@
             <td class="text-center"> {{  $establishment->contact_no }}</td>
             <td> {{  $establishment->geo_tag_location }}</td>
             <td class="text-center"> {{  $establishment->created_at->diffForHumans() }}</td>
-            <td class="text-center">
+            <td class="text-ceter">
               <a href="{{  route('establishment.edit', $establishment->id) }}" class="btn btn-icon btn-sm btn-success">
                   <i class="la la-edit"></i>
               </div>
@@ -79,20 +74,14 @@
                 { name: 'name' },
                 { name: 'address' },
                 { name: 'contact_no' },
-                { name: 'geo_tag_location' },
+                { name: 'latitude' },
+                { name: 'longitude' },
                 { name: 'created_at' },
                 { name: 'admin_action' , searchable : false, orderable : false, },
             ],
         });
   </script>
 
-   {{-- <script>
-      $('#city_filter').change(function (e) {
-          QUERY_STRING = $(this).val();
-          localStorage.setItem('FILTER_SELECT', QUERY_STRING);
-          person_table.ajax.url(`/admin/persons/list/${QUERY_STRING}`).load();
-          cellContentEditableUpdator();
-      });
-    </script> --}}
-  @endpush
+
+    @endpush
 @endsection

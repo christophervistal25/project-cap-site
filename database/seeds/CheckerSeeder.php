@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Checker;
+use App\City;
 
 class CheckerSeeder extends Seeder
 {
@@ -13,12 +14,13 @@ class CheckerSeeder extends Seeder
     public function run()
     {
         Checker::create([
-            'firstname'     => 'christopher',
-            'middlename'    => 'platino',
-            'lastname'      => 'vistal',
-            'city_zip_code' => '8300',
-            'username'      => 'tooshort01',
-            'password'      => bcrypt('christopher')
+            'firstname'      => 'christopher',
+            'middlename'     => 'platino',
+            'lastname'       => 'vistal',
+            'municipal_code' => City::first()->code,
+            'phone_number'   => '09193693499',
+            'username'       => 'tooshort01',
+            'password'       => bcrypt('christopher')
         ]);
     }
 }

@@ -20,7 +20,8 @@ class CreateCheckersTable extends Migration
             $table->string('middlename');
             $table->string('lastname');
             $table->string('suffix')->default('');
-            $table->bigInteger('city_zip_code');
+            $table->bigInteger('municipal_code');
+            $table->string('phone_number');
             $table->string('password');
             $table->timestamps();
         });
