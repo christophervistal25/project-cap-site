@@ -19,6 +19,7 @@ class PersonnelController extends Controller
     public function make(Request $request)
     {
         $personId = $this->personnelRepository->makeIDForMobile($request->all());
+        list($barangay, $personId) = explode('-', $personId);
         return response()->json(
             [
                 'code' => 200,

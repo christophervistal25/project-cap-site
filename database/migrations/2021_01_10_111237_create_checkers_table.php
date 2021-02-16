@@ -19,7 +19,7 @@ class CreateCheckersTable extends Migration
             $table->string('firstname');
             $table->string('middlename');
             $table->string('lastname');
-            $table->string('suffix')->default('');
+            $table->string('suffix')->nullable();
             $table->bigInteger('municipal_code');
             $table->string('phone_number')->unique();
             $table->string('password');

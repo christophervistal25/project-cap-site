@@ -280,10 +280,10 @@
     let personnelChartLabels = $('meta[name="chart-labels"]').attr('content').split(',');
     let personnelChartValues = $('meta[name="chart-labels-value"]').attr('content').split(',')
     $(window).on("load", function(){
-    
+
     //Get the context of the Chart canvas element we want to select
     var ctx = $("#line-chart");
-    
+
     // Chart Options
     var chartOptions = {
         responsive: true,
@@ -323,7 +323,7 @@
             text: 'Chart.js Line Chart - Legend'
         }
     };
-    
+
     // Chart Data
     var chartData = {
         labels: personnelChartLabels,
@@ -341,33 +341,33 @@
         },
     ]
     };
-    
+
     var config = {
         type: 'line',
-    
+
         // Chart Options
         options : chartOptions,
-    
+
         data : chartData
     };
-    
+
     // Create the chart
     var lineChart = new Chart(ctx, config);
     });
     </script>
-    
-    
+
+
     <script>
         //Get the context of the Chart canvas element we want to select
         var pieCtx = $("#simple-pie-chart");
-    
+
         // Chart Options
         var pieChartOptions = {
             responsive: true,
             maintainAspectRatio: false,
             responsiveAnimationDuration:500,
         };
-    
+
         // Chart Data
         var pieChartData = {
             labels: ["High Temperature", "Normal Temperature"],
@@ -377,21 +377,19 @@
                 backgroundColor: ['#d32f2f', '#666EE8'],
             }]
         };
-    
+
         var pieConfig = {
             type: 'pie',
-    
+
             // Chart Options
             options : pieChartOptions,
-    
+
             data : pieChartData
         };
-    
+
         // Create the chart
         var pieSimpleChart = new Chart(pieCtx, pieConfig);
     </script>
-
-
 @endpush
 @endsection
 

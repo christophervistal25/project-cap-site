@@ -14,10 +14,10 @@
         <h5 class="font-weight-bold">History</h5>
         @foreach($person->logs as $log)
            <div class="alert alert-info">
-               <li style="list-style: none;">{{ $log->location }}</li>
-               <li style="list-style: none;">{{ $log->body_temperature }}</li>
-               <li style="list-style: none;">{{ $log->time }}</li>
-               <li class="text-capitalize" style="list-style: none;">{{ $log->checker->firstname }} {{ $log->checker->middlename }} {{ $log->checker->lastname }}</li>
+               <li style="list-style: none;">Location : {{ $log->location }}</li>
+               <li style="list-style: none;">Temperature : {{ $log->body_temperature }}</li>
+               <li style="list-style: none;">Time : {{ $log->time }}</li>
+               <li class="text-capitalize" style="list-style: none;">Checker : {{ $log->checker->firstname }} {{ $log->checker->middlename }} {{ $log->checker->lastname }}</li>
                <button class="float-right btn btn-primary btn-icon btn-sm mt-1 font-weight-light btn-interact" id="log-{{ $log->id }}">People with same location and date</button>
                <div class="clearfix"></div>
                <div class="card mt-2 " id="container-interact-{{ $log->id }}">
@@ -27,6 +27,8 @@
                    <form action="{{ route('other.person.notify') }}" method="POST">
                     @csrf
                     <input type="hidden" name="phone_numbers" class="phone-numbers-{{ $log->id }}">
+                    <input type="hidden" name="location" value="{{ $log->location }}">
+                    <input type="hidden" name="time" value="{{ $log->time }}">
                     <div class="float-right">
                         <button class="btn btn-warning btn-send-notification" type="submit">Send SMS Notification</button>
                     </div>

@@ -66,6 +66,7 @@ class PersonnelRepository
     {
         $barangay = Barangay::where('code', $data['barangay'])->first();
         $birthdate = Carbon::parse($data['date_of_birth'])->format('Y-m-d');
+
         $person = Person::firstOrCreate(
             [
                 'firstname'     => strtoupper($data['firstname']),
@@ -87,9 +88,9 @@ class PersonnelRepository
             'city_code'         => $barangay->city_code,
             'barangay_code'     => $barangay->code,
             'civil_status'      => '*',
-            'phone_number'      => '*',
+            'phone_number'      => $data['phone_number'],
             'landline_number'   => '*',
-            'age'               => 0,
+            'age'               => $this->getAge($birthdate),
             'registered_from'   => 'MOBILE'
         ]);
 

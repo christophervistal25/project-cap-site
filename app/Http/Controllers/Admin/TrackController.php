@@ -64,8 +64,12 @@ class TrackController extends Controller
     public function notify(Request $request)
     {
         $phoneNumbers = explode('|', $request->phone_numbers);
+
         foreach(array_filter($phoneNumbers) as $mobileNumber) {
-            SMS::create(['phone_number' => $mobileNumber]);
+            SMS::create([
+                'phone_number' => $mobileNumber,
+                'message'      => "Alert message\n" . $request->location . "\n" . $request->time . "\n" . "Na ay ang positibo sa COVID-19",
+            ]);
         }
 
         return back()->with('success', 'Success!');
@@ -77,7 +81,7 @@ class TrackController extends Controller
      */
     public function track($id)
     {
-        // if(request()->ajax()) {
+        if(request()->ajax()) {
 
             $log  = PersonLog::find($id);
 
@@ -91,7 +95,7 @@ class TrackController extends Controller
                             ->unique('person_id');
 
             return $log;
-        // }
+        }
     }
 
     /**

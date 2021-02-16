@@ -20,9 +20,11 @@ class NotifyController extends Controller
 
     public function messageDone(Request $request)
     {
-        $sms = SMS::find($request->message_id);
-        $sms->status = 'in-active';
-        $sms->save();
+        foreach(array_filter(explode(',', $request->message_ids))  as $id) {
+            $sms = SMS::find($id);
+            $sms->status = 'in-active';
+            $sms->save();
+        }
 
         return response()->json(['success' => true, 'message' => 'Successfully update the message.']);
     }

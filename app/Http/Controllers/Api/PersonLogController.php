@@ -14,7 +14,7 @@ use Exception;
 
 class PersonLogController extends Controller
 {
-    
+
     public function __construct(PersonnelRepository $personnelRepo)
     {
         $this->personnelRepository = $personnelRepo;
@@ -56,7 +56,7 @@ class PersonLogController extends Controller
                     'age'               => $this->personnelRepository->getAge($request->date_of_birth),
                     'registered_from' => $request->registered_from
                 ]);
-                
+
                 PersonLog::create([
                     'person_id'        => $person->id,
                     'location'         => $request->location,
@@ -65,7 +65,7 @@ class PersonLogController extends Controller
                     'body_temperature' => $request->temperature,
                     'time'             => $request->time,
                 ]);
-                
+
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -80,7 +80,7 @@ class PersonLogController extends Controller
                 'time'             => $request->time,
             ]);
         }
-        
+
 
         return response()->json(['code' => 200, 'message' => 'success']);
     }
@@ -119,7 +119,7 @@ class PersonLogController extends Controller
                         'landline_number'   => $log['landline_number'],
                         'age'               => $this->personnelRepository->getAge($log['date_of_birth']),
                     ]);
-                    
+
                     PersonLog::create([
                         'person_id'        => $person->id,
                         'location'         => $log['location'],
@@ -128,7 +128,7 @@ class PersonLogController extends Controller
                         'body_temperature' => $log['body_temperature'],
                         'time'             => $log['time'],
                     ]);
-                    
+
                     DB::commit();
                 } catch (\Exception $e) {
                     DB::rollback();
@@ -144,7 +144,7 @@ class PersonLogController extends Controller
                     'time'             => $log['time'],
                 ]);
             }
-                
+
         }
 
         return response()->json(
