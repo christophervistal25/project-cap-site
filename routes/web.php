@@ -1,5 +1,9 @@
 <?php
 
+Route::get('/register', function () {
+    return view('register');
+});
+
 Route::get('production-clear', 'ProductionArtisanController@clear');
 
 Route::get('production-cache', 'ProductionArtisanController@cache');
@@ -45,7 +49,7 @@ Route::group(['prefix' => 'admin'] , function () {
 		Route::get('persons/list/{filter}', 'Admin\PersonnelController@list')->name('persons.list');
 
 		Route::resource('personnel', 'Admin\PersonnelController');
-		
+
         Route::get('/personnel/{id}/logs', 'Admin\PersonnelLogController@show')->name('personnel.logs');
         Route::put('/personnel/{id}/logs', 'Admin\PersonnelLogController@update')->name('personnel.logs.update');
 
