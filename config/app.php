@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'ACTION TRACE AND PROTECT COVID - 19 CONTACT TRACING SYSTEM'),
+    'name' => env('APP_NAME', 'SurSur-ATP'),
 
     /*
     |--------------------------------------------------------------------------
